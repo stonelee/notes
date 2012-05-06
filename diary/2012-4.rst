@@ -51,3 +51,106 @@
 13:30-16:00	extjs	修正几个bug，基本完成suggestTextField
 16:00-17:30	extjs	fileupload因为DisplayField被override而无法触发change事件，如果没有必要，不要override Ext中的类
 ===========	=======	======================
+
+4.22
+
+===========	=======	======================
+时间		标签	内容
+===========	=======	======================
+9:00-12:00	sphinx	读sphinx文档，准备将notes迁移到sphinx上
+13:00-14:20	work	整理python,database两部分的文档	
+14:20-15:00	work	整理diary
+18:00-19:00	django	chapter7 forms
+19:30-20:30	django	chapter7 forms
+===========	=======	======================
+
+4.23
+
+===========	=======	======================
+时间		标签	内容
+===========	=======	======================
+9:00-11:00	extjs	重构reminder
+11:00-11:50	extjs	规划我的提醒
+13:30-14:50	extjs	完成我的提醒
+15:00-15:30	extjs	为保证初始化和切换tab时都加载store，绑定render和show两个事件
+15:30-17:30	extjs	研究view继承和函数封装问题
+18:30-20:00	django	chapter 8: Advanced Views and URLconfs
+20:30-22:00	django	Chapter 9: Advanced Templates到Writing the Compilation Function
+===========	=======	======================
+
+4.24
+
+===========	=======	======================
+时间		标签	内容
+===========	=======	======================
+9:00-11:50	extjs	使用mixins方式实现reminders代码复用
+13:30-13:50	extjs	mixins方式实现Approvals
+13:50-14:00	extjs	Approvals需要隐藏几列
+14:00-14:20	extjs	reminder widget
+14:20-14:50	extjs	根据后端更改url参数
+14:50-15:20	extjs	重构desktop，operate使用model的save来代替sync
+15:20-16:50	extjs	调整按照日期筛选部分的按钮交互逻辑
+16:50-17:30	extjs	class调用的实际上是mixin的prototype，因此覆盖mixin中的函数时，会造成全局改变。待研究～
+20:00-21:20	django	Chapter 9: Advanced Templates
+===========	=======	======================
+
+4.25
+
+===========	=======	======================
+时间		标签	内容
+===========	=======	======================
+9:00-10:15	extjs	多个view调用同一个mixin，如果需要赋参数时，不要赋给mixin，而应该赋给其他已经实例化的属性
+10:15-10:25	extjs	show事件直接store.load()可以避免在切换tab时失去store参数
+10:25-10:30	extjs	调整日期筛选界面
+10:30-11:50	extjs	设计消息中心
+13:30-16:10	extjs	完成消息中心雏形
+16:10-17:20	extjs	重构内部消息message
+19:30-20:40	django	Chapter 10: Advanced Models
+20:40-21:40	django	Chapter 11: Generic Views
+===========	=======	======================
+
+4.26
+
+===========	=======	======================
+时间		标签	内容
+===========	=======	======================
+9:00-10:00	work	fix bug
+13:30-14:30	extjs	更改子表post方式
+14:30-16:25	extjs	rawexpander展示收件人阅读消息情况
+16:25-17:20	extjs	消息查看，细节优化
+20:25-21:30	extjs	写blog
+21:40-22:10	django	Chapter 12: Deploying Django
+===========	=======	======================
+
+4.27
+
+===========	=======	======================
+时间		标签	内容
+===========	=======	======================
+8:40-9:00	web	分析豆瓣系统架构
+9:00-10:50	extjs	调整plan,reminder,report,message界面tab样式
+10:50-11:50	extjs	重构plan
+13:10-13:21	extjs	更改rowpander样式
+13:21-13:39	extjs	重构report
+13:39-15:05	extjs	message界面调整,reminder根据状态不同显示不同的tooltip
+15:05-15:33	extjs	完成message-widget
+15:33-15:58	extjs	消息发送按钮移到tabs上面后，需要更改需要load的store绑定
+15:58-17:07	extjs	优化desktop代码
+17:07-17:08	extjs	todo增加刷新按钮
+17:08-17:12	extjs	desktop-todo加上collapsible
+17:12-17:20	extjs	去掉todo的收缩按钮
+17:20-17:39	extjs	message显示状态
+20:00-22:00	apache	了解mod_wsgi使用，但是没有配置成功
+===========	=======	======================
+
+4.28
+
+===========	=======	======================
+时间		标签	内容
+===========	=======	======================
+9:00-9:38	extjs	inbox增加状态列
+9:38-10:08	extjs	将view中的mixin集中放到view文件之前
+10:30-11:00	work	帮同事找bug
+13:30-15:00	uwsgi	了解uwsgi
+15:00-15:30	work	帮同事找bug
+===========	=======	======================
