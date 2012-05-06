@@ -156,3 +156,7 @@ http://thomasst.ch/mongoadmin/
 
 Pandoc-多种写作格式转换
 http://johnmacfarlane.net/pandoc/
+
+django-rest-framework
+https://github.com/tomchristie/django-rest-framework
+自描述 browse-able restful web apis

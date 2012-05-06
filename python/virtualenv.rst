@@ -29,6 +29,10 @@ virtualenv
 
 	$ source mysite-env/bin/activate
 
+从指定的文件中安装依赖::
+
+	pip install -r requirements.txt
+
 mezzanine
 =============================
 
