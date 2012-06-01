@@ -1,9 +1,28 @@
 .. _vim:
 
-
 ***************
 vim
 ***************
+
+每列后面加+::
+
+	ctrl-V G $ A + Esc退出编辑模式
+
+离开 Vim::
+
+	:qa!<Enter>
+
+检查filetype::
+
+	:set filetype
+
+转换为html格式::
+
+	:TOhtml
+
+record后重复上一次记录的命令::
+
+	@@
 
 跳转
 =============================
@@ -22,15 +41,55 @@ mA		标识全局缓冲区位置A
 ''		跳回上一个位置
 ctrl-o	跳回
 ctrl-i	跳到
+ctrl-]	帮助文件中跳入
+ctrl-t	跳回
 =======	=======
+
+分割窗口
+=============================
+
+尽可能扩展窗口::
+
+	CTRL-W _
 
 平均显示多个窗口::
 
 	ctrl+w+= 
 
-每列后面加+::
+打开窗口编辑一个新文件::
 
-	ctrl-V G $ A + Esc退出编辑模式
+	:vnew
+
+命令行中比较两个文件::
+
+	vimdiff main.c~ main.c
+
+vim中将当前文件与其他文件比较::
+
+	:vertical diffsplit main.c~
+
+窗口绑定滚动::
+
+	:set scrollbind
+
+下一处不同::
+
+	]c
+
+反向跳转::
+
+	[c
+
+编译vim
+=============================
+
+::
+
+	yum install ncurses-devel
+	yum install python-devel
+	yum install libgnome-devel
+	yum install libgnomeui-devel
+	yum install libXt-devel
 
 js taglist
 =============================
