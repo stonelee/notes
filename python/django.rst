@@ -141,6 +141,33 @@ django-cms
 
 	$ pip freeze
 
+
+django-extensions
+------------------------
+
+安装图形库::
+
+	yum install graphviz
+	yum install graphviz-devel
+
+	pip install pygraphviz
+
+生成数据库模型图::
+
+	$python ./manage.py graph_models -a -g -o my_project_visualized.png
+
+查看图片::
+
+	$ display some.png
+
+django-mptt
+---------------------
+https://github.com/django-mptt/django-mptt/
+
+预排序遍历树 Modified Preorder Tree
+Traversal（MPTT）,可以非常有效率的进行树的检索
+http://www.cnblogs.com/woodcutter/archive/2010/04/21/1716923.html
+
 ---------------------
 
 更换主题: https://github.com/MegaMark16/django-cms-themes

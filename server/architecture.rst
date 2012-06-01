@@ -8,7 +8,6 @@
 豆瓣
 =============================
 
-
 Web server上划分为动态html和静态图片,做不同的调优
 
 动态内容使用nginx和lighttpd的混合，nginx做负载的平衡，lighttpd通过SCGi与application server相连，application server基于quixote框架
@@ -22,3 +21,9 @@ Web server上划分为动态html和静态图片,做不同的调优
 数据库根据应用划分，使用MySQL，一个master ，一个 slave，还有一个slave,一方面作为备份，一方面用作数据挖掘，因为不能对线上的数据做直接操作。
 
 View模版使用mako，容易维护，自己做了速度优化，并反馈回社区
+
+Instagram
+=============================
+
+http://www.infoq.com/cn/news/2012/05/instagram
+

@@ -8,11 +8,13 @@ Contents:
 
    diary/index.rst
    python/index.rst
+   javascript/index.rst
+   css/index.rst
    linux/index.rst
    database/index.rst
    server/index.rst
    web/index.rst
-   javascript/index.rst
+   algorithm/index.rst
 
 Indices and tables
 ==================
