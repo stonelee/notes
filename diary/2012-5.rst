@@ -4,6 +4,136 @@
 2012-5
 ***************
 
+时间统计
+=======================
+
+js共115小时,
+
+=======	=============
+标签	时间
+=======	=============
+js		  17h	  29m
+jquery	  33h	  10m
+extjs	  64h	  30m
+=======	=============
+
+django共22.5小时,
+
+=======	=============
+标签	时间
+=======	=============
+django	  22h	  24m
+=======	=============
+
+web配置开发13小时
+
+=======	=============
+标签	时间
+=======	=============
+web		  11h	  53m
+jekyll	   1h	   0m
+apache	   1h	   0m
+php		   1h	  30m
+css		   4h	  40m
+=======	=============
+
+linux配置开发13小时
+
+=======	=============
+标签	时间
+=======	=============
+linux	   0h	  30m
+config	   0h	  50m
+vim		  11h	  40m
+=======	=============
+
+工作业务时间花费13小时
+
+=======	=============
+标签	时间
+=======	=============
+work	  13h	  10m
+=======	=============
+
+工作成果
+=======================
+
+js
+--------------------
+
+* 看书《JavaScript Web Applications》
+* 了解spine框架
+* 研究jquery prototype继承, 写笔记一篇
+* 开始看《Secrets of the JavaScript Ninja》
+* 学习mustache,require.js, backbone
+
+jquery
+--------------------
+
+对项目组之前的前端代码进行重构，将主要控件封装成jquery插件形式，方便调用
+
+* kjGrid表格显示，分页，列render函数,事件触发
+* kjTree设置标题,解析多种json格式,事件触发
+* kjInterval定时刷新
+* kjDialog在iframe中弹出dialog，在整个页面中居中显示
+
+
+心得:
+
+* 通过自定义属性data-*来标记模板html标签,防止id滥用
+* options保存到.data中
+* 同一个插件的不同方法放在同一个namespace中
+
+extjs
+--------------------
+
+看extjs4.1代码示例kitchensink,simple-tasks
+
+* 完成可以模糊查询的多选控件MultiSuggestManager, 通过suggestTpl设置suggest下拉框的显示内容，通过otherColumns设置grid的其他列
+* 完成可以模糊查询的单选控件SuggestField
+* 重构树形combobox控件ComboboxTreeField
+* 完成控件ViewForm.js,提供加边框、label图标、样式美化后的form控件，可用于view中
+
+django
+--------------------
+
+* 看完《The Definitive Guide to Django》
+* 了解django-extensions,django-cms,tastypie, django-mptt
+
+vim
+--------------------
+
+* 编译gvim
+* 使用vundle配置vim
+* 学习write plugin,各种操作技巧,各种插件
+
+其他
+--------------------
+
+* 了解SELinux
+* 配置php环境，布置extjs源码示例
+* 使用Octopress对博客进行重新部署,添加部分插件
+
+work
+--------------------
+
+* 参与写论文"svg在联网系统监控中的应用"
+* 帮同事将build-tool迁移到windows下
+* 开会，培训
+
+下个月计划
+=======================
+
+看完《Secrets of the JavaScript Ninja》,整理笔记
+
+未来计划
+=======================
+
+看《数学之美》
+
+日常记录
+=======================
+
 5.2
 
 ===========	=======	======================
@@ -332,7 +462,7 @@
 8:40-11:50	jquery	完成tree插件原型
 13:00-14:20	jquery	封装成kjTree，增加title配置
 14:20-15:20	jquery	options深copy，避免多插件出现同步问题
-15:20-16:30	jqurey	更改调用API，通过字符data调用插件的不同函数。delegate会导致多次trigger累积，因此需要避免重复调用。
+15:20-16:30	jquery	更改调用API，通过字符data调用插件的不同函数。delegate会导致多次trigger累积，因此需要避免重复调用。
 16:40-17:20	js		使用require.js重构jquery插件
 ===========	=======	======================
 
@@ -378,3 +508,5 @@
 13:30-17:50	jquery	公共函数封装为kjUtil，kjDialog可以在iframe中弹出dialog，在整个页面中居中显示
 21:00-21:30	js		function
 ===========	=======	======================
+
+
