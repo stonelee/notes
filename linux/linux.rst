@@ -27,6 +27,15 @@ linux
 
 	$ gnome-open .
 
+安装源里没有的程序::
+
+	在http://pkgs.org/下载相应的rpm文件，然后
+	rpm -ivh PIL-1.1.7-10.fc16.i686.rpm 
+
+下载远程文件::
+
+	$ scp -r vboxadmin@10.10.22.86:/home/vboxadmin/Videos/冰冻星球/ /media/程序
+
 工具
 =============================
 
@@ -104,3 +113,17 @@ http://www.linux.gov.cn/netweb/selinux.htm
 重启Apache2::
 
 	$ service httpd restart
+
+
+Fedora 10里将普通用户添加到sudo组
+=======================================
+
+1. 在终端输入su -
+#. 输入密码， 这样就切换到root了
+#. 输入visudo
+#. 找到 root ALL=(ALL) ALL 在这一行下边按a键进入编辑模式，然后输入： yourname ALL=(ALL) ALL,然后按esc退出
+#. 按 :wq 键保存退出
+#. 输入exit退出root权限
+#. 测试，在当前用户下，输入sudo whoami
+
+如果一切正常，命令会返回 “root” 这个字。
