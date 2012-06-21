@@ -155,6 +155,37 @@ iframe中获取其他iframe中的元素::
 
 	$(window).resize(function(){});
 
+constructor
+-------------------
+
+对象的constructor属性始终指向创建当前对象的构造函数
+
+每个函数都有一个默认的属性prototype，而这个prototype的constructor默认指向这个函数
+
+::
+
+	var Foo=function(){}
+	var f = new Foo(); 
+	 
+	console.log(f.constructor === Foo); // true 
+	console.log(Foo.prototype.constructor===Foo);// true 
+	//合并起来
+	console.log(f.constructor.prototype.constructor===Foo);// true 
+
+但如果覆盖了prototype::
+
+	Foo.prototype = {  
+		getName: function() {  
+			return "name";  
+		}  
+	}; 
+
+此时Person.prototype.constructor === Object
+
+应采用重新覆盖的方式更改::
+
+	Person.prototype.constructor = Person; 
+
 思考
 =============================
 
