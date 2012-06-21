@@ -1,6 +1,14 @@
 Welcome to stonelee's Notes!
 =====================================
 
+::
+
+	(*╯3╰) 
+
+	~(～￣▽￣)～o 
+
+	(*￣︶￣)y 
+
 Contents:
 
 .. toctree::

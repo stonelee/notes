@@ -228,4 +228,37 @@ extjs使用规范
 
 ExtJS之所以慢在很大程度上是因为需要在客户端解析js生成html，如果能够在服务端解析，生成html并缓存，然后发给客户端，应该能够解决这个问题
 
+更改css
+================
 
+::
+
+	gem install sass -v 3.1.1
+	gem install compass
+
+查看版本号::
+
+	compass -v
+	sass -v
+
+目录结构::
+
+	appname
+	--app/
+	--extjs/
+	--resources/
+	  --css/
+	  --images/
+	  --sass/
+	--app.js
+	--index.html
+
+
+更改css模板：
+appname/resources/sass/my-ext-theme.scss
+
+可控制的变量：
+appname/extjs/resources/themes/stylesheets/ext4/default/variables/
+
+编译css:
+在appname/resources/sass中运行compass compile
