@@ -4,6 +4,96 @@
 2012-6
 ***************
 
+时间统计
+=======================
+
+js共118.5小时,
+
+=======	=============
+标签	时间
+=======	=============
+js  	  29h	  44m
+jquery	  17h	  59m
+jquerui	  11h	  10m
+arale	   9h	  17m
+backbon	   5h	  45m
+kjquery	   3h	  45m
+kjsvg	  40h	  48m
+=======	=============
+
+各种语言学习应用38.5小时
+
+=======	=============
+标签	时间
+=======	=============
+python	1h	  50m
+io  	5h	   0m
+ruby	4h	   0m
+prolog	1h	   0m
+css 	11h	  30m
+node	3h	  20m
+web 	5h	   0m
+vim 	3h	  30m
+linux	2h	  10m
+book	1h	   0m
+=======	=============
+
+工作成果
+=======================
+
+kjquery
+--------------
+
+* 现学现卖，使用resize隐藏iframe的方式进行主页面对iframe的事件监听，避免事件轮询导致的渲染延迟
+* 根据kjquery控件在实践过程中的需求进行改进
+
+kjsvg
+--------------
+
+* 整理之前的联网系统svg图形展示项目代码，重新规划系统架构
+* 采用sea.js来进行js模块划分和引用,并封装了部分jquery插件
+* jasmine进行测试
+* 采用jquery的方式封装kjsvg
+
+js
+--------------
+
+* 看ansyc,Handlebars
+* 看backbone中event，model部分源码
+* 看underscore部分源码
+* 看canvas游戏Street Fighter源码
+* 学习arale项目源码，其代码相当轻量，在widget基础上可以自由封装控件，等发布稳定版本后继续关注。
+
+jQueryUI
+--------------
+
+* 学习widget继承方式
+* 看draggable源码
+
+jquery
+--------------
+
+* 看deferred object, Callbacks
+
+css
+--------
+
+* 看bootstrap部分代码
+* 看css sprites工具Glue用法
+* CSS Mastery中roma例子
+
+python
+------------
+
+* diary解析程序，统计时间，归类标签
+
+book
+--------
+
+* Seven Languages in Seven Weeks中Ruby,Io,Prolog三章内容
+* zen and motorbike
+
+
 日常记录
 =======================
 
