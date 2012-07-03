@@ -64,6 +64,17 @@ l.length=0	清空array
 
 arg.length说明可以$.each
 
+[]会被认为是true
+
+document.documentMode
+---------------------------
+
+* 5	Internet Explorer 5 mode (also known as "quirks mode").
+* 7	Internet Explorer 7 Standards mode.
+* 8	Internet Explorer 8 Standards mode.
+* 9	Internet Explorer 9 Standards mode.
+* 10	Internet Explorer 10 Standards mode.
+
 json标准格式
 ---------------
 
@@ -194,4 +205,9 @@ constructor
 对于非核心功能，可以考虑在自己组件里实现。如$.extend 或 $.each
 
 IE6/7不支持JSON，需要借助json2.js，其他版本原生支持
+
+async
+=============================
+
+将多层嵌套变为一层，还是需要callback
 

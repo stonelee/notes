@@ -4,22 +4,66 @@
 jquery
 ***************
 
+判断是否找到::
+
+	$('#id').length ? 'exist' : 'not'
+
 jquery1.7.2中如果在setInterval中循环getJSON同一个地址时，chrome不会显示发送xhr请求，但是firefox中会显示。jquery1.4.2没有这个问题
 
-$.extend可以merge objects，第一个参数True递归merge
+$.extend可以merge objects，第一个参数true递归merge(deep copy for object and array)
 
 防止修改defaults参数::
 
 	var settings = $.extend({}, defaults, options);
 
-
-jquery中.data(‘kjGrid’)，调用时使用kjGrid，kj-grid都可以。反之亦然
+jquery中.data('kjGrid')，调用时使用kjGrid，kj-grid都可以。反之亦然
 
 只序列化有name的input，select，textarea；check，radio如果没选中不加入序列，选中会返回on
 
 intro，outro提供包裹函数，其他函数可以作为全局函数测试，生产环境时打包到一起
 
 jQuery.fn中的this是个[]
+
+* event.stopImmediatePropagation()	阻止冒泡，也阻止其他handlers
+* event.stopPropagation() 	阻止冒泡
+
+event设置命名空间name，方便统一处理同类型的事件::
+
+	bind('click.name',handler)
+	unbind('.name')
+
+offsetParent()得到positioned的最近的父元素(relative,absolute,fixed)
+
+event.pageX,pageY得到相对于document左上角的鼠标位置坐标
+
+* offset得到相对document的第一个元素的坐标
+* position得到相对于offset parent的坐标
+
+clone可以复制选择的element，第一个参数为true可以连同event和data一起复制，第二个参数为true可以连同children一起复制，注意不要复制有id的，这样会导致id重复。对于data中的objects和arrays依然需要$.extend([],$elem.data('arr'))才能做到深复制
+
+高亮某项，去掉其他项的高亮::
+
+	if ( !$event_counter.hasClass( "ui-state-hover" ) ) {
+		$event_counter.addClass( "ui-state-hover" )
+			.siblings().removeClass( "ui-state-hover" );
+	}
+
+限制查找范围,第二个参数为上下文，可以代替find::
+
+	$( "span.count", $event_counter ).text( new_count );
+
+text获取所有文本，去除html标签，可应用于xml和html，对于input或者textarea使用val，对于script使用html。text()赋值时会将html标签转义。
+
+typeof null == 'object'
+所以要使用$.isPlainObject()来判断是不是object
+
+判断::
+
+	empty string is falsey, 
+	empty array with .length == 0
+	empty objects	with $.isEmptyObject()
+
+$.getScript()加载js文件并执行，不缓存
 
 Callbacks
 ====================
@@ -141,3 +185,33 @@ node切换到正式版本::
 编译jquery::
 
 	$ node_modules/grunt/bin/grunt
+
+jquery UI
+====================
+
+::
+
+	$.widget('custom.colorize',{options:{}})
+
+定义了custome命名空间下的colorize控件。
+options为配置参数，使用this.options.name来调用。还包括回调函数，使用this._trigger('')来调用。用户实例化控件时直接定义即可。
+this.element为调用该控件的jquery对象。
+
+不以下划线开头的函数为公开函数，可以通过.colorize('hello')来调用。
+
+实例化方法::
+
+	$("#myid").colorize({});
+
+引用所有实例::
+
+	$(':custom-colorize')
+
+
+寻找data中有droppable的::
+
+	this.element.find(":data(droppable)")
+
+jqueryui中widget中通过this定义函数和变量会保存在$('#id').data()中
+
+draggable的scroll针对父元素overflow:auto有效，这时scrollParent不为document；如果使用body的滚动条会出现元素消失的现象

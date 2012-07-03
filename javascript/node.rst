@@ -8,6 +8,13 @@ node
 
 	# npm install -g
 
+查看安装细节，找到问题::
+
+	npm install --verbose
+
+对于安装失败的包,手工下载tgz文件,然后::
+
+	npm install some.tgz --verbose
 
 express
 ============
