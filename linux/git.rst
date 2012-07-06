@@ -11,8 +11,13 @@ git
 
 github更新子模块::
 
-	$ git submodule init 
-	$ git submodule update 
+	$ git submodule init
+	$ git submodule update
+
+RhodeCode中推送已经存在的库::
+
+	git push http://stonelee@10.10.22.86:1080/parseCSV master
+
 
 hg
 =============================

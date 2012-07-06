@@ -231,7 +231,11 @@ Fedora
 安装
 ------------------
 
-中文输入法：IBus中选择Pinyin，改为双拼，不要使用Intelligent Pinyin（不支持lue等）
+中文输入法：Input Method Selector选择Use IBus，选择Pinyin，改为双拼，不要使用Intelligent Pinyin（不支持lue等）
+
+将Caps Lock变为ctrl键::
+
+	setxkbmap -option ctrl:swapcaps
 
 常用::
 
@@ -355,5 +359,19 @@ Fedora 10里将普通用户添加到sudo组
 重启Apache2::
 
 	$ service httpd restart
+
+
+非root权限安装nginx
+------------------------
+
+编译安装::
+
+	./configure --prefix=/home/vboxadmin/lxd/bin/nginx  --without-http_rewrite_module --without-http_gzip_module
+	make
+	make install
+
+conf/nginx.conf将端口改为8090（1-1024需要管理员权限）
+
+运行 sbin/nginx
 
 

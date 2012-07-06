@@ -89,11 +89,11 @@ http://www.w3school.com.cn/js/pro_js_operators_bitwise.asp
 
 ::
 
-	<< 左移 
-	>> 右移 
-	~ 非 
-	& 与 
-	| 或 
+	<< 左移
+	>> 右移
+	~ 非
+	& 与
+	| 或
 	^ 异或
 
 所有整数字面量都默认存储为有符号整数。只有 ECMAScript 的位运算符才能创建无符号整数。
@@ -124,7 +124,7 @@ escape
 
 encodeURI::
 
-	http://www.google.com/a%20file%20with%20spaces.html 
+	http://www.google.com/a%20file%20with%20spaces.html
 
 encodeURIComponent::
 
@@ -176,26 +176,26 @@ constructor
 ::
 
 	var Foo=function(){}
-	var f = new Foo(); 
-	 
-	console.log(f.constructor === Foo); // true 
-	console.log(Foo.prototype.constructor===Foo);// true 
+	var f = new Foo();
+
+	console.log(f.constructor === Foo); // true
+	console.log(Foo.prototype.constructor===Foo);// true
 	//合并起来
-	console.log(f.constructor.prototype.constructor===Foo);// true 
+	console.log(f.constructor.prototype.constructor===Foo);// true
 
 但如果覆盖了prototype::
 
-	Foo.prototype = {  
-		getName: function() {  
-			return "name";  
-		}  
-	}; 
+	Foo.prototype = {
+		getName: function() {
+			return "name";
+		}
+	};
 
 此时Person.prototype.constructor === Object
 
 应采用重新覆盖的方式更改::
 
-	Person.prototype.constructor = Person; 
+	Person.prototype.constructor = Person;
 
 思考
 =============================
@@ -211,3 +211,11 @@ async
 
 将多层嵌套变为一层，还是需要callback
 
+js库
+=============================
+
+多选控件，包括自动补全，ajax等功能
+http://textextjs.com/
+
+类似iphone的手指滑动，滚动屏幕效果
+http://natrixnatrix89.github.com/promptu-menu/
