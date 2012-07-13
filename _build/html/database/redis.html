@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>redis &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="database" href="index.html" />
+    <link rel="next" title="diary" href="../diary/index.html" />
+    <link rel="prev" title="mysql" href="mysql.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../diary/index.html" title="diary"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mysql.html" title="mysql"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">database</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">redis</a><ul>
+<li><a class="reference internal" href="#id2">基本命令</a></li>
+<li><a class="reference internal" href="#id3">在线命令学习</a></li>
+<li><a class="reference internal" href="#redis-tutorial">redis-tutorial</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mysql.html"
+                        title="previous chapter">mysql</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../diary/index.html"
+                        title="next chapter">diary</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/database/redis.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="redis">
+<span id="id1"></span><h1>redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>基本命令<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>官方网站
+<a class="reference external" href="http://redis.io/download">http://redis.io/download</a></p>
+<p>打开服务端:</p>
+<div class="highlight-python"><pre>$ src/redis-server</pre>
+</div>
+<p>客户端:</p>
+<div class="highlight-python"><pre>$ src/redis-cli</pre>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>在线命令学习<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://try.redis-db.com/">http://try.redis-db.com/</a></p>
+<p>key-value</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">目的</th>
+<th class="head">操作</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>设置key value</td>
+<td>SET server:name &#8220;fido&#8221; （SETNX &#8211; &#8220;SET if Not eXists&#8221;）</td>
+</tr>
+<tr class="row-odd"><td>获取value</td>
+<td>GET server:name =&gt; &#8220;fido&#8221;</td>
+</tr>
+<tr class="row-even"><td>删除key</td>
+<td>DEL connections</td>
+</tr>
+<tr class="row-odd"><td>原子操作加1</td>
+<td>INCR connections =&gt; 1</td>
+</tr>
+<tr class="row-even"><td>超过120s会删除</td>
+<td>EXPIRE resource:lock 120</td>
+</tr>
+<tr class="row-odd"><td>监测还保留多久</td>
+<td>TTL resource:lock =&gt; 113 （-1表示不会过期）（重新SET会reset过期时间）</td>
+</tr>
+</tbody>
+</table>
+<p>list（ordered values）</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">目的</th>
+<th class="head">操作</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>加到末尾</td>
+<td>RPUSH friends &#8220;Tom&#8221;</td>
+</tr>
+<tr class="row-odd"><td>加到开始</td>
+<td>LPUSH friends &#8220;Sam&#8221;</td>
+</tr>
+<tr class="row-even"><td>得到list</td>
+<td>LRANGE friends 0 1 =&gt; [&#8220;Sam&#8221;,&#8221;Tom&#8221;] （0 based，第二个参数为-1表示取剩下的所有）</td>
+</tr>
+<tr class="row-odd"><td>取个数</td>
+<td>LLEN friends =&gt; 3</td>
+</tr>
+<tr class="row-even"><td>删第1元素并返回</td>
+<td>LPOP friends =&gt; &#8220;Sam&#8221;</td>
+</tr>
+<tr class="row-odd"><td>删最后元素并返回</td>
+<td>RPOP friends =&gt; &#8220;Bob&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>set（没有order，不重复）</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">目的</th>
+<th class="head">操作</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>添加</td>
+<td>SADD superpowers &#8220;flight&#8221;</td>
+</tr>
+<tr class="row-odd"><td>删除</td>
+<td>SREM superpowers &#8220;reflexes&#8221;</td>
+</tr>
+<tr class="row-even"><td>检查是否在set中</td>
+<td>SISMEMBER superpowers &#8220;flight&#8221; =&gt; true</td>
+</tr>
+<tr class="row-odd"><td>得到set</td>
+<td>SMEMBERS superpowers =&gt; [&#8220;flight&#8221;,&#8221;x-ray vision&#8221;]</td>
+</tr>
+<tr class="row-even"><td>并集</td>
+<td>SUNION superpowers birdpowers =&gt; [&#8220;flight&#8221;,&#8221;x-ray vision&#8221;,&#8221;pecking&#8221;]</td>
+</tr>
+</tbody>
+</table>
+<p>sorted set（元素有权值的set）</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">目的</th>
+<th class="head">操作</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>添(score,value)</td>
+<td>ZADD hackers 1940 &#8220;Alan Kay&#8221;</td>
+</tr>
+<tr class="row-odd"><td>得到</td>
+<td>ZRANGE hackers 2 4 =&gt; [&#8220;Alan Kay&#8221;,&#8221;Richard Stallman&#8221;,&#8221;Yukihiro Matsumoto&#8221;]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="redis-tutorial">
+<h2>redis-tutorial<a class="headerlink" href="#redis-tutorial" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://simonwillison.net/static/2010/redis-tutorial/">http://simonwillison.net/static/2010/redis-tutorial/</a></p>
+<ul class="simple">
+<li>key命名 obj-type:id:field =&gt; (user:23:username)</li>
+<li>TYPE =&gt; the type of a Redis key(string, list, set, zset, hash or none)</li>
+<li>ends with an NX =&gt; Not Exists</li>
+</ul>
+<p>Redis can work as a cache (similar to memcached) by using the EXPIRE and EXPIREAT</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../diary/index.html" title="diary"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mysql.html" title="mysql"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >database</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

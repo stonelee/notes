@@ -1,0 +1,182 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>版本控制 &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="linux" href="index.html" />
+    <link rel="next" title="linux" href="linux.html" />
+    <link rel="prev" title="bash" href="bash.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="linux.html" title="linux"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bash.html" title="bash"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">linux</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">版本控制</a><ul>
+<li><a class="reference internal" href="#id2">git</a></li>
+<li><a class="reference internal" href="#hg">hg</a><ul>
+<li><a class="reference internal" href="#ignore">使用本地ignore</a></li>
+<li><a class="reference internal" href="#log">查看自己提交的log</a></li>
+<li><a class="reference internal" href="#bitbucket">bitbucket</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bash.html"
+                        title="previous chapter">bash</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="linux.html"
+                        title="next chapter">linux</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/linux/git.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="git">
+<span id="id1"></span><h1>版本控制<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>git<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>github更新子模块:</p>
+<div class="highlight-python"><pre>$ git submodule init
+$ git submodule update</pre>
+</div>
+<p>RhodeCode中推送已经存在的库:</p>
+<div class="highlight-python"><pre>git push http://stonelee@10.10.22.86:1080/parseCSV master</pre>
+</div>
+</div>
+<div class="section" id="hg">
+<h2>hg<a class="headerlink" href="#hg" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ignore">
+<h3>使用本地ignore<a class="headerlink" href="#ignore" title="Permalink to this headline">¶</a></h3>
+<p>.hg/hgrc中添加:</p>
+<div class="highlight-python"><pre>[ui]
+ignore = /path/to/repo/.hg/hgignore</pre>
+</div>
+<p>然后在.hg/hgignore中列出本地存在但不提交的代码</p>
+</div>
+<div class="section" id="log">
+<h3>查看自己提交的log<a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>$ hg log -u stonelee --template '{date|isodate} {desc}\n'|more</pre>
+</div>
+</div>
+<div class="section" id="bitbucket">
+<h3>bitbucket<a class="headerlink" href="#bitbucket" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">将~/.ssh/id_rsa.pub添加到网站SSH keys中</p>
+</li>
+<li><p class="first">修改.hg/hgrc文件:</p>
+<div class="highlight-python"><pre>[paths]
+bitbucket = https://istonelee@bitbucket.org/hsialee/ciis
+
+[hostfingerprints]
+bitbucket.org = 24:9c:45:8b:9c:aa:ba:55:4e:01:6d:58:ff:e4:28:7d:2a:14:ae:3b</pre>
+</div>
+</li>
+<li><p class="first">TortorseHg中View-Synchronize，选择相应的url进行操作</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="linux.html" title="linux"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bash.html" title="bash"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >linux</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,207 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>css &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="css" href="index.html" />
+    <link rel="next" title="django-cms" href="django-cms.html" />
+    <link rel="prev" title="css" href="index.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="django-cms.html" title="django-cms"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="css"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">css</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">css</a><ul>
+<li><a class="reference internal" href="#position">position</a></li>
+<li><a class="reference internal" href="#block-formatting-context">block formatting context</a></li>
+<li><a class="reference internal" href="#id2">字体</a><ul>
+<li><a class="reference internal" href="#css3">CSS3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">css</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="django-cms.html"
+                        title="next chapter">django-cms</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/css/css.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="css">
+<span id="id1"></span><h1>css<a class="headerlink" href="#css" title="Permalink to this headline">¶</a></h1>
+<p>position:absolute中的width，height是相对父relative来定义的</p>
+<p>em 强调</p>
+<ul class="simple">
+<li>a&gt;img</li>
+<li>li&gt;a</li>
+<li>h4&gt;a</li>
+</ul>
+<p>image调整垂直位置:vertical-align</p>
+<div class="section" id="position">
+<h2>position<a class="headerlink" href="#position" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>static        在正常流中，忽略left等</li>
+<li>relative      相对于正常位置定位</li>
+<li>absolute      相对于static之外的第一个父元素定位</li>
+</ul>
+</div>
+<div class="section" id="block-formatting-context">
+<h2>block formatting context<a class="headerlink" href="#block-formatting-context" title="Permalink to this headline">¶</a></h2>
+<p>产生条件：</p>
+<ul class="simple">
+<li>float not &#8216;none&#8217;: left, right</li>
+<li>overflow not &#8216;visible&#8217;: hidden, scroll, auto</li>
+<li>display: &#8216;table-cell&#8217;, &#8216;table-caption&#8217;, or &#8216;inline-block&#8217;</li>
+<li>position:absolute, fixed</li>
+</ul>
+<p>位于normal flow</p>
+<p>效果：</p>
+<ol class="arabic">
+<li><p class="first">prevent margin collapsing</p>
+<blockquote>
+<div><p>位于相同block formatting context中的相邻block boxes会对vertical margins折叠</p>
+<p>消除方法:</p>
+<div class="highlight-python"><pre>overflow:hidden;zoom:1</pre>
+</div>
+<p>或者设置 border or padding</p>
+</div></blockquote>
+</li>
+<li><p class="first">Block formatting contexts contain floats</p>
+</li>
+</ol>
+</div>
+<div class="section" id="id2">
+<h2>字体<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>字体分为三类（generic family）：Serif、Sans-serif、Monospace</p>
+<p>Serif对某些字符笔画末端加了些小短线做装饰</p>
+<p>在计算机屏幕上Sans-serif比Serif更易读</p>
+<p>16px=1em</p>
+<p>W3C推荐使用em来代替px，因为px在IE9之前版本中无法随页面缩放，
+但是em在IE老版本中缩放比例不一致，所以body {font-size:100%;}，然后再使用em</p>
+<p>font-size/line-height, font-family将generic family放到最后面，来自动选择此类型的字体:</p>
+<div class="highlight-python"><pre>font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;</pre>
+</div>
+<div class="section" id="css3">
+<h3>CSS3<a class="headerlink" href="#css3" title="Permalink to this headline">¶</a></h3>
+<p>阴影box-shadow:</p>
+<div class="highlight-python"><pre>横偏移 竖偏移 阴影大小 颜色
+-webkit-box-shadow:0 15px 10px rgba(0, 0, 0, 0.7);
+-moz-box-shadow:0 -15px 10px rgba(0, 0, 0, 0.7);
+box-shadow:10px 15px 10px rgba(0, 0, 0, 0.7);</pre>
+</div>
+<p>旋转transform:</p>
+<div class="highlight-python"><pre>-3逆时针
+-webkit-transform:rotate(-3deg);
+-moz-transform:rotate(-3deg);
+-o-transform:rotate(-3deg);
+transform:rotate(-3deg);</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="django-cms.html" title="django-cms"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="css"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >css</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

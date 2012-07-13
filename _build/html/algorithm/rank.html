@@ -1,0 +1,161 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>排行榜 &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="算法" href="index.html" />
+    <link rel="prev" title="算法" href="index.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="算法"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">算法</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">排行榜</a><ul>
+<li><a class="reference internal" href="#id2">考虑因素</a><ul>
+<li><a class="reference internal" href="#id3">上榜时间</a></li>
+<li><a class="reference internal" href="#id4">其他因素</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">业务问题</a></li>
+<li><a class="reference internal" href="#id6">总结</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">算法</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/algorithm/rank.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="rank">
+<span id="id1"></span><h1>排行榜<a class="headerlink" href="#rank" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://www.cnblogs.com/kym/archive/2012/05/11/2495297.html">http://www.cnblogs.com/kym/archive/2012/05/11/2495297.html</a></p>
+<p>推荐系统这个领域可以分为个性化推荐和非个性化推荐，那么排行榜一定是非个性化推荐中最重要的一部分了。</p>
+<div class="section" id="id2">
+<h2>考虑因素<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>上榜时间、分数、收藏人数</p>
+<div class="section" id="id3">
+<h3>上榜时间<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>刚刚出版的书关注人少，因此需要动态调整时间权重，使其逐渐衰减。可以使用半衰期算法:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">m</span> <span class="o">=</span> <span class="n">M</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>M 为初始值，m为反应后的值，t为反应的时间，T为半衰期。
+如图书半衰期为7天，即7天后重要度减少一半，T=7</p>
+</div>
+<div class="section" id="id4">
+<h3>其他因素<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>对于分数可以过滤3分以下的，然后归一化后采用相乘或指数的形式</p>
+<p>收藏人数直接归一化后相乘</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>业务问题<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>排行榜会面临马太效应，强者越强，所以要考虑时间衰减问题</p>
+<p>还有Anti-spammer的问题，参见
+<a class="reference external" href="http://www.paulgraham.com/antispam.html">http://www.paulgraham.com/antispam.html</a></p>
+</div>
+<div class="section" id="id6">
+<h2>总结<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>通过函数曲线研究函数规律
+<a class="reference external" href="http://www.wolframalpha.com/">http://www.wolframalpha.com/</a></p>
+<p>如果可能，应尽量避免trial-and-error</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="算法"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >算法</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

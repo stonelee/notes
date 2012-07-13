@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>extjs &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="javascript" href="index.html" />
+    <link rel="next" title="jquery" href="jquery.html" />
+    <link rel="prev" title="javascript" href="index.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="jquery.html" title="jquery"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="javascript"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">extjs</a><ul>
+<li><a class="reference internal" href="#api">基本API</a></li>
+<li><a class="reference internal" href="#id2">技巧</a><ul>
+<li><a class="reference internal" href="#store">store</a></li>
+<li><a class="reference internal" href="#treestore">TreeStore</a></li>
+<li><a class="reference internal" href="#combobox">combobox</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">examples</a><ul>
+<li><a class="reference internal" href="#kitchensink">4.1.0-kitchensink</a></li>
+<li><a class="reference internal" href="#simple-tasks">simple-tasks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3">extjs使用规范</a></li>
+<li><a class="reference internal" href="#id4">想法</a></li>
+<li><a class="reference internal" href="#css">更改css</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">javascript</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jquery.html"
+                        title="next chapter">jquery</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/javascript/extjs.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="extjs">
+<span id="id1"></span><h1>extjs<a class="headerlink" href="#extjs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="api">
+<h2>基本API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Ext.getCmp(id)        单例时使用</li>
+<li>Ext.container.Container.getComponent(itemId)</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>getCmp</td>
+<td>得到component</td>
+</tr>
+<tr class="row-even"><td>get</td>
+<td>得到element</td>
+</tr>
+</tbody>
+</table>
+<p>ownerCt 得到父Container</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>query</td>
+<td>所有后代</td>
+</tr>
+<tr class="row-even"><td>down</td>
+<td>first后代</td>
+</tr>
+<tr class="row-odd"><td>child</td>
+<td>first direct child</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="66%" />
+<col width="34%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Ext.util.HashMap</td>
+<td>无顺序</td>
+</tr>
+<tr class="row-even"><td>Ext.util.MixedCollection</td>
+<td>有顺序</td>
+</tr>
+</tbody>
+</table>
+<p>Ext.iterate可以同时迭代object和array</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Ext.merge()</td>
+<td>递归合并（内部object也合并），后面的会把前面的覆盖</td>
+</tr>
+<tr class="row-even"><td>Ext.apply()</td>
+<td>不递归</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">store</span><span class="o">.</span><span class="n">loadPage</span><span class="p">(</span><span class="mi">1</span><span class="p">,{</span><span class="n">params</span><span class="p">:{</span><span class="n">query</span><span class="p">:</span><span class="s">&#39;something&#39;</span><span class="p">}})</span>
+<span class="n">store</span><span class="o">.</span><span class="n">clearFilter</span><span class="p">()</span>
+<span class="n">store</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span><span class="s">&#39;some&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>store.findRecord(fieldName, value,null,null,null,true)
+最后一个参数为true，否则会模糊查询，返回第一个查到的结果</p>
+<p>Ext.extend在原class基础上创建新class,而Ext.override修改原class</p>
+</div>
+<div class="section" id="id2">
+<h2>技巧<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>initComponent中使用this.initialConfig来获取实例的配置参数</p>
+<p>Ext.define中配置参数中的this指向的是window，因此如果想引用该class的属性，应该在initComponent中使用。</p>
+<p>getElConfig使用DomHelper方式来配置控件</p>
+<p>Ext.form.Panel通过getForm()得到Ext.form.Basic（辅助类）的实例，从而完成验证，提交，加载等功能。</p>
+<p>loadRecord调用的是field.setValue</p>
+<p>数组用，隔开，字符直接显示:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">me</span><span class="o">.</span><span class="n">displayTpl</span> <span class="o">=</span> <span class="n">Ext</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;Ext.XTemplate&#39;</span><span class="p">,</span>
+        <span class="s">&#39;&lt;tpl for=&quot;.&quot;&gt;&#39;</span> <span class="o">+</span>
+                <span class="s">&#39;{[typeof values === &quot;string&quot; ?  values : values[&quot;&#39;</span> <span class="o">+</span> <span class="n">me</span><span class="o">.</span><span class="n">displayField</span> <span class="o">+</span> <span class="s">&#39;&quot;]]}&#39;</span> <span class="o">+</span>
+                <span class="s">&#39;&lt;tpl if=&quot;xindex &lt; xcount&quot;&gt;&#39;</span> <span class="o">+</span> <span class="n">me</span><span class="o">.</span><span class="n">delimiter</span> <span class="o">+</span> <span class="s">&#39;&lt;/tpl&gt;&#39;</span> <span class="o">+</span>
+        <span class="s">&#39;&lt;/tpl&gt;&#39;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>函数正常运行，返回true，有异常返回false</p>
+<div class="section" id="store">
+<h3>store<a class="headerlink" href="#store" title="Permalink to this headline">¶</a></h3>
+<p>为保证初始化和切换tab时都加载store，tabs中的grid需要同时设置render和show两个事件。
+因为tabs render时会触发第一个tab中grid的render事件，但是不会触发show事件；
+点击第二个tab时会先后触发其grid的render和show事件；
+切换tab时会触发相应grid的show事件</p>
+<p>一般grid设置render即可，因为默认不会触发show事件</p>
+<p>配合pagingtoolbar的store，都要通过getProxy().extraParams的方式更改参数</p>
+<p>store跟控件是绑定的，如果同一个页面的多个控件关联同一个store，会出现状态同步的现象，解决方法是新创建一个store</p>
+</div>
+<div class="section" id="treestore">
+<h3>TreeStore<a class="headerlink" href="#treestore" title="Permalink to this headline">¶</a></h3>
+<p>TreeStore必须要使用model，model和TreeStore都要在controller中引用，</p>
+<p>不能使用名为“Trees”的store和名为Tree的model</p>
+<p>TreeStore当有节点expand时自动加载数据，因此如果在TreeStore的子类中设置root:{expanded:true}时会在create该store时加载数据,否则会在Tree.Panel的load事件中加载。</p>
+</div>
+<div class="section" id="combobox">
+<h3>combobox<a class="headerlink" href="#combobox" title="Permalink to this headline">¶</a></h3>
+<p>如果设置:</p>
+<div class="highlight-python"><pre>displayField:'name';valueField:'id';name:'name'</pre>
+</div>
+<p>对于:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">record</span><span class="o">=</span><span class="n">Ext</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;KJExt.model.Student&#39;</span><span class="p">,{</span><span class="n">name</span><span class="p">:</span><span class="mi">2</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">this</span><span class="o">.</span><span class="n">up</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getForm</span><span class="p">()</span><span class="o">.</span><span class="n">loadRecord</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>只会显示id，但是下拉列表中会自动高亮选择该项</p>
+<p>改进：</p>
+<p>在form的render事件中先load该store，则会显示name，但是第一次点击下拉列表会自动收缩，以后就没事了。</p>
+<p>注意：</p>
+<p>如果在按钮点击事件中store.load，会在重新点击按钮，然后点击下拉列表后报错</p>
+<p>推荐做法：</p>
+<p>如果赋值为object，可以正确显示，但是下拉列表不会自动高亮:</p>
+<div class="highlight-python"><pre>combobox设置：
+{
+        xtype: 'combobox',
+        store: 'Students',
+        valueField: 'id',
+        displayField: 'name',
+        name: 'student'
+}
+赋值方法：
+Ext.define('Record', {
+        extend: 'Ext.data.Model',
+        fields: ['id', 'student']
+});
+var myStore = Ext.create('Ext.data.Store', {
+        model: 'Record',
+        data: [{
+                id: 1,
+                student: {
+                        id: 2,
+                        name: 'jerry'
+                }
+        }]
+});
+var record = myStore.getRange()[0];
+this.up('form').getForm().loadRecord(record);</pre>
+</div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="kitchensink">
+<h3>4.1.0-kitchensink<a class="headerlink" href="#kitchensink" title="Permalink to this headline">¶</a></h3>
+<p>使用neptune样式，适合触摸屏使用</p>
+<p>Viewport中layout:&#8217;border&#8217;中如果设置左右两边,可以直接设置:</p>
+<div class="highlight-python"><pre>region:'center',
+layout:{
+        type:'hbox',
+        align:'stretch'
+},
+items:[]</pre>
+</div>
+<p>hbox中的控件通过flex设置按比例自动扩展</p>
+<p>hbox中设置pack:&#8217;center&#8217;会使得items横向居中显示，align:&#8217;stretch&#8217;会使得纵向达到最大</p>
+<p>overflowY:&#8217;auto&#8217;单独设置y轴滚动条</p>
+<p>如果要设计模块统一风格，可以使用ui，如在toolbar的子类中设置ui:&#8217;sencha&#8217;,会生成class=“x-toolbar-sencha”
+单独设置控件class，使用cls:&#8217;x-logo&#8217;</p>
+<p>通过defaults来设置items中的默认值，可以嵌套</p>
+<p>{}的默认xtype是‘panel&#8217;</p>
+<p>form默认layout为anchor，可以默认设置:</p>
+<div class="highlight-python"><pre>defaultType:'textfield',
+defaults:{anchor:'100%'}</pre>
+</div>
+<p>通过location.hash来保存页面地址，进而通过url设置页面:</p>
+<div class="highlight-python"><pre>在左侧树的select事件中:
+location.hash='someid';
+document.title=document.title.split(' - ')[0]+' - '+title
+
+在左侧树的afterrender事件中:
+name=location.hash.substring(1);
+record=treepanel.view.store.find(key,name)
+treepanel.view.select(record);</pre>
+</div>
+<p>新的代码组织方式:</p>
+<div class="highlight-python"><pre>(function(){
+        var toolbarItems = [];
+        Ext.define();
+})();</pre>
+</div>
+<p>这种方式可以将某些配置项抽象出来，使得定义模块时依然可以直接配置</p>
+</div>
+<div class="section" id="simple-tasks">
+<h3>simple-tasks<a class="headerlink" href="#simple-tasks" title="Permalink to this headline">¶</a></h3>
+<p>bodyStyle:设置body的style属性</p>
+<p>grid&#8217;s column的weight:100，如果设某个dockedItem的weight:101,则排在column的下面，默认toolbar为0，所以排在最上面</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>extjs使用规范<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>为了顺利完成打包工作：</p>
+<ul class="simple">
+<li>js里面统一使用单引号，尤其是在requires中</li>
+<li>view中如果要通过xtype方式引用其他view，必须在requires中引入该文件</li>
+<li>controller中的views只应该包含没有被任何view文件require的view</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>想法<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>按模块划分mvc有利于模块复用,但是Extjs的mvc是整个应用的划分，不利于模块复用。</p>
+<p>ExtJS之所以慢在很大程度上是因为需要在客户端解析js生成html，如果能够在服务端解析，生成html并缓存，然后发给客户端，应该能够解决这个问题</p>
+</div>
+<div class="section" id="css">
+<h2>更改css<a class="headerlink" href="#css" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>gem install sass -v 3.1.1
+gem install compass</pre>
+</div>
+<p>查看版本号:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">compass</span> <span class="o">-</span><span class="n">v</span>
+<span class="n">sass</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+<p>目录结构:</p>
+<div class="highlight-python"><pre>appname
+--app/
+--extjs/
+--resources/
+  --css/
+  --images/
+  --sass/
+--app.js
+--index.html</pre>
+</div>
+<p>更改css模板：
+appname/resources/sass/my-ext-theme.scss</p>
+<p>可控制的变量：
+appname/extjs/resources/themes/stylesheets/ext4/default/variables/</p>
+<p>编译css:
+在appname/resources/sass中运行compass compile</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="jquery.html" title="jquery"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="javascript"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>rails &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="linux" href="index.html" />
+    <link rel="next" title="vim" href="vim.html" />
+    <link rel="prev" title="linux" href="linux.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vim.html" title="vim"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="linux.html" title="linux"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">linux</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">rails</a><ul>
+<li><a class="reference internal" href="#ror">安装ROR环境</a><ul>
+<li><a class="reference internal" href="#id2">自动加载环境</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3">rails开发</a><ul>
+<li><a class="reference internal" href="#id4">常用命令</a></li>
+<li><a class="reference internal" href="#id5">自动生成</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="linux.html"
+                        title="previous chapter">linux</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vim.html"
+                        title="next chapter">vim</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/linux/rails.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="rails">
+<span id="id1"></span><h1>rails<a class="headerlink" href="#rails" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ror">
+<h2>安装ROR环境<a class="headerlink" href="#ror" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">安装RVM:</p>
+<div class="highlight-python"><pre>$ curl -L get.rvm.io | bash -s stable
+$ source ~/.bash_profile
+
+$ rvm -v</pre>
+</div>
+</li>
+<li><p class="first">用 RVM 安装 Ruby 环境(Ruby, Ruby Gems):</p>
+<div class="highlight-python"><pre>$ rvm pkg install readline
+$ rvm install 1.9.2 --with-readline-dir=$rvm_path/usr</pre>
+</div>
+</li>
+<li><p class="first">设置 Ruby 版本:</p>
+<div class="highlight-python"><pre>$ rvm 1.9.2 --default
+
+$ ruby -v
+ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-darwin10.8.0]
+
+$ gem -v
+1.8.6</pre>
+</div>
+</li>
+<li><p class="first">或者创建gemset，来管理多个rails和gem:</p>
+<div class="highlight-python"><pre>$ rvm use 1.9.3
+$ rvm gemset create rails313
+$ rvm use 1.9.3@rails313
+
+# 查看目前所在环境
+$ rvm list
+$ rvm gemset list</pre>
+</div>
+</li>
+<li><p class="first">设置速度更快的taobao源:</p>
+<div class="highlight-python"><pre>$ gem source -r http://rubygems.org/
+$ gem source -a http://ruby.taobao.org</pre>
+</div>
+</li>
+<li><p class="first">安装Rails以及依赖管理工具Bundler:</p>
+<div class="highlight-python"><pre>$ gem install bundler rails
+
+$ bundle -v
+Bundler version 1.0
+
+$ rails -v
+Rails 3.2.1</pre>
+</div>
+</li>
+</ol>
+<div class="section" id="id2">
+<h3>自动加载环境<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>在项目目录中建立.rvmrc文件, 加入:</p>
+<div class="highlight-python"><pre>rvm use 1.9.3@rails313</pre>
+</div>
+<p>这样在进入项目目录后，会自动加载对应版本ruby和gemset</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>rails开发<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>常用命令<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>加载环境:</p>
+<div class="highlight-python"><pre>$ rvm use 1.9.3@rails323</pre>
+</div>
+<p>建立项目:</p>
+<div class="highlight-python"><pre>$ rails new blog</pre>
+</div>
+<p>运行服务器:</p>
+<div class="highlight-python"><pre>$ rails server</pre>
+</div>
+<p>更新数据库结构:</p>
+<div class="highlight-python"><pre>$ rake db:migrate</pre>
+</div>
+<p>model命令行:</p>
+<div class="highlight-python"><pre>$ rails console</pre>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>自动生成<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>首页（the home controller’s index action）:</p>
+<div class="highlight-python"><pre>$ rails generate controller home index</pre>
+</div>
+<p>为新的resource生成models, views, and controllers:</p>
+<div class="highlight-python"><pre>$ rails generate scaffold Post name:string title:string content:text</pre>
+</div>
+<p>创建model:</p>
+<div class="highlight-python"><pre>$ rails generate model Comment commenter:string body:text post:references</pre>
+</div>
+<p>创建controller:</p>
+<div class="highlight-python"><pre>$ rails generate controller Comments</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vim.html" title="vim"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="linux.html" title="linux"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >linux</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

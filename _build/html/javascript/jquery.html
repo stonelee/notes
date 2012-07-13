@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>jquery &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="javascript" href="index.html" />
+    <link rel="next" title="js" href="js.html" />
+    <link rel="prev" title="extjs" href="extjs.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="js.html" title="js"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="extjs.html" title="extjs"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">jquery</a><ul>
+<li><a class="reference internal" href="#callbacks">Callbacks</a></li>
+<li><a class="reference internal" href="#deferred">Deferred</a></li>
+<li><a class="reference internal" href="#id2">编译jquery</a></li>
+<li><a class="reference internal" href="#jquery-ui">jquery UI</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="extjs.html"
+                        title="previous chapter">extjs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="js.html"
+                        title="next chapter">js</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/javascript/jquery.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jquery">
+<span id="id1"></span><h1>jquery<a class="headerlink" href="#jquery" title="Permalink to this headline">¶</a></h1>
+<p>判断是否找到:</p>
+<div class="highlight-python"><pre>$('#id').length ? 'exist' : 'not'</pre>
+</div>
+<p>jquery1.7.2中如果在setInterval中循环getJSON同一个地址时，chrome不会显示发送xhr请求，但是firefox中会显示。jquery1.4.2没有这个问题</p>
+<p>$.extend可以merge objects，第一个参数true递归merge(deep copy for object and array)</p>
+<p>防止修改defaults参数:</p>
+<div class="highlight-python"><pre>var settings = $.extend({}, defaults, options);</pre>
+</div>
+<p>jquery中.data(&#8216;kjGrid&#8217;)，调用时使用kjGrid，kj-grid都可以。反之亦然</p>
+<p>只序列化有name的input，select，textarea；check，radio如果没选中不加入序列，选中会返回on</p>
+<p>intro，outro提供包裹函数，其他函数可以作为全局函数测试，生产环境时打包到一起</p>
+<p>jQuery.fn中的this是个[]</p>
+<ul class="simple">
+<li>event.stopImmediatePropagation()      阻止冒泡，也阻止其他handlers</li>
+<li>event.stopPropagation()       阻止冒泡</li>
+</ul>
+<p>event设置命名空间name，方便统一处理同类型的事件:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bind</span><span class="p">(</span><span class="s">&#39;click.name&#39;</span><span class="p">,</span><span class="n">handler</span><span class="p">)</span>
+<span class="n">unbind</span><span class="p">(</span><span class="s">&#39;.name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>offsetParent()得到positioned的最近的父元素(relative,absolute,fixed)</p>
+<p>event.pageX,pageY得到相对于document左上角的鼠标位置坐标</p>
+<ul class="simple">
+<li>offset得到相对document的第一个元素的坐标</li>
+<li>position得到相对于offset parent的坐标</li>
+</ul>
+<p>clone可以复制选择的element，第一个参数为true可以连同event和data一起复制，第二个参数为true可以连同children一起复制，注意不要复制有id的，这样会导致id重复。对于data中的objects和arrays依然需要$.extend([],$elem.data(&#8216;arr&#8217;))才能做到深复制</p>
+<p>高亮某项，去掉其他项的高亮:</p>
+<div class="highlight-python"><pre>if ( !$event_counter.hasClass( "ui-state-hover" ) ) {
+        $event_counter.addClass( "ui-state-hover" )
+                .siblings().removeClass( "ui-state-hover" );
+}</pre>
+</div>
+<p>限制查找范围,第二个参数为上下文，可以代替find:</p>
+<div class="highlight-python"><pre>$( "span.count", $event_counter ).text( new_count );</pre>
+</div>
+<p>text获取所有文本，去除html标签，可应用于xml和html，对于input或者textarea使用val，对于script使用html。text()赋值时会将html标签转义。</p>
+<p>typeof null == &#8216;object&#8217;
+所以要使用$.isPlainObject()来判断是不是object</p>
+<p>判断:</p>
+<div class="highlight-python"><pre>empty string is falsey,
+empty array with .length == 0
+empty objects   with $.isEmptyObject()</pre>
+</div>
+<p>$.getScript()加载js文件并执行，不缓存</p>
+<div class="section" id="callbacks">
+<h2>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this headline">¶</a></h2>
+<p>$.Callbacks()可以将一组函数进行统一调用。</p>
+<p>可以使用add，remove来操作，通过fire来调用</p>
+<ul class="simple">
+<li>once  只能执行一次fire</li>
+<li>momory        对于fire后面的add语句，仍然使用原值进行fire，就好像先add再fire一样，对remove无效</li>
+<li>unique        如果多次add同一个函数，list中只保留一次</li>
+<li>stopOnFalse   list中的函数如果返回false则不继续执行</li>
+</ul>
+<p>$.Callbacks()返回object，包含add，remove等函数，这几个函数又return this，可以保证链式操作</p>
+<p>Callbacks实现pub/sub解耦，以及使用deferred进一步解耦:</p>
+<div class="highlight-python"><pre>function fn1(value) {
+        console.log(value);
+        return 'result'
+}
+
+function fn2(value) {
+        fn1("fn2 says:" + value);
+        return false;
+}
+
+var topics = {};
+
+jQuery.Topic = function(id) {
+        var callbacks, method, topic = id &amp;&amp; topics[id];
+        if (!topic) {
+                callbacks = jQuery.Callbacks();
+                topic = {
+                        publish: callbacks.fire,
+                        subscribe: callbacks.add,
+                        unsubscribe: callbacks.remove
+                };
+                if (id) {
+                        topics[id] = topic;
+                }
+        }
+        return topic;
+};
+
+$.Topic("mailArrived").subscribe(fn1);
+
+//pub/sub
+$.Topic( "mailArrived" ).publish( "hello world!" );
+
+//deferred
+var topic = $.Topic("mailArrived");
+
+var dfd = $.Deferred();
+dfd.done(topic.publish);
+
+dfd.resolve("its been published!");</pre>
+</div>
+</div>
+<div class="section" id="deferred">
+<h2>Deferred<a class="headerlink" href="#deferred" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html">http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html</a></p>
+<p>Deferred可以用来屏蔽异步/同步操作的差异:</p>
+<div class="highlight-python"><pre>var cache = {};
+
+function getData( val ){
+
+        // return either the cached value or an
+        // jqXHR object (which contains a promise)
+        return cache[ val ] || $.ajax('/foo/', {
+                data: { value: val },
+                dataType: 'json',
+                success: function( resp ){
+                        cache[ val ] = resp;
+                }
+        });
+}
+
+$.when(getData('foo')).then(function(resp){
+        // do something with the response, which may
+        // or may not have been retreived using an
+        // XHR request.
+});</pre>
+</div>
+<p>方便多个操作:</p>
+<div class="highlight-python"><pre>$.when( $.getJSON('/some/data/'), $.get('template.tpl') ).then(function( data, tmpl ){
+
+        $( tmpl ) // create a jQuery object out of the template
+                .tmpl( data) // compile it
+                .appendTo( "#target" ); // insert it into the DOM
+
+});</pre>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>编译jquery<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>node切换到正式版本:</p>
+<div class="highlight-python"><pre>$ git checkout v0.6.19-release</pre>
+</div>
+<p>编译:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># ./configure</span>
+<span class="c"># make</span>
+<span class="c"># make install</span>
+</pre></div>
+</div>
+<p>查看node版本:</p>
+<div class="highlight-python"><pre>$ node --version
+v0.6.19</pre>
+</div>
+<p>进入jquery目录，安装node依赖:</p>
+<div class="highlight-python"><pre>$ cd jquery &amp;&amp; npm install</pre>
+</div>
+<p>编译jquery:</p>
+<div class="highlight-python"><pre>$ node_modules/grunt/bin/grunt</pre>
+</div>
+</div>
+<div class="section" id="jquery-ui">
+<h2>jquery UI<a class="headerlink" href="#jquery-ui" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>$.widget('custom.colorize',{options:{}})</pre>
+</div>
+<p>定义了custome命名空间下的colorize控件。
+options为配置参数，使用this.options.name来调用。还包括回调函数，使用this._trigger(&#8216;&#8217;)来调用。用户实例化控件时直接定义即可。
+this.element为调用该控件的jquery对象。</p>
+<p>不以下划线开头的函数为公开函数，可以通过.colorize(&#8216;hello&#8217;)来调用。</p>
+<p>实例化方法:</p>
+<div class="highlight-python"><pre>$("#myid").colorize({});</pre>
+</div>
+<p>引用所有实例:</p>
+<div class="highlight-python"><pre>$(':custom-colorize')</pre>
+</div>
+<p>寻找data中有droppable的:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">this</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;:data(droppable)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>jqueryui中widget中通过this定义函数和变量会保存在$(&#8216;#id&#8217;).data()中</p>
+<p>draggable的scroll针对父元素overflow:auto有效，这时scrollParent不为document；如果使用body的滚动条会出现元素消失的现象</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="js.html" title="js"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="extjs.html" title="extjs"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

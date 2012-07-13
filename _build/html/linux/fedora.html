@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fedora &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="linux" href="index.html" />
+    <link rel="next" title="版本控制" href="git.html" />
+    <link rel="prev" title="bash" href="bash.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="git.html" title="版本控制"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bash.html" title="bash"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">linux</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">fedora</a><ul>
+<li><a class="reference internal" href="#id2">安装</a><ul>
+<li><a class="reference internal" href="#virtualbox">安装virtualbox</a></li>
+<li><a class="reference internal" href="#php">配置php环境</a></li>
+<li><a class="reference internal" href="#rootnginx">非root权限安装nginx</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3">技巧</a><ul>
+<li><a class="reference internal" href="#id4">fedora启动失败</a></li>
+<li><a class="reference internal" href="#fedora-10sudo">Fedora 10里将普通用户添加到sudo组</a></li>
+<li><a class="reference internal" href="#id5">fedora启动时显示启动信息</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bash.html"
+                        title="previous chapter">bash</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="git.html"
+                        title="next chapter">版本控制</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/linux/fedora.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fedora">
+<span id="id1"></span><h1>fedora<a class="headerlink" href="#fedora" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>中文输入法：Input Method Selector选择Use IBus，选择Pinyin，改为双拼，不要使用Intelligent Pinyin（不支持lue等）</p>
+<p>将Caps Lock变为ctrl键:</p>
+<div class="highlight-python"><pre>setxkbmap -option ctrl:swapcaps</pre>
+</div>
+<p>常用:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">stardict</span>
+<span class="n">flash</span><span class="o">-</span><span class="n">plugin</span>
+<span class="n">tomboy</span>
+</pre></div>
+</div>
+<p>nginx:</p>
+<div class="highlight-python"><pre>nginx
+配置：ln ～/config/nginx.conf /etc/nginx/nginx.conf</pre>
+</div>
+<p>mongodb:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mongodb</span><span class="o">-</span><span class="n">server</span>
+<span class="n">mongodb</span>
+</pre></div>
+</div>
+<p>版本控制:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mercurial</span><span class="p">,</span><span class="n">tortoisehg</span>
+<span class="n">git</span>
+<span class="n">git</span><span class="o">-</span><span class="n">gui</span>
+</pre></div>
+</div>
+<p>vim:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">vim</span><span class="o">-</span><span class="n">enhanced</span>
+<span class="n">ctags</span>
+<span class="n">ack</span>
+</pre></div>
+</div>
+<p>jslint插件:</p>
+<div class="highlight-python"><pre>需要先通过yum安装ruby，rubygem-rake
+安装node
+$ rake install
+配置文件config/jslintrc 链接到～/.jslintrc</pre>
+</div>
+<p>编译:</p>
+<div class="highlight-python"><pre>gcc
+gcc-c++</pre>
+</div>
+<p>java:</p>
+<div class="highlight-python"><pre>maven
+mysql
+mysql-server
+mysql-workbench
+启动：$ service mysqld start
+设置密码：mysqladmin -u root password admin
+更改数据库编码：config/mysql/my.cnf 连接到 /etc/my.cnf</pre>
+</div>
+<p>安装node，npm，express:</p>
+<div class="highlight-python"><pre>git clone https://github.com/joyent/node.git
+curl http://npmjs.org/install.sh | sh
+npm install -g express
+
+编译安装node 0.6.11
+要安装openssl-devel</pre>
+</div>
+<div class="section" id="virtualbox">
+<h3>安装virtualbox<a class="headerlink" href="#virtualbox" title="Permalink to this headline">¶</a></h3>
+<p>yum install kernel-devel</p>
+<p>安装dkms使得内核变动后自动编译</p>
+<p>重新编译内核：/etc/init.d/vboxdrv setup</p>
+<p>虚拟机中的Gateway即为主机的ip，可以直接访问</p>
+</div>
+<div class="section" id="php">
+<h3>配置php环境<a class="headerlink" href="#php" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>yum install php</pre>
+</div>
+<p>在/var/www/html中创建测试文件info.php:</p>
+<div class="highlight-python"><pre>&lt;?php
+        phpinfo();
+?&gt;</pre>
+</div>
+<p>可以看到测试页面。</p>
+<div class="highlight-python"><pre>yum install php-mysql php-gd php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-eaccelerator php-magickwand php-magpierss php-mapserver php-mbstring php-mcrypt php-mhash php-mssql php-shout php-snmp php-soap php-tidy</pre>
+</div>
+<p>重启Apache2:</p>
+<div class="highlight-python"><pre>$ service httpd restart</pre>
+</div>
+</div>
+<div class="section" id="rootnginx">
+<h3>非root权限安装nginx<a class="headerlink" href="#rootnginx" title="Permalink to this headline">¶</a></h3>
+<p>编译安装:</p>
+<div class="highlight-python"><pre>./configure --prefix=/home/vboxadmin/lxd/bin/nginx  --without-http_rewrite_module --without-http_gzip_module
+make
+make install</pre>
+</div>
+<p>conf/nginx.conf将端口改为8090（1-1024需要管理员权限）</p>
+<p>运行 sbin/nginx</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>技巧<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>fedora启动失败<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>启动fedora，提示:</p>
+<div class="highlight-python"><pre>Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)</pre>
+</div>
+<p>更换其他内核可以进入</p>
+<p>查看/bin/grub2/grub.cfg, 发现最新内核下少了initrd/boot/initramfs-*.img</p>
+<p>重新生成img:</p>
+<div class="highlight-python"><pre>$ yum reinstall kernel</pre>
+</div>
+</div>
+<div class="section" id="fedora-10sudo">
+<h3>Fedora 10里将普通用户添加到sudo组<a class="headerlink" href="#fedora-10sudo" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>在终端输入su -</li>
+<li>输入密码， 这样就切换到root了</li>
+<li>输入visudo</li>
+<li>找到 root ALL=(ALL) ALL 在这一行下边按a键进入编辑模式，然后输入： yourname ALL=(ALL) ALL,然后按esc退出</li>
+<li>按 :wq 键保存退出</li>
+<li>输入exit退出root权限</li>
+<li>测试，在当前用户下，输入sudo whoami</li>
+</ol>
+<p>如果一切正常，命令会返回 “root” 这个字。</p>
+</div>
+<div class="section" id="id5">
+<h3>fedora启动时显示启动信息<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>编辑/etc/default/grub， 去掉GRUB_CMDLINE_LINUX中quiet和rhgb</li>
+<li>/sbin/grub2-mkconfig -o /boot/grub2/grub.cfg</li>
+<li>查看/boot/grub2/grub.cfg，启动配置中已经没有了quiet，rhgb选项。</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="git.html" title="版本控制"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bash.html" title="bash"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >linux</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

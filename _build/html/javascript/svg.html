@@ -1,0 +1,173 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>svg &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="javascript" href="index.html" />
+    <link rel="next" title="css" href="../css/index.html" />
+    <link rel="prev" title="node" href="node.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../css/index.html" title="css"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="node.html" title="node"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">svg</a><ul>
+<li><a class="reference internal" href="#svg-editor">svg-editor</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="node.html"
+                        title="previous chapter">node</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../css/index.html"
+                        title="next chapter">css</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/javascript/svg.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="svg">
+<span id="id1"></span><h1>svg<a class="headerlink" href="#svg" title="Permalink to this headline">¶</a></h1>
+<p>requiredFeatures可以检测浏览器对svg的支持情况:</p>
+<div class="highlight-python"><pre>&lt;rect class="ok" x="10" y="10" height="25" width="430"
+                  requiredFeatures="http://www.w3.org/TR/SVG11/feature#SVG" /&gt;</pre>
+</div>
+<p>switch进行条件render:</p>
+<div class="highlight-python"><pre>&lt;switch&gt;
+        &lt;!-- If you have set French as one of the language available in your browser then you'll see the word "Français" --&gt;
+                &lt;text systemLanguage="fr"
+                          text-anchor="middle"
+                          x="50" y="25"&gt;Français&lt;/text&gt;
+
+        &lt;!-- but if you do not have set French and you have set English then you'll see the word "English" --&gt;
+                &lt;text systemLanguage="en"
+                          text-anchor="middle"
+                          x="50" y="25"&gt;English&lt;/text&gt;
+
+        &lt;!-- and if you have not set French nor English you'll see the word "???" --&gt;
+                &lt;text text-anchor="middle"
+                          x="50" y="25"&gt;???&lt;/text&gt;
+&lt;/switch&gt;</pre>
+</div>
+<p>viewbox相当于对其包裹的元素进行了一次transform:</p>
+<div class="highlight-python"><pre>&lt;svg width="150px" height="200px" version="1.1"
+         viewBox="0 0 1500 1000" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"&gt;</pre>
+</div>
+<p>相当于:</p>
+<div class="highlight-python"><pre>&lt;g transform="scale(0.1 0.2)"&gt;</pre>
+</div>
+<p>即元素使用viewBox的坐标，但是显示时缩放到svg width，height这个范围内</p>
+<div class="section" id="svg-editor">
+<h2>svg-editor<a class="headerlink" href="#svg-editor" title="Permalink to this headline">¶</a></h2>
+<p>svgicons默认将svg图形用data URI的方式进行编码，然后作为图标加载。
+好处是减少HTTP请求。最大坏处是经过Base64编码字符串很大</p>
+<ul class="simple">
+<li>no_img直接加载svg</li>
+<li>页面不同标签加载同一图像时，使用placement</li>
+<li>resize更改图像大小</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../css/index.html" title="css"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="node.html" title="node"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,181 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>django-cms &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="css" href="index.html" />
+    <link rel="prev" title="css" href="index.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="css"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">css</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">django-cms</a><ul>
+<li><a class="reference internal" href="#id2">技巧</a></li>
+<li><a class="reference internal" href="#id3">知识点</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">css</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/css/django-cms.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="django-cms">
+<span id="id1"></span><h1>django-cms<a class="headerlink" href="#django-cms" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://www.django-cms.org/">https://www.django-cms.org/</a></p>
+<div class="section" id="id2">
+<h2>技巧<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>logo样式:</p>
+<div class="highlight-python"><pre>&lt;h1 class="logo_main"&gt;
+        &lt;a href="#" class="offset noprint"&gt;logo&lt;/a&gt;
+        &lt;img src="media/img/logo_main.png" class="print" alt="some"&gt;
+&lt;/h1&gt;</pre>
+</div>
+<p>将两幅图合到一起，通过偏移来形成动态效果；float:left相当于使得a变为block:</p>
+<div class="highlight-python"><pre>.logo_main a { width:110px; height:25px; background-image:url('media/img/theme/logo_main-hover.png') !important;
+}
+.logo_main a { float:left; background:no-repeat left top; }
+.logo_main a:hover, .logo_main a:active, .logo_main a:focus { background-position:left bottom; }</pre>
+</div>
+<p>隐藏文字:</p>
+<div class="highlight-python"><pre>.offset {
+        text-indent: -9999px;
+        overflow: hidden;
+}</pre>
+</div>
+<p>print.css中设置，使得logo在print时不出现，而print图片出现:</p>
+<div class="highlight-python"><pre>.print { display:block; position:static; left:0; }
+.noprint { display:none !important; }</pre>
+</div>
+<p>.pngfix借助js插件实现在ie6下显示png</p>
+<p>h1通过padding:20px 0来扩大边界，h2使用position:absolute;right:10px;top:23px;来定位到右边</p>
+<p>使用隐藏hr包裹隐藏导航，貌似是为了其他设备使用，然后建立隐藏锚点&lt;h2 class=&#8221;hidden&#8221; id=&#8221;navigation&#8221;&gt;Navigation:&lt;/h2&gt;通过#navigation来跳转</p>
+</div>
+<div class="section" id="id3">
+<h2>知识点<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">position</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>absolute</td>
+<td>相对于 static 定位以外的第一个父元素进行定位</td>
+</tr>
+<tr class="row-odd"><td>fixed</td>
+<td>相对于浏览器窗口进行定位。</td>
+</tr>
+<tr class="row-even"><td>relative</td>
+<td>相对于其正常位置进行定位。</td>
+</tr>
+<tr class="row-odd"><td>static</td>
+<td>默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="css"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >css</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
