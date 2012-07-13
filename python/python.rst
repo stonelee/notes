@@ -13,3 +13,9 @@ sphinx
 1. 切换到python虚拟环境
 #. $ sphinx-quickstart 
 
+当前目录下启动服务器
+---------------------------
+
+::
+
+	python -mSimpleHTTPServer

@@ -10,6 +10,13 @@ linux
 基本操作
 =============================
 
+::
+
+	echo '$var'	#原样输出
+	echo “$var”	#解释后输出
+
+	printf	格式化输出
+
 文件夹中查找字符串::
 
 	$ grep 'makeprg' * -r
@@ -223,155 +230,5 @@ http://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
 	/usr：存放Unix系统商（比如IBM和HP）开发的程序。
 	/usr/local：存放用户自己安装的程序。
 	/opt：在某些系统，用于存放第三方厂商开发的程序，所以取名为option，意为"选装"。
-
-
-Fedora
-===========================
-
-安装
-------------------
-
-中文输入法：Input Method Selector选择Use IBus，选择Pinyin，改为双拼，不要使用Intelligent Pinyin（不支持lue等）
-
-将Caps Lock变为ctrl键::
-
-	setxkbmap -option ctrl:swapcaps
-
-常用::
-
-	stardict
-	flash-plugin
-	tomboy
-
-nginx::
-
-	nginx
-	配置：ln ～/config/nginx.conf /etc/nginx/nginx.conf
-
-mongodb::
-
-	mongodb-server
-	mongodb
-
-版本控制::
-
-	mercurial,tortoisehg
-	git
-	git-gui
-
-vim::
-
-	vim-enhanced
-	ctags
-	ack
-
-jslint插件::
-
-	需要先通过yum安装ruby，rubygem-rake
-	安装node
-	$ rake install
-	配置文件config/jslintrc 链接到～/.jslintrc
-
-编译::
-
-	gcc
-	gcc-c++
-
-java::
-
-	maven
-	mysql
-	mysql-server
-	mysql-workbench
-	启动：$ service mysqld start
-	设置密码：mysqladmin -u root password admin
-	更改数据库编码：config/mysql/my.cnf 连接到 /etc/my.cnf
-
-
-安装node，npm，express::
-
-	git clone https://github.com/joyent/node.git
-	curl http://npmjs.org/install.sh | sh
-	npm install -g express
-
-	编译安装node 0.6.11
-	要安装openssl-devel
-
-安装virtualbox
-----------------------------
-
-yum install kernel-devel
-
-安装dkms使得内核变动后自动编译
-
-重新编译内核：/etc/init.d/vboxdrv setup
-
-虚拟机中的Gateway即为主机的ip，可以直接访问
-
-fedora启动失败
--------------------
-
-启动fedora，提示::
-
-	Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
-
-更换其他内核可以进入
-
-查看/bin/grub2/grub.cfg, 发现最新内核下少了initrd/boot/initramfs-\*.img
-
-重新生成img::
-
-	$ yum reinstall kernel
-
-Fedora 10里将普通用户添加到sudo组
-----------------------------------
-
-1. 在终端输入su -
-#. 输入密码， 这样就切换到root了
-#. 输入visudo
-#. 找到 root ALL=(ALL) ALL 在这一行下边按a键进入编辑模式，然后输入： yourname ALL=(ALL) ALL,然后按esc退出
-#. 按 :wq 键保存退出
-#. 输入exit退出root权限
-#. 测试，在当前用户下，输入sudo whoami
-
-如果一切正常，命令会返回 “root” 这个字。
-
-
-配置php环境
---------------------
-
-::
-
-	yum install php
-
-在/var/www/html中创建测试文件info.php::
- 
-	<?php 
-		phpinfo(); 
-	?>
-
-可以看到测试页面。
-
-::
-
-	yum install php-mysql php-gd php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-eaccelerator php-magickwand php-magpierss php-mapserver php-mbstring php-mcrypt php-mhash php-mssql php-shout php-snmp php-soap php-tidy
-
-重启Apache2::
-
-	$ service httpd restart
-
-
-非root权限安装nginx
-------------------------
-
-编译安装::
-
-	./configure --prefix=/home/vboxadmin/lxd/bin/nginx  --without-http_rewrite_module --without-http_gzip_module
-	make
-	make install
-
-conf/nginx.conf将端口改为8090（1-1024需要管理员权限）
-
-运行 sbin/nginx
 
 
