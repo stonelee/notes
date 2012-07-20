@@ -81,13 +81,30 @@ rails开发
 
 	$ rails server
 
+model命令行::
+
+	$ rails console
+
+初始化数据，执行seeds文件中的代码::
+
+	$ rake db:seed
+
 更新数据库结构::
 
 	$ rake db:migrate
 
-model命令行::
+回滚migrate::
 
-	$ rails console
+	$ rake db:rollback
+
+重建数据库::
+
+	$ rake db:reset
+
+测试::
+
+	$ rake test
+	$ rake test:units
 
 自动生成
 -------------
@@ -107,3 +124,37 @@ model命令行::
 创建controller::
 
 	$ rails generate controller Comments
+
+笔记
+-------------
+
+cookie中保存sessionId，用来到服务端找到对应的session，默认使用CookieStore，可以防篡改但是没有加密，只有4k，建议存简单objects
+
+api中后面有!的（如save!）当有问题时抛出异常
+
+
+心得
+===============
+
+生成本地 Rails Guides
+----------------------------
+::
+
+	$ rake doc:guides 
+
+提示以下错误信息::
+
+	cannot load such file -- redcloth
+
+需要在 Gemfile 里添加::
+
+	gem 'RedCloth'
+
+然后执行::
+
+	bundle
+
+或者::
+
+	gem install RedCloth
+

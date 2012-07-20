@@ -18,6 +18,14 @@ RhodeCode中推送已经存在的库::
 
 	git push http://stonelee@10.10.22.86:1080/parseCSV master
 
+如果做了修改或删除，想回到版本控制的状态::
+
+	git checkout .
+
+提交::
+
+	git commit -a -m 'Validation!'
+
 
 hg
 =============================

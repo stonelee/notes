@@ -67,6 +67,11 @@
 <li><a class="reference internal" href="#id3">rails开发</a><ul>
 <li><a class="reference internal" href="#id4">常用命令</a></li>
 <li><a class="reference internal" href="#id5">自动生成</a></li>
+<li><a class="reference internal" href="#id6">笔记</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">心得</a><ul>
+<li><a class="reference internal" href="#rails-guides">生成本地 Rails Guides</a></li>
 </ul>
 </li>
 </ul>
@@ -179,11 +184,24 @@ Rails 3.2.1</pre>
 <p>运行服务器:</p>
 <div class="highlight-python"><pre>$ rails server</pre>
 </div>
+<p>model命令行:</p>
+<div class="highlight-python"><pre>$ rails console</pre>
+</div>
+<p>初始化数据，执行seeds文件中的代码:</p>
+<div class="highlight-python"><pre>$ rake db:seed</pre>
+</div>
 <p>更新数据库结构:</p>
 <div class="highlight-python"><pre>$ rake db:migrate</pre>
 </div>
-<p>model命令行:</p>
-<div class="highlight-python"><pre>$ rails console</pre>
+<p>回滚migrate:</p>
+<div class="highlight-python"><pre>$ rake db:rollback</pre>
+</div>
+<p>重建数据库:</p>
+<div class="highlight-python"><pre>$ rake db:reset</pre>
+</div>
+<p>测试:</p>
+<div class="highlight-python"><pre>$ rake test
+$ rake test:units</pre>
 </div>
 </div>
 <div class="section" id="id5">
@@ -199,6 +217,32 @@ Rails 3.2.1</pre>
 </div>
 <p>创建controller:</p>
 <div class="highlight-python"><pre>$ rails generate controller Comments</pre>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>笔记<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>cookie中保存sessionId，用来到服务端找到对应的session，默认使用CookieStore，可以防篡改但是没有加密，只有4k，建议存简单objects</p>
+<p>api中后面有!的（如save!）当有问题时抛出异常</p>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>心得<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rails-guides">
+<h3>生成本地 Rails Guides<a class="headerlink" href="#rails-guides" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>$ rake doc:guides</pre>
+</div>
+<p>提示以下错误信息:</p>
+<div class="highlight-python"><pre>cannot load such file -- redcloth</pre>
+</div>
+<p>需要在 Gemfile 里添加:</p>
+<div class="highlight-python"><pre>gem 'RedCloth'</pre>
+</div>
+<p>然后执行:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bundle</span>
+</pre></div>
+</div>
+<p>或者:</p>
+<div class="highlight-python"><pre>gem install RedCloth</pre>
 </div>
 </div>
 </div>
