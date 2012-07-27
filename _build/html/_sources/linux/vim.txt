@@ -155,3 +155,7 @@ https://github.com/int3/vim-taglist-plus
 
 	:TlistToggle
 
+ack.vim与jslint.vim有冲突
+============================
+
+jslint会覆盖ack的所使用的quickfix窗口，需要:cnew来查看结果

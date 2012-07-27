@@ -74,6 +74,17 @@
 <li><a class="reference internal" href="#rails-guides">生成本地 Rails Guides</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#virtualboxcentos">virtualbox中安装centos</a><ul>
+<li><a class="reference internal" href="#id8">上网</a></li>
+<li><a class="reference internal" href="#id9">更新163源</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">部署</a><ul>
+<li><a class="reference internal" href="#phusion-passengerapache">使用Phusion Passenger部署到apache上</a></li>
+<li><a class="reference internal" href="#id11">生产数据库</a></li>
+<li><a class="reference internal" href="#capistrano">Capistrano部署到远程</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -187,7 +198,7 @@ Rails 3.2.1</pre>
 <p>model命令行:</p>
 <div class="highlight-python"><pre>$ rails console</pre>
 </div>
-<p>初始化数据，执行seeds文件中的代码:</p>
+<p>执行db/seeds.rb生成数据:</p>
 <div class="highlight-python"><pre>$ rake db:seed</pre>
 </div>
 <p>更新数据库结构:</p>
@@ -199,9 +210,25 @@ Rails 3.2.1</pre>
 <p>重建数据库:</p>
 <div class="highlight-python"><pre>$ rake db:reset</pre>
 </div>
+<p>列出所有命令:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rake</span> <span class="o">-</span><span class="n">T</span>
+</pre></div>
+</div>
+<p>删除数据库:</p>
+<div class="highlight-python"><pre>rake db:drop</pre>
+</div>
+<p>生成数据库:</p>
+<div class="highlight-python"><pre>rake db:schema:load</pre>
+</div>
 <p>测试:</p>
 <div class="highlight-python"><pre>$ rake test
 $ rake test:units</pre>
+</div>
+<p>sqlite命令行,line参数使得排列比较美观:</p>
+<div class="highlight-python"><pre>sqlite3 -line db/development.sqlite3</pre>
+</div>
+<p>执行脚本:</p>
+<div class="highlight-python"><pre>rails runner script/load_orders.rb</pre>
 </div>
 </div>
 <div class="section" id="id5">
@@ -223,6 +250,7 @@ $ rake test:units</pre>
 <h3>笔记<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>cookie中保存sessionId，用来到服务端找到对应的session，默认使用CookieStore，可以防篡改但是没有加密，只有4k，建议存简单objects</p>
 <p>api中后面有!的（如save!）当有问题时抛出异常</p>
+<p>migrate用来添加数据表，更改数据表结构，更改相应数据内容</p>
 </div>
 </div>
 <div class="section" id="id7">
@@ -243,6 +271,162 @@ $ rake test:units</pre>
 </div>
 <p>或者:</p>
 <div class="highlight-python"><pre>gem install RedCloth</pre>
+</div>
+</div>
+</div>
+<div class="section" id="virtualboxcentos">
+<h2>virtualbox中安装centos<a class="headerlink" href="#virtualboxcentos" title="Permalink to this headline">¶</a></h2>
+<p>64位环境需要在bios中打开vt，然后关机，然后开机</p>
+<div class="section" id="id8">
+<h3>上网<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>连接方式使用NAT</p>
+<p>获取网络配置:</p>
+<div class="highlight-python"><pre>dhclient -v eth0</pre>
+</div>
+<p>Host使用ssh访问Guest</p>
+<p>Port Forwarding中设置</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="18%" />
+<col width="18%" />
+<col width="18%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Protocol</th>
+<th class="head">Host IP</th>
+<th class="head">Host Port</th>
+<th class="head">Guest IP</th>
+<th class="head">Guest Port</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ssh</td>
+<td>TCP</td>
+<td>10.10.22.84</td>
+<td>2222</td>
+<td>10.0.2.15</td>
+<td>22</td>
+</tr>
+</tbody>
+</table>
+<p>Host中连接:</p>
+<div class="highlight-python"><pre>ssh -l root -p 2222 10.10.22.84</pre>
+</div>
+<p>注意：linux中因为权限问题，应该设置host port大于1024.</p>
+<p>上传文件:</p>
+<div class="highlight-python"><pre>scp -P 2222 /home/stonelee/Downloads/CentOS6-Base-163.repo root@10.10.22.84:/</pre>
+</div>
+<p>ping 8.8.8.8</p>
+<p>NAT网络的连接方式的优点就是方便配置，无须手动设置IP等，自动获取就行了。 虚拟机能访问网络。 虚拟机与Host机之间也能互相访问。 但外部网站无法访问虚拟机（缺点）</p>
+<p><a class="reference external" href="http://chenling1018.blog.163.com/blog/static/14802542010431102339538/">http://chenling1018.blog.163.com/blog/static/14802542010431102339538/</a>
+<a class="reference external" href="http://www.cnblogs.com/chusiping/archive/2011/11/09/2243467.html">http://www.cnblogs.com/chusiping/archive/2011/11/09/2243467.html</a></p>
+</div>
+<div class="section" id="id9">
+<h3>更新163源<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>备份:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mv</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">yum</span><span class="o">.</span><span class="n">repos</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">CentOS</span><span class="o">-</span><span class="n">Base</span><span class="o">.</span><span class="n">repo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">yum</span><span class="o">.</span><span class="n">repos</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">CentOS</span><span class="o">-</span><span class="n">Base</span><span class="o">.</span><span class="n">repo</span><span class="o">.</span><span class="n">backup</span>
+</pre></div>
+</div>
+<p>下载对应版本repo文件: <a class="reference external" href="http://mirrors.163.com/.help/CentOS6-Base-163.repo">http://mirrors.163.com/.help/CentOS6-Base-163.repo</a></p>
+<div class="highlight-python"><pre>yum clean all
+yum upgrade
+yum -y update</pre>
+</div>
+<p>生成缓存:</p>
+<div class="highlight-python"><pre>yum makecache</pre>
+</div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>部署<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<p>Rails为单线程, Apache作为前端服务器处理请求，使用Passenger代理到后端多个rails实例中处理</p>
+<div class="section" id="phusion-passengerapache">
+<h3>使用Phusion Passenger部署到apache上<a class="headerlink" href="#phusion-passengerapache" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>$ gem install passenger
+$ passenger-install-apache2-module</pre>
+</div>
+<p>在/etc/httpd/conf中添加:</p>
+<div class="highlight-python"><pre>LoadModule passenger_module /home/stonelee/.rvm/gems/ruby-1.9.3-p194@rails323/gems/passenger-3.0.14/ext/apache2/mod_passenger.so
+PassengerRoot /home/stonelee/.rvm/gems/ruby-1.9.3-p194@rails323/gems/passenger-3.0.14
+PassengerRuby /home/stonelee/.rvm/wrappers/ruby-1.9.3-p194@rails323/ruby
+
+NameVirtualHost *:80
+Listen 80
+
+&lt;VirtualHost *:80&gt;
+        ServerName depot.yourhost.com
+        DocumentRoot /home/stonelee/test/rails32/depot_v/public
+        &lt;Directory /home/stonelee/test/rails32/depot_v/public&gt;
+                AllowOverride all
+                Options -MultiViews
+                Order allow,deny
+                Allow from all
+        &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</pre>
+</div>
+<p>/etc/hosts中设置域名:</p>
+<div class="highlight-python"><pre>127.0.0.1 depot.yourhost.com</pre>
+</div>
+<p>然后:</p>
+<div class="highlight-python"><pre>service httpd restart</pre>
+</div>
+<p>需要关闭selinux</p>
+<p>如果报权限错误，需要在home目录加Read and Execute permissions:</p>
+<div class="highlight-python"><pre>sudo chmod o+rx /home/joarobles</pre>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>生产数据库<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>Gemfile:</p>
+<div class="highlight-python"><pre>group :production do
+        gem 'mysql2'
+end</pre>
+</div>
+<p>config/database.yml:</p>
+<div class="highlight-python"><pre>production:
+        adapter: mysql2
+        encoding: utf8
+        reconnect: false
+        database: depot_production
+        pool: 5
+        username: username
+        password: password
+        host: localhost</pre>
+</div>
+<div class="highlight-python"><pre>mysql -u root -p
+create database depot_production;</pre>
+</div>
+<p>创建表结构:</p>
+<div class="highlight-python"><pre>rake db:setup RAILS_ENV="production"</pre>
+</div>
+<p>assets预压缩:</p>
+<div class="highlight-python"><pre>bundle exec rake assets:precompile</pre>
+</div>
+</div>
+<div class="section" id="capistrano">
+<h3>Capistrano部署到远程<a class="headerlink" href="#capistrano" title="Permalink to this headline">¶</a></h3>
+<p>在生产服务器创建代码仓库:</p>
+<div class="highlight-python"><pre>$ git --bare init</pre>
+</div>
+<p>开发服务器设置推送地址:</p>
+<div class="highlight-python"><pre>git remote add origin ssh://root@10.10.22.84:2222/~/git/depot.git
+git push origin master</pre>
+</div>
+<p>报错:</p>
+<div class="highlight-python"><pre>Host key verification failed.</pre>
+</div>
+<p>重新ssh进入，提示保存known hosts</p>
+<p>config/deploy.rb中:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">default_run_options</span><span class="p">[:</span><span class="n">pty</span><span class="p">]</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">ssh_options</span><span class="p">[:</span><span class="n">forward_agent</span><span class="p">]</span> <span class="o">=</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>生产服务器需要安装rvm，ruby，安装依赖:</p>
+<div class="highlight-python"><pre>yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison iconv-devel</pre>
 </div>
 </div>
 </div>
