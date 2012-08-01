@@ -4,6 +4,105 @@
 2012-7
 ***************
 
+总结
+=======================
+
+本月对ruby元编程和rails产生了浓厚的兴趣，看了几本书，了解了普通rails程序的结构和开发方式。发觉rails这货开发起来真的不一般的敏捷，甚至貌似比之前使用的django更合我的胃口。没有django的admin，但是用scaffold更加灵活方便；test分unit，functional，integration，为测试开发提供了便捷保障；默认集成coffeescript,sass；方便的生产环境部署。如果以后要开发crud系统就用rails算了。
+
+ruby元编程也挺有意思的，可以订制DSL哦～。可惜最近事情比较多，有时间的时候一定好好玩下。
+
+在阅读svg-edit源码的过程中发现，自己原来对svg的理解太死板了。丫就是一DOM而已，直接jquery解析，配合IE下ASV的兼容修正就完了。可怜我之前封装的所谓库，现在想想都恶心，冲动一下重写算了。
+
+相对来说js的时间少了，这可不好，下个月希望加强。
+
+时间统计
+=======================
+
+js共61.5小时,
+
+=======	=============
+标签	时间
+=======	=============
+kjsvg	  37h	  59m
+ciis	   6h	  50m
+extjs	   0h	  50m
+js		   6h	  28m
+jqui	   1h	  30m
+svgedit	   3h	  40m
+svg		   4h	  20m
+=======	=============
+
+rails共54小时,
+
+=======	=============
+标签	时间
+=======	=============
+ruby	   2h	   0m
+ror		  19h	  45m
+rails	  32h	   9m
+=======	=============
+
+各种语言学习应用57.5小时
+
+=======	=============
+标签	时间
+=======	=============
+linux	   2h	   0m
+centos	   3h	  50m
+bash	   0h	  20m
+web		   6h	  10m
+git		   0h	  45m
+less	   1h	   0m
+css		   6h	   0m
+python	   7h	  58m
+vim		   3h	   0m
+ds		   2h	  30m
+book	  24h	   8m
+=======	=============
+
+工作成果
+=======================
+
+kjsvg
+--------------
+
+* 完成矿井人员定位系统的静态展示
+* js实现svg路径移动动画
+* 编辑图元
+* 研究asv下使用js动态更改右键菜单的方法
+* 研究svg-edit源码,对使用jquery操作svg有了新的认识。
+
+ciis
+--------------
+
+* 解决同事的开发过程中遇到的问题
+* 部分功能开发
+
+python
+--------------
+
+人工输入文本纠正parseCSV，采用过滤高词频，正则匹配过滤，按顺序正则匹配搜索单字，优先选择精确匹配，特殊规则指定匹配等手段进行多方面优化，目前正确率达到98%
+
+rails
+--------------
+
+* 初步看完Guide
+* 看完Agile_Web_Development_with_Rails_4th_for_Rails_3.2第二部分
+* 使用twitter-bootstrap-rails美化界面
+* 虚拟机中安装centos,配置上网，练习生产环境部署rails
+
+book
+--------------
+
+* 翻完《松本行弘的程序世界》
+* Seven Languages in Seven Weeks --erlang
+* ruby元编程
+* 大话数据结构1，2章, 线性
+
+生活
+--------------
+
+换灯管， 学游泳
 
 日常记录
 =======================
@@ -158,14 +257,14 @@
 时间		标签	内容
 ===========	=======	======================
 8:40-9:10	ror		Getting Started with Rails
-9:10-10:10	ror		action_controller_overview 
+9:10-10:10	ror		action_controller_overview
 10:15-10:30	ror		action_controller_overview 7.1 After Filters and Around Filters
 10:30-10:58	kjsvg	统一名称为track，将查询出来的路径信息放到模板里
 10:58-11:17	kjsvg	完成查询功能
 11:20-11:50	work	汇报工作进度
 13:35-14:30	work	工作总结
 14:30-15:15	git		将sphinx生成的页面放到gh-pages
-15:30-16:15	ror		action_controller_overview 
+15:30-16:15	ror		action_controller_overview
 16:15-17:00	ror		routing-2.9 Adding More RESTful Actions
 17:00-17:38	book	linux shell p17
 ===========	=======	======================
@@ -355,7 +454,7 @@
 9:00-11:50	rails	使用Phusion Passenger部署到apache上
 13:30-15:30	rails	Capistrano部署到远程
 16:30-17:30	gtd		work record
-19:00-24:00	web		设计新项目
+19:00-23:30	web		设计新项目
 ===========	=======	======================
 
 7.28
@@ -386,7 +485,7 @@
 ===========	=======	======================
 时间		标签	内容
 ===========	=======	======================
-9:00-11:00	kjsvg	初始加载时不生成path，轨迹移动时动态绘制	
+9:00-11:00	kjsvg	初始加载时不生成path，轨迹移动时动态绘制
 14:00-14:50	linux	文本解析
 15:01-15:34	kjsvg	自动生成反向路径
 15:34-15:53	kjsvg	path完成时绘制整个path
