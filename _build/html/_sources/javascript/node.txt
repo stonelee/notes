@@ -8,6 +8,11 @@ node
 
 	# npm install -g
 
+会安装到::
+
+    /usr/local/lib/node_modules
+
+
 查看安装细节，找到问题::
 
 	npm install --verbose
@@ -15,6 +20,58 @@ node
 对于安装失败的包,手工下载tgz文件,然后::
 
 	npm install some.tgz --verbose
+
+
+socketio
+==========
+
+安装redis::
+
+    make
+    yum install tcl
+
+写密集型操作放到redis中
+
+基于Multi-process and multi-machine scaling考虑，使用redis pub-sub来扩展socket.io，而且这样还可以供其他redis客户端使用。
+
+::
+
+    var socketio = require("socket.io")
+    var redis = require("redis")
+
+    // redis clients
+    var store = redis.createClient()
+    var pub = redis.createClient()
+    var sub = redis.createClient()
+
+    // ... application paths go here
+
+    var socket = socketio.listen(app)
+
+    sub.subscribe("chat")
+
+    socket.on("connection", function(client){
+      client.send("welcome!")
+
+      client.on("message", function(text){
+        store.incr("messageNextId", function(e, id){
+          store.hmset("messages:" + id, { uid: client.sessionId, text: text }, function(e, r){
+            pub.publish("chat", "messages:" + id)
+          })
+        })
+      })
+
+      client.on("disconnect", function(){
+        client.broadcast(client.sessionId + " disconnected")
+      })
+
+      sub.on("message", function(pattern, key){
+        store.hgetall(key, function(e, obj){
+          client.send(obj.uid + ": " + obj.text)
+        })
+      })
+
+    })
 
 express
 ============

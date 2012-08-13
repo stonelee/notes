@@ -161,3 +161,25 @@ fedora启动时显示启动信息
 #. /sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
 #. 查看/boot/grub2/grub.cfg，启动配置中已经没有了quiet，rhgb选项。
 
+给ibus-pinyin加上搜狗细胞词库
+----------------------------------
+
+下载:https://code.google.com/p/hslinuxextra/downloads/detail?name=sougou-phrases-full.7z&can=2&q=
+
+解压后android.db文件就是ibus-pinyin的词库
+
+打开/usr/share/ibus-pinyin/db，将android.db改名覆盖
+
+重启ibus激活
+
+
+关闭防火墙
+-------------------
+
+::
+
+    /etc/init.d/iptables stop
+
+修改配置::
+
+    /etc/sysconfig/iptables

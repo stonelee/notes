@@ -70,6 +70,8 @@
 <li><a class="reference internal" href="#id4">fedora启动失败</a></li>
 <li><a class="reference internal" href="#fedora-10sudo">Fedora 10里将普通用户添加到sudo组</a></li>
 <li><a class="reference internal" href="#id5">fedora启动时显示启动信息</a></li>
+<li><a class="reference internal" href="#ibus-pinyin">给ibus-pinyin加上搜狗细胞词库</a></li>
+<li><a class="reference internal" href="#id6">关闭防火墙</a></li>
 </ul>
 </li>
 </ul>
@@ -237,6 +239,21 @@ make install</pre>
 <li>/sbin/grub2-mkconfig -o /boot/grub2/grub.cfg</li>
 <li>查看/boot/grub2/grub.cfg，启动配置中已经没有了quiet，rhgb选项。</li>
 </ol>
+</div>
+<div class="section" id="ibus-pinyin">
+<h3>给ibus-pinyin加上搜狗细胞词库<a class="headerlink" href="#ibus-pinyin" title="Permalink to this headline">¶</a></h3>
+<p>下载:<a class="reference external" href="https://code.google.com/p/hslinuxextra/downloads/detail?name=sougou-phrases-full.7z&amp;can=2&amp;q=">https://code.google.com/p/hslinuxextra/downloads/detail?name=sougou-phrases-full.7z&amp;can=2&amp;q=</a></p>
+<p>解压后android.db文件就是ibus-pinyin的词库</p>
+<p>打开/usr/share/ibus-pinyin/db，将android.db改名覆盖</p>
+<p>重启ibus激活</p>
+</div>
+<div class="section" id="id6">
+<h3>关闭防火墙<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>/etc/init.d/iptables stop</pre>
+</div>
+<p>修改配置:</p>
+<div class="highlight-python"><pre>/etc/sysconfig/iptables</pre>
+</div>
 </div>
 </div>
 </div>

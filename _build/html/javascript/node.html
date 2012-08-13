@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
     <link rel="up" title="javascript" href="index.html" />
-    <link rel="next" title="css" href="../css/index.html" />
+    <link rel="next" title="svg" href="svg.html" />
     <link rel="prev" title="js" href="js.html" /> 
   </head>
   <body>
@@ -43,7 +43,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../css/index.html" title="css"
+          <a href="svg.html" title="svg"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="js.html" title="js"
@@ -60,6 +60,7 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">node</a><ul>
+<li><a class="reference internal" href="#socketio">socketio</a></li>
 <li><a class="reference internal" href="#express">express</a></li>
 <li><a class="reference internal" href="#connect">connect</a></li>
 </ul>
@@ -70,8 +71,8 @@
   <p class="topless"><a href="js.html"
                         title="previous chapter">js</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../css/index.html"
-                        title="next chapter">css</a></p>
+  <p class="topless"><a href="svg.html"
+                        title="next chapter">svg</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/javascript/node.txt"
@@ -104,11 +105,60 @@
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># npm install -g</span>
 </pre></div>
 </div>
+<p>会安装到:</p>
+<div class="highlight-python"><pre>/usr/local/lib/node_modules</pre>
+</div>
 <p>查看安装细节，找到问题:</p>
 <div class="highlight-python"><pre>npm install --verbose</pre>
 </div>
 <p>对于安装失败的包,手工下载tgz文件,然后:</p>
 <div class="highlight-python"><pre>npm install some.tgz --verbose</pre>
+</div>
+<div class="section" id="socketio">
+<h2>socketio<a class="headerlink" href="#socketio" title="Permalink to this headline">¶</a></h2>
+<p>安装redis:</p>
+<div class="highlight-python"><pre>make
+yum install tcl</pre>
+</div>
+<p>写密集型操作放到redis中</p>
+<p>基于Multi-process and multi-machine scaling考虑，使用redis pub-sub来扩展socket.io，而且这样还可以供其他redis客户端使用。</p>
+<div class="highlight-python"><pre>var socketio = require("socket.io")
+var redis = require("redis")
+
+// redis clients
+var store = redis.createClient()
+var pub = redis.createClient()
+var sub = redis.createClient()
+
+// ... application paths go here
+
+var socket = socketio.listen(app)
+
+sub.subscribe("chat")
+
+socket.on("connection", function(client){
+  client.send("welcome!")
+
+  client.on("message", function(text){
+    store.incr("messageNextId", function(e, id){
+      store.hmset("messages:" + id, { uid: client.sessionId, text: text }, function(e, r){
+        pub.publish("chat", "messages:" + id)
+      })
+    })
+  })
+
+  client.on("disconnect", function(){
+    client.broadcast(client.sessionId + " disconnected")
+  })
+
+  sub.on("message", function(pattern, key){
+    store.hgetall(key, function(e, obj){
+      client.send(obj.uid + ": " + obj.text)
+    })
+  })
+
+})</pre>
+</div>
 </div>
 <div class="section" id="express">
 <h2>express<a class="headerlink" href="#express" title="Permalink to this headline">¶</a></h2>
@@ -168,7 +218,7 @@ app.listen(3000);</pre>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../css/index.html" title="css"
+          <a href="svg.html" title="svg"
              >next</a> |</li>
         <li class="right" >
           <a href="js.html" title="js"

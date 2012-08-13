@@ -125,6 +125,9 @@
 <p>record后重复上一次记录的命令:</p>
 <div class="highlight-python"><pre>@@</pre>
 </div>
+<p>删除空白行:</p>
+<div class="highlight-python"><pre>:g/^\s*$/d</pre>
+</div>
 <div class="section" id="id2">
 <h2>跳转<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
@@ -233,6 +236,14 @@ yum install python-devel
 yum install libgnome-devel
 yum install libgnomeui-devel
 yum install libXt-devel</pre>
+</div>
+<p>Terminal中报错:</p>
+<div class="highlight-python"><pre>CSApprox needs gui support - not loading.
+  See :help |csapprox-+gui| for possible workarounds.</pre>
+</div>
+<p>需要安装GUI版本的vim:</p>
+<div class="highlight-python"><pre>yum install vim-X11
+cp /usr/bin/gvim /usr/bin/vim</pre>
 </div>
 </div>
 <div class="section" id="js-taglist">

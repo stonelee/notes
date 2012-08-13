@@ -24,6 +24,10 @@ record后重复上一次记录的命令::
 
 	@@
 
+删除空白行::
+
+    :g/^\s*$/d
+
 跳转
 =============================
 
@@ -111,6 +115,16 @@ vim中将当前文件与其他文件比较::
 	yum install libgnome-devel
 	yum install libgnomeui-devel
 	yum install libXt-devel
+
+Terminal中报错::
+
+    CSApprox needs gui support - not loading.
+      See :help |csapprox-+gui| for possible workarounds.
+
+需要安装GUI版本的vim::
+
+    yum install vim-X11
+    cp /usr/bin/gvim /usr/bin/vim
 
 js taglist
 =============================

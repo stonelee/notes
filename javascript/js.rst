@@ -219,3 +219,8 @@ http://textextjs.com/
 
 类似iphone的手指滑动，滚动屏幕效果
 http://natrixnatrix89.github.com/promptu-menu/
+
+moment进行日期解析::
+
+    var moment = require('moment');
+    moment().format('YYYY-MM-DD HH:mm:ss')
