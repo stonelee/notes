@@ -3,11 +3,11 @@ Welcome to stonelee's Notes!
 
 ::
 
-	(*╯3╰) 
+  (*╯3╰) 
 
-	~(～￣▽￣)～o 
+  ~(～￣▽￣)～o 
 
-	(*￣︶￣)y 
+  (*￣︶￣)y 
 
 Contents:
 

@@ -71,6 +71,8 @@
 </li>
 <li><a class="reference internal" href="#id4">思考</a></li>
 <li><a class="reference internal" href="#async">async</a></li>
+<li><a class="reference internal" href="#jscex">Jscex</a></li>
+<li><a class="reference internal" href="#spm">spm</a></li>
 <li><a class="reference internal" href="#id5">js库</a></li>
 </ul>
 </li>
@@ -116,25 +118,31 @@
 <div class="highlight-python"><pre>if (obj.length === +obj.length) {}</pre>
 </div>
 <ul class="simple">
-<li>object.length undefined</li>
-<li>+obj.length   NaN</li>
+<li>object.length  undefined</li>
+<li>+obj.length  NaN</li>
 </ul>
-<div class="highlight-python"><pre>lst = ['a','b','c']
-2 in lst        true</pre>
+<p>undefined == null</p>
+<p>[]会被认为是true:</p>
+<div class="highlight-python"><pre>&gt; lst = [];
+&gt; if (lst) console.log(true);
+true</pre>
 </div>
-<p>breaker用作模块内部的标记，外面无法修改:</p>
-<div class="highlight-python"><pre>var breaker={};
-console.log({}===breaker);      false</pre>
-</div>
-<p>lst.length=8    会扩展array长度，不足的为undefined</p>
+<p>在判断中赋值:</p>
 <div class="highlight-python"><pre>//else false
 if (a=false){
-        console.log(a);
+  console.log(a);
 }
 else {
-        console.log('else',a);
+  console.log('else',a);
 }</pre>
 </div>
+<p>for (var key in dict)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;c&#39;</span><span class="p">]</span>
+<span class="mi">2</span> <span class="ow">in</span> <span class="n">lst</span>  <span class="o">//</span><span class="n">true</span>
+</pre></div>
+</div>
+<p>lst.length=8  会扩展array长度，不足的为undefined</p>
+<p>l.length=0  清空array</p>
 <p>有length和序号，可以当作Array来使用:</p>
 <div class="highlight-python"><pre>var my_object = {
     '0': 'zero',
@@ -148,23 +156,22 @@ var sliced = Array.prototype.slice.call(my_object, 3);
 
 console.log(sliced);</pre>
 </div>
-<p>undefined==null</p>
-<p>for (var key in dict)</p>
-<p>l.length=0      清空array</p>
-<div class="highlight-python"><pre>&gt; lst = [];
-&gt; if (lst) console.log(true);
-true</pre>
-</div>
 <p>arg.length说明可以$.each</p>
-<p>[]会被认为是true</p>
+<p>sort默认按照字符编码对数组进行排序:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span> <span class="o">//</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>按数字比较:</p>
+<div class="highlight-python"><pre>[2,10].sort(function(a,b){a-b}) //[2,10]</pre>
+</div>
 <div class="section" id="document-documentmode">
 <h3>document.documentMode<a class="headerlink" href="#document-documentmode" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>5     Internet Explorer 5 mode (also known as &#8220;quirks mode&#8221;).</li>
-<li>7     Internet Explorer 7 Standards mode.</li>
-<li>8     Internet Explorer 8 Standards mode.</li>
-<li>9     Internet Explorer 9 Standards mode.</li>
-<li>10    Internet Explorer 10 Standards mode.</li>
+<li>5  Internet Explorer 5 mode (also known as &#8220;quirks mode&#8221;).</li>
+<li>7  Internet Explorer 7 Standards mode.</li>
+<li>8  Internet Explorer 8 Standards mode.</li>
+<li>9  Internet Explorer 9 Standards mode.</li>
+<li>10  Internet Explorer 10 Standards mode.</li>
 </ul>
 </div>
 <div class="section" id="json">
@@ -187,15 +194,15 @@ true</pre>
 <p>无符号整数的数值范围为 0 到 4294967295</p>
 <p>32位最多存储整数42亿</p>
 <div class="highlight-python"><pre>var iNum = 18;
-alert(iNum.toString(2));        //输出 "10010"</pre>
+alert(iNum.toString(2));  //输出 "10010"</pre>
 </div>
 <p>位运算 NOT 实质上是对数字求负，然后减 1，因此 25 变 -26</p>
 </div>
 <div class="section" id="escape">
 <h3>escape<a class="headerlink" href="#escape" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>escape()      已经被废弃，不要使用</li>
-<li>encodeURI()   url编码，编码后仍然可以使用</li>
+<li>escape()  已经被废弃，不要使用</li>
+<li>encodeURI()  url编码，编码后仍然可以使用</li>
 <li>encodeURIComponent()  作为url参数编码使用</li>
 </ul>
 <p>原来:</p>
@@ -244,15 +251,15 @@ alert(iNum.toString(2));        //输出 "10010"</pre>
 var f = new Foo();
 
 console.log(f.constructor === Foo); // true
-console.log(Foo.prototype.constructor===Foo);// true
+console.log(Foo.prototype.constructor === Foo);// true
 //合并起来
 console.log(f.constructor.prototype.constructor===Foo);// true</pre>
 </div>
 <p>但如果覆盖了prototype:</p>
 <div class="highlight-python"><pre>Foo.prototype = {
-        getName: function() {
-                return "name";
-        }
+  getName: function() {
+    return "name";
+  }
 };</pre>
 </div>
 <p>此时Person.prototype.constructor === Object</p>
@@ -271,6 +278,32 @@ console.log(f.constructor.prototype.constructor===Foo);// true</pre>
 <div class="section" id="async">
 <h2>async<a class="headerlink" href="#async" title="Permalink to this headline">¶</a></h2>
 <p>将多层嵌套变为一层，还是需要callback</p>
+</div>
+<div class="section" id="jscex">
+<h2>Jscex<a class="headerlink" href="#jscex" title="Permalink to this headline">¶</a></h2>
+<p>series:</p>
+<div class="highlight-python"><pre>$await(op1());
+$await(op2());
+$await(op3());</pre>
+</div>
+<p>parallel:</p>
+<div class="highlight-python"><pre>var resultArray = $await(whenAll(op1(), op2(), op3()));</pre>
+</div>
+<p>$await等待的是一个异步对象, 待该Task对象结束（返回结果或抛出错误）；如果它尚未启动，则启动该任务；如果已经完成，则立即返回结果（或抛出错误）</p>
+<p>在一般编程场景中，如果盲目使用await取代传统的callback，会带来不必要的封装，导致语句理解难度加大。如sample/weibo.html</p>
+</div>
+<div class="section" id="spm">
+<h2>spm<a class="headerlink" href="#spm" title="Permalink to this headline">¶</a></h2>
+<p>建立spm目录结构:</p>
+<div class="highlight-python"><pre>mkdir svg-personnel
+cd svg-personnel/
+spm init</pre>
+</div>
+<p>获取模块:</p>
+<div class="highlight-python"><pre>mkdir libs
+cd libs/
+spm install all</pre>
+</div>
 </div>
 <div class="section" id="id5">
 <h2>js库<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
