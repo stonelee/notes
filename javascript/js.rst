@@ -257,3 +257,13 @@ moment进行日期解析::
 
     var moment = require('moment');
     moment().format('YYYY-MM-DD HH:mm:ss')
+
+bootstrap
+=============================
+
+<button>会有默认的点击事件，会导致页面重新加载，因此使用<a>来代替
+
+bootstrap-transition.js返回css transition的函数名，例如chrome下为{end: "webkitTransitionEnd"}
+通过调用css transition在现代浏览器中实现动画效果
+
+bootstrap-dropdown.js通过toggleClass('open')实现下拉列表的显示和隐藏
