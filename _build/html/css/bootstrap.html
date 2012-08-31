@@ -1,0 +1,180 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bootstrap &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="css" href="index.html" />
+    <link rel="next" title="css" href="css.html" />
+    <link rel="prev" title="css" href="index.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="css.html" title="css"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="css"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">css</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">css</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="css.html"
+                        title="next chapter">css</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/css/bootstrap.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="bootstrap">
+<span id="id1"></span><h1>bootstrap<a class="headerlink" href="#bootstrap" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first">.label</p>
+<p>white-space: nowrap; 防止换行</p>
+<p>通过background-color区分不同</p>
+</li>
+<li><p class="first">.badge比.label边角更圆一些</p>
+</li>
+<li><p class="first">.hero-unit显示页面主要内容，里面的h1，p等都调大了</p>
+</li>
+<li><p class="first">.page-header用于显示标题，有下边线</p>
+<p>h1&gt;small显示补充信息</p>
+</li>
+<li><p class="first">.thumbnails用于图片展示，产品简介等，ul &gt; li即可</p>
+<p>其中的li如果设置.span3会使得img按比例缩放</p>
+<p>.thumbnail使用border-radius设置圆角，box-shadow设置立体感，padding使得img留有白边。</p>
+</li>
+<li><p class="first">.progress-striped使用gradient来实现斜条纹，可使用工具 <a class="reference external" href="http://www.colorzilla.com/gradient-editor/">http://www.colorzilla.com/gradient-editor/</a></p>
+</li>
+</ul>
+<p>关闭按钮:</p>
+<div class="highlight-python"><pre>&lt;a class="close" href="#"&gt;&amp;times;&lt;/a&gt;</pre>
+</div>
+<p>background-clip 和 background-origin用来确定背景的定位</p>
+<p>btn心跳闪烁:</p>
+<div class="highlight-python"><pre>@-webkit-keyframes downloadButton {
+  from { box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25), 0 2px 10px rgba(0,68,204,.5); }
+  50% {  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25), 0 2px 25px rgba(0,68,204,.9); }
+  to {   box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25), 0 2px 10px rgba(0,68,204,.5); }
+}
+@-moz-keyframes downloadButton {
+  from { box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25), 0 2px 10px rgba(0,68,204,.5); }
+  50% {  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25), 0 2px 25px rgba(0,68,204,.9); }
+  to {   box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25), 0 2px 10px rgba(0,68,204,.5); }
+}
+.btn {
+  -webkit-animation-name: downloadButton;
+     -moz-animation-name: downloadButton;
+  -webkit-animation-duration: 1.5s;
+     -moz-animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+     -moz-animation-iteration-count: infinite;
+}</pre>
+</div>
+<ul class="simple">
+<li>fluid grid(.row-fluid)在屏幕大于960px时会继续扩大，而fixed grid(.row)不会改变</li>
+<li>responsive会根据media query在某宽度时更改大小，在屏幕很小时从float改为stack</li>
+</ul>
+<div class="highlight-python"><pre>.leftHalf{ width: 50%; float: left}
+.rightHalf{ width: 50%; float: left }
+
+@media (max-width: 320px){
+    .leftHalf{ width: 100%; color: red; }
+    .rightHalf{ width: 100%; color: blue; }
+}</pre>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="css.html" title="css"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="css"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >css</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

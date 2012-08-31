@@ -70,7 +70,7 @@ font-size/line-height, font-family将generic family放到最后面，来自动�
 
 
 CSS3
-=================
+----------
 
 阴影box-shadow::
 
@@ -88,3 +88,13 @@ CSS3
 	transform:rotate(-3deg);
 
 
+less
+-----------
+
+使用less实现修改样式后页面自动刷新，在console中::
+
+  less.watch()
+
+颜色减淡::
+
+  +#111
