@@ -102,6 +102,6 @@ def arrange(filename):
 
 if __name__ == '__main__':
     #test()
-    filename=r'diary/2012-7.rst'
+    filename=r'diary/2012-8.rst'
     statistics(filename)
     arrange(filename)
