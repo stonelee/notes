@@ -369,3 +369,5 @@ css
 
 8.24-8.31
 
+使用Time Ticker，请见: http://stonelee.info/records/index.html
+

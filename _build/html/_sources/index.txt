@@ -9,6 +9,8 @@ Welcome to stonelee's Notes!
 
   (*￣︶￣)y 
 
+diary自2012-08-24起使用Time Ticker，请见: http://stonelee.info/records/index.html
+
 Contents:
 
 .. toctree::
