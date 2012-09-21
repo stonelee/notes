@@ -16,7 +16,16 @@ github更新子模块::
 
 RhodeCode中推送已经存在的库::
 
-	git push http://stonelee@10.10.22.86:1080/parseCSV master
+  $ git push http://stonelee@10.10.22.86:1080/parseCSV master
+
+如果报错::
+
+  RhodeCode error: RPC failed; result=22, HTTP code = 502
+  fatal: The remote end hung up unexpectedly
+
+应该设置::
+
+  $ git config http.postBuffer 524288000
 
 如果做了修改或删除，想回到版本控制的状态::
 

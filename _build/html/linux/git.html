@@ -112,7 +112,14 @@
 $ git submodule update</pre>
 </div>
 <p>RhodeCode中推送已经存在的库:</p>
-<div class="highlight-python"><pre>git push http://stonelee@10.10.22.86:1080/parseCSV master</pre>
+<div class="highlight-python"><pre>$ git push http://stonelee@10.10.22.86:1080/parseCSV master</pre>
+</div>
+<p>如果报错:</p>
+<div class="highlight-python"><pre>RhodeCode error: RPC failed; result=22, HTTP code = 502
+fatal: The remote end hung up unexpectedly</pre>
+</div>
+<p>应该设置:</p>
+<div class="highlight-python"><pre>$ git config http.postBuffer 524288000</pre>
 </div>
 <p>如果做了修改或删除，想回到版本控制的状态:</p>
 <div class="highlight-python"><pre>git checkout .</pre>

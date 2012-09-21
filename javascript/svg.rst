@@ -39,6 +39,10 @@ viewbox相当于对其包裹的元素进行了一次transform::
 
 即元素使用viewBox的坐标，但是显示时缩放到svg width，height这个范围内
 
+
+svg中pointer-events设置element是否接收鼠标事件，实现穿过元素而使得下面的元素接收鼠标事件.
+为all时即使fill或stoke为none也可以接收鼠标事件，使得空心矩形也可以通过点击空心被选中。
+
 svg-editor
 =============
 

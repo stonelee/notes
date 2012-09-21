@@ -23,6 +23,16 @@ position
 * relative	相对于正常位置定位
 * absolute	相对于static之外的第一个父元素定位
 
+float vs position
+-----------------------
+
+从性能上看，将元素的position设置为absolute和fixed可以使元素从DOM树结构中脱离出来独立的存在，
+而浏览器在需要渲染时只需要渲染该元素以及位于该元素下方的元素，从而在某种程度上缩短浏览器渲染时间。
+所以如果是制作js动画等，用absolute或者fixed定位会更好。
+
+不推荐用position来布局整个页面的大框架，而推荐用float或者文档流的默认方式。
+
+
 block formatting context
 -----------------------------
 
@@ -31,7 +41,7 @@ block formatting context
 * float not 'none': left, right
 * overflow not 'visible': hidden, scroll, auto
 * display: 'table-cell', 'table-caption', or 'inline-block'
-* position:absolute, fixed 
+* position:absolute, fixed
 
 位于normal flow
 
@@ -49,6 +59,27 @@ block formatting context
 
 #. Block formatting contexts contain floats
 
+hasLayout和BFC
+-----------------------------
+
+因为CSS的模型和术语脱胎于传统排版，故而与计算机GUI技术通常基于组件的模型相差甚远。
+除了float之外，另一个例子是CSS中上下margin的collapse，显然这是为了满足段落排版的需求。
+所以像float、margin collapse等，在典型的GUI技术中是没有的。
+还有，CSS box model中，width/height不算入padding和border，许多开发者对这点很不适应，这实际上是GUI的控件思维与CSS排版思维的冲突。
+这个冲突在浏览器技术实现上的遗迹就是IE臭名昭著的“hasLayout”。
+元素“has layout”的真实意思是这样的元素直接对应一个控件。
+也正是由于IE很naive的在实现中直接结合了这两种矛盾的模型，从而导致了无数的布局bug。 
+
+
+block formatting context	块级元素格式上下文
+hasLayout			IE5.5/6/7上一些奇怪的bug
+
+::
+
+  overflow:hidden	触发BFC
+  *zoom:1			触发hasLayout
+
+设置float		触发BFC
 
 字体
 ---------

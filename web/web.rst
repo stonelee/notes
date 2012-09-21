@@ -130,3 +130,13 @@ http://sachagreif.com/ebook/#!prettyPhoto
 http://bootstrappingdesign.com/
 http://www.amazon.cn/gp/product/1119998956/ref=as_li_ss_tl?ie=UTF8&linkCode=as2&camp=1789&creative=390957&creativeASIN=1119998956&tag=programming-23
 
+Time Tracker
+=========================
+
+记录当前要干什么，相当于戴上一顶特定的工作帽子::
+
+  Activity： 主题@类别，如js@study, surf@web
+
+Description等到全天结束总结的时候再添加，写过程概述或者成果收获
+
+Tags先空着

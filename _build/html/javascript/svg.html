@@ -129,6 +129,8 @@
 <div class="highlight-python"><pre>&lt;g transform="scale(0.1 0.2)"&gt;</pre>
 </div>
 <p>即元素使用viewBox的坐标，但是显示时缩放到svg width，height这个范围内</p>
+<p>svg中pointer-events设置element是否接收鼠标事件，实现穿过元素而使得下面的元素接收鼠标事件.
+为all时即使fill或stoke为none也可以接收鼠标事件，使得空心矩形也可以通过点击空心被选中。</p>
 <div class="section" id="svg-editor">
 <h2>svg-editor<a class="headerlink" href="#svg-editor" title="Permalink to this headline">¶</a></h2>
 <p>svgicons默认将svg图形用data URI的方式进行编码，然后作为图标加载。
