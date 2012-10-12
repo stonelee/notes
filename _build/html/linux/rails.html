@@ -74,6 +74,7 @@
 <li><a class="reference internal" href="#rails-guides">生成本地 Rails Guides</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#twitter-bootstrap-rails">twitter-bootstrap-rails</a></li>
 <li><a class="reference internal" href="#virtualboxcentos">virtualbox中安装centos</a><ul>
 <li><a class="reference internal" href="#id8">上网</a></li>
 <li><a class="reference internal" href="#id9">更新163源</a></li>
@@ -273,6 +274,27 @@ $ rake test:units</pre>
 <p>或者:</p>
 <div class="highlight-python"><pre>gem install RedCloth</pre>
 </div>
+</div>
+</div>
+<div class="section" id="twitter-bootstrap-rails">
+<h2>twitter-bootstrap-rails<a class="headerlink" href="#twitter-bootstrap-rails" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/seyhunak/twitter-bootstrap-rails">https://github.com/seyhunak/twitter-bootstrap-rails</a></p>
+<p>在Gemfile中加入:</p>
+<div class="highlight-python"><pre>gem 'twitter-bootstrap-rails', :git =&gt; 'git://github.com/seyhunak/twitter-bootstrap-rails.git'</pre>
+</div>
+<p>然后:</p>
+<div class="highlight-python"><pre>bundle install</pre>
+</div>
+<p>加入bootstrap js、css文件:</p>
+<div class="highlight-python"><pre>rails g bootstrap:install</pre>
+</div>
+<p>改变application样式:</p>
+<div class="highlight-python"><pre>rails g bootstrap:layout application fixed</pre>
+</div>
+<p>更改scaffold样式:</p>
+<div class="highlight-python"><pre>rails g scaffold Post title:string description:text
+rake db:migrate
+rails g bootstrap:themed Posts</pre>
 </div>
 </div>
 <div class="section" id="virtualboxcentos">

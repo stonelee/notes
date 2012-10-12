@@ -12,6 +12,13 @@ node
 
     /usr/local/lib/node_modules
 
+npm install -g会安装为命令行工具，但是node环境下依然无法require该类库，会报错::
+
+  Error: Cannot find module 'uglify-js'
+
+需要在安装到本目录的node-modules中::
+
+  $ npm install uglify-js
 
 查看安装细节，找到问题::
 
@@ -20,7 +27,6 @@ node
 对于安装失败的包,手工下载tgz文件,然后::
 
 	npm install some.tgz --verbose
-
 
 socketio
 ==========

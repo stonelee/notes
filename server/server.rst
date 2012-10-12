@@ -21,4 +21,3 @@ uwsgi together with nginx
 nginx  pass requests to the uWSGI server.
 http://projects.unbit.it/uwsgi/
 
-

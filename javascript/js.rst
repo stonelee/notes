@@ -78,6 +78,11 @@ IE中array没有indexOf方法，数组中查找元素::
 
 如果html不规范（比如标签未关闭），那么在IE中赋值给$.html时会静静的失败
 
+解析url
+---------------------------
+
+.. image:: location.png
+
 document.documentMode
 ---------------------------
 
@@ -294,3 +299,11 @@ bootstrap-transition.js返回css transition的函数名，例如chrome下为{end
 
 bootstrap-dropdown.js通过toggleClass('open')实现下拉列表的显示和隐藏
 
+aralejs
+-----------
+
+widget中
+
+当attrs中的activeIndex变化时，会触发其change事件，通过_onRenderActiveIndex可以对其响应
+
+.. image:: aralejs.png

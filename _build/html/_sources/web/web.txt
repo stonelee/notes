@@ -140,3 +140,7 @@ Time Tracker
 Description等到全天结束总结的时候再添加，写过程概述或者成果收获
 
 Tags先空着
+
+每月末，将统计html导出到octopress/source/records
+
+在index.html中写月总结

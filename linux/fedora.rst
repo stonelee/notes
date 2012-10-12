@@ -121,6 +121,8 @@ conf/nginx.conf将端口改为8090（1-1024需要管理员权限）
 
 运行 sbin/nginx
 
+停止 sbin/nginx -s stop
+
 
 技巧
 ============

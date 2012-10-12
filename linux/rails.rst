@@ -182,6 +182,32 @@ migrate用来添加数据表，更改数据表结构，更改相应数据内容
 
 	gem install RedCloth
 
+twitter-bootstrap-rails
+===========================
+
+https://github.com/seyhunak/twitter-bootstrap-rails
+
+在Gemfile中加入::
+
+  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+
+然后::
+
+  bundle install
+
+加入bootstrap js、css文件::
+
+  rails g bootstrap:install
+
+改变application样式::
+
+  rails g bootstrap:layout application fixed
+
+更改scaffold样式::
+
+  rails g scaffold Post title:string description:text
+  rake db:migrate
+  rails g bootstrap:themed Posts
 
 virtualbox中安装centos
 ===========================

@@ -35,6 +35,10 @@ RhodeCode中推送已经存在的库::
 
 	git commit -a -m 'Validation!'
 
+git pages
+=============================
+
+创建两个branch。在master中开发，稳定版本merge到gh-pages中。参见：https://github.com/aralejs/aralejs.github.com
 
 hg
 =============================

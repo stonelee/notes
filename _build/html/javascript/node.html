@@ -108,6 +108,12 @@
 <p>会安装到:</p>
 <div class="highlight-python"><pre>/usr/local/lib/node_modules</pre>
 </div>
+<p>npm install -g会安装为命令行工具，但是node环境下依然无法require该类库，会报错:</p>
+<div class="highlight-python"><pre>Error: Cannot find module 'uglify-js'</pre>
+</div>
+<p>需要在安装到本目录的node-modules中:</p>
+<div class="highlight-python"><pre>$ npm install uglify-js</pre>
+</div>
 <p>查看安装细节，找到问题:</p>
 <div class="highlight-python"><pre>npm install --verbose</pre>
 </div>
