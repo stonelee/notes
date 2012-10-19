@@ -78,6 +78,34 @@ IE中array没有indexOf方法，数组中查找元素::
 
 如果html不规范（比如标签未关闭），那么在IE中赋值给$.html时会静静的失败
 
+
+chrome中的滑动条控件::
+
+  <input id="rangeCrossFade" type="range" value="50" min="0" max="100" step="10" />
+
+
+css选择::
+
+  var $ = function(selector) {
+      return document.querySelector(selector);
+  };
+
+forEach::
+
+  ["-webkit-", "-moz-", "-ms-", "-o-", ""].forEach(function(prefix) {
+
+修改内容::
+
+  eleOpacityImage.innerHTML = '<'
+
+修改css::
+
+  eleImages[1].style.opacity = value / 100;
+
+* 浏览器内部宽度 window.innerWidth
+* 整个浏览器的宽度 window.outerWidth
+* 显示器宽度 screen.width
+
 解析url
 ---------------------------
 

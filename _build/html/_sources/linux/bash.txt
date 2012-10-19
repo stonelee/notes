@@ -5,6 +5,13 @@
 bash
 ***************
 
+将文件夹内所有js文件打包成all.js::
+
+  $ find . -type f -name "*.js" -exec cat {} \; > all.js
+
+统计文件夹内所有coffee文件的代码行数::
+
+  $ find . -type f -name "*.coffee" -print0|xargs -0 wc -l
 
 取文件名::
 

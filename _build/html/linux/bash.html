@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
     <link rel="up" title="linux" href="index.html" />
-    <link rel="next" title="版本控制" href="git.html" />
+    <link rel="next" title="fedora" href="fedora.html" />
     <link rel="prev" title="linux" href="index.html" /> 
   </head>
   <body>
@@ -43,7 +43,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="git.html" title="版本控制"
+          <a href="fedora.html" title="fedora"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="linux"
@@ -61,8 +61,8 @@
   <p class="topless"><a href="index.html"
                         title="previous chapter">linux</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="git.html"
-                        title="next chapter">版本控制</a></p>
+  <p class="topless"><a href="fedora.html"
+                        title="next chapter">fedora</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/linux/bash.txt"
@@ -91,6 +91,12 @@
             
   <div class="section" id="bash">
 <span id="id1"></span><h1>bash<a class="headerlink" href="#bash" title="Permalink to this headline">¶</a></h1>
+<p>将文件夹内所有js文件打包成all.js:</p>
+<div class="highlight-python"><pre>$ find . -type f -name "*.js" -exec cat {} \; &gt; all.js</pre>
+</div>
+<p>统计文件夹内所有coffee文件的代码行数:</p>
+<div class="highlight-python"><pre>$ find . -type f -name "*.coffee" -print0|xargs -0 wc -l</pre>
+</div>
 <p>取文件名:</p>
 <div class="highlight-python"><pre>$basename /etc/passwd =&gt; passwd</pre>
 </div>
@@ -132,7 +138,7 @@ allFiles $testdir</pre>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="git.html" title="版本控制"
+          <a href="fedora.html" title="fedora"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="linux"

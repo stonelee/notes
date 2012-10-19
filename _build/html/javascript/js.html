@@ -179,6 +179,30 @@ $element[0].offsetHeight</pre>
 </pre></div>
 </div>
 <p>如果html不规范（比如标签未关闭），那么在IE中赋值给$.html时会静静的失败</p>
+<p>chrome中的滑动条控件:</p>
+<div class="highlight-python"><pre>&lt;input id="rangeCrossFade" type="range" value="50" min="0" max="100" step="10" /&gt;</pre>
+</div>
+<p>css选择:</p>
+<div class="highlight-python"><pre>var $ = function(selector) {
+    return document.querySelector(selector);
+};</pre>
+</div>
+<p>forEach:</p>
+<div class="highlight-python"><pre>["-webkit-", "-moz-", "-ms-", "-o-", ""].forEach(function(prefix) {</pre>
+</div>
+<p>修改内容:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">eleOpacityImage</span><span class="o">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="s">&#39;&lt;&#39;</span>
+</pre></div>
+</div>
+<p>修改css:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">eleImages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="n">value</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>浏览器内部宽度 window.innerWidth</li>
+<li>整个浏览器的宽度 window.outerWidth</li>
+<li>显示器宽度 screen.width</li>
+</ul>
 <div class="section" id="url">
 <h3>解析url<a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/location.png" src="../_images/location.png" />

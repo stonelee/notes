@@ -81,6 +81,12 @@ hasLayout			IE5.5/6/7上一些奇怪的bug
 
 设置float		触发BFC
 
+IE中跟尺寸有关的bug往往可以通过layout设置width或者height来解决
+
+zoom: 1 //IE特有属性来激发layout
+
+layout元素设置display: inline 相当于通常意义上的inline-block
+
 字体
 ---------
 
