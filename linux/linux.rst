@@ -93,6 +93,22 @@ ssh::
 
 	uname -a
 
+ssh
+-----------------
+
+ssh scp sftp访问远程机器免输入密码
+
+本机生成密钥::
+
+  $ ssh-keygen -t rsa
+
+公共密钥保存在 ~/.ssh/id_rsa.pub
+私有密钥保存在 ~/.ssh/id_rsa
+
+将公共密钥复制到要访问的机器上::
+
+  $ scp ~/.ssh/id_rsa.pub vboxadmin@10.10.22.86:/home/vboxadmin/.ssh/authorized_keys
+
 工具
 -----------------
 

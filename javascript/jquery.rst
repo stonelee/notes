@@ -4,6 +4,8 @@
 jquery
 ***************
 
+$.ajax()返回jqXHR，是XMLHTTPRequest的超集
+
 判断是否找到::
 
 	$('#id').length ? 'exist' : 'not'

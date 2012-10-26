@@ -61,6 +61,7 @@
   <ul>
 <li><a class="reference internal" href="#">linux</a><ul>
 <li><a class="reference internal" href="#id2">基本操作</a><ul>
+<li><a class="reference internal" href="#ssh">ssh</a></li>
 <li><a class="reference internal" href="#id3">工具</a></li>
 <li><a class="reference internal" href="#id4">下载整个网站</a></li>
 <li><a class="reference internal" href="#curl">curl</a></li>
@@ -177,6 +178,18 @@ rpm -ivh PIL-1.1.7-10.fc16.i686.rpm</pre>
 <p>查看所有内核信息:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">uname</span> <span class="o">-</span><span class="n">a</span>
 </pre></div>
+</div>
+<div class="section" id="ssh">
+<h3>ssh<a class="headerlink" href="#ssh" title="Permalink to this headline">¶</a></h3>
+<p>ssh scp sftp访问远程机器免输入密码</p>
+<p>本机生成密钥:</p>
+<div class="highlight-python"><pre>$ ssh-keygen -t rsa</pre>
+</div>
+<p>公共密钥保存在 ~/.ssh/id_rsa.pub
+私有密钥保存在 ~/.ssh/id_rsa</p>
+<p>将公共密钥复制到要访问的机器上:</p>
+<div class="highlight-python"><pre>$ scp ~/.ssh/id_rsa.pub vboxadmin@10.10.22.86:/home/vboxadmin/.ssh/authorized_keys</pre>
+</div>
 </div>
 <div class="section" id="id3">
 <h3>工具<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>

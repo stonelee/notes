@@ -67,6 +67,7 @@
 <li><a class="reference internal" href="#id2">字体</a></li>
 <li><a class="reference internal" href="#css3">CSS3</a></li>
 <li><a class="reference internal" href="#less">less</a></li>
+<li><a class="reference internal" href="#jqueryui">jqueryui</a></li>
 </ul>
 </li>
 </ul>
@@ -209,6 +210,29 @@ transform:rotate(-3deg);</pre>
 <p>颜色减淡:</p>
 <div class="highlight-python"><pre>+#111</pre>
 </div>
+</div>
+<div class="section" id="jqueryui">
+<h2>jqueryui<a class="headerlink" href="#jqueryui" title="Permalink to this headline">¶</a></h2>
+<p>合并顺序:</p>
+<div class="highlight-python"><pre>base
+  -- core 最核心不变的
+  -- accordion
+  -- ...
+  -- tooltip
+
+theme 易变，特别指定
+  font-family, font-size,
+  ui-widget-content -- border, background, color, font-weight
+           -header
+  state, corner, overlay, shadow</pre>
+</div>
+<p>css如果为一个元素指定多个class，其优先级取决于css文件中的定义顺序，后定义的会覆盖前面定义的。与class的书写顺序无关</p>
+<p>class顺序与实际样式表顺序一致，方便查询</p>
+<p>开发顺序：</p>
+<ul class="simple">
+<li>功能实现</li>
+<li>抽象架构，着眼于扩展</li>
+</ul>
 </div>
 </div>
 

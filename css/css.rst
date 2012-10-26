@@ -5,7 +5,6 @@
 css
 ***************
 
-
 position:absolute中的width，height是相对父relative来定义的
 
 em 强调
@@ -135,3 +134,29 @@ less
 颜色减淡::
 
   +#111
+
+jqueryui
+-----------
+
+合并顺序::
+
+  base
+    -- core 最核心不变的
+    -- accordion
+    -- ...
+    -- tooltip
+
+  theme 易变，特别指定
+    font-family, font-size,
+    ui-widget-content -- border, background, color, font-weight
+             -header
+    state, corner, overlay, shadow
+
+css如果为一个元素指定多个class，其优先级取决于css文件中的定义顺序，后定义的会覆盖前面定义的。与class的书写顺序无关
+
+class顺序与实际样式表顺序一致，方便查询
+
+开发顺序：
+
+* 功能实现
+* 抽象架构，着眼于扩展
