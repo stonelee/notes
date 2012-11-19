@@ -280,6 +280,19 @@ this.element为调用该控件的jquery对象。</p>
 </div>
 <p>jqueryui中widget中通过this定义函数和变量会保存在$(&#8216;#id&#8217;).data()中</p>
 <p>draggable的scroll针对父元素overflow:auto有效，这时scrollParent不为document；如果使用body的滚动条会出现元素消失的现象</p>
+<p>data中保存类信息</p>
+<p>添加selector:</p>
+<div class="highlight-python"><pre>jQuery.expr[':'].inline = function(elem) {
+    return jQuery(elem).css('display') === 'inline';
+};</pre>
+</div>
+<p>调用:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jQuery</span><span class="p">(</span><span class="s">&#39;div a:inline&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s">&#39;color&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>$.widget.extend 对于{}类型的对象进行深复制，貌似相当于$.extend(true,{},...)</p>
+<p>$.widget.bridge将一般的对象桥接到jquery上，自动创建实例并存储在元素的data中，实例化后允许调用公共方法，不允许调用私有或者不存在的方法，防止多次实例化。
+约定该对象参数为options,element，_init()为初始方法，option为配置参数方法。</p>
 </div>
 </div>
 

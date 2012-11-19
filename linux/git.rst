@@ -35,6 +35,34 @@ RhodeCode中推送已经存在的库::
 
 	git commit -a -m 'Validation!'
 
+如果Fork别人的项目或者多人合作项目，最好每人都拥有一个独立分支，然后由项目维护人合并。
+
+如何建立自己的分支
+----------------------
+
+* git branch yourbranch 创建分支
+* git checkout yourbranch 切换到yourbranch
+* 开发yourbranch分支，然后开发之后与master分支合并
+* git checkout master
+* git merge yourbranch
+* git branch -d yourbranch 合并完后删除local
+
+如何将牛人的远程分支更新到自己的本地分支？
+-------------------------------------------
+
+* git remote 查看当前项目下远程
+* 增加新的分支链接，例如 git remote add niuren giturl…
+* 获取牛人的远程更新 git fetch niuren
+* 将牛人的远程更新合并到本地分支 git merge niuren/master
+
+
+避免push时填入密码，通过ssh
+---------------------------------
+
+::
+
+  git remote set-url origin git@github.com:user/repo.git
+
 git pages
 =============================
 

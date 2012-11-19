@@ -217,3 +217,21 @@ this.element为调用该控件的jquery对象。
 jqueryui中widget中通过this定义函数和变量会保存在$('#id').data()中
 
 draggable的scroll针对父元素overflow:auto有效，这时scrollParent不为document；如果使用body的滚动条会出现元素消失的现象
+
+data中保存类信息
+
+添加selector::
+
+  jQuery.expr[':'].inline = function(elem) {
+      return jQuery(elem).css('display') === 'inline';
+  };
+
+调用::
+
+  jQuery('div a:inline').css('color', 'red');
+
+$.widget.extend 对于{}类型的对象进行深复制，貌似相当于$.extend(true,{},...)
+
+$.widget.bridge将一般的对象桥接到jquery上，自动创建实例并存储在元素的data中，实例化后允许调用公共方法，不允许调用私有或者不存在的方法，防止多次实例化。
+约定该对象参数为options,element，_init()为初始方法，option为配置参数方法。
+

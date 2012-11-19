@@ -75,6 +75,10 @@
 <li><a class="reference internal" href="#id3">extjs使用规范</a></li>
 <li><a class="reference internal" href="#id4">想法</a></li>
 <li><a class="reference internal" href="#css">更改css</a></li>
+<li><a class="reference internal" href="#id5">优化</a><ul>
+<li><a class="reference internal" href="#id6">优化记录</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -358,6 +362,36 @@ appname/resources/sass/my-ext-theme.scss</p>
 appname/extjs/resources/themes/stylesheets/ext4/default/variables/</p>
 <p>编译css:
 在appname/resources/sass中运行compass compile</p>
+</div>
+<div class="section" id="id5">
+<h2>优化<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>貌似Ext的底层封装实现中，会在用户绑定的事件中阻塞整个css的渲染，需要等待所有css计算完成后再统一进行。这在效率上真是做到了我能想到的极致！只是如果想在其中加入自己的css动态实现时难免会掉到坑里</p>
+<p>关于Extjs项目打开页面慢的问题</p>
+<p>我们现在要解决的是渲染慢问题，因为局域网基本不需要考虑加载问题。</p>
+<p>经过分析，现在渲染慢的原因在代码层面主要有：</p>
+<ul class="simple">
+<li>业务划分不合理，很多组件显示在一个页面上整体显示</li>
+<li>有些代码确实不规范，其中最影响性能的就是面板多次嵌套，再就是使用了组件树中功能多的组件而没有优先选用适合自己需要的简单组件</li>
+</ul>
+<p>网上那些减少渲染问题的手段，比如避免使用iframe，合并压缩，延迟创建组件我们从一开始就已经这么用了。
+委托模式我们还没有使用，不过这个跟页面打开的渲染速度无关</p>
+<p>解决方案按难度排列如下：</p>
+<ul class="simple">
+<li>最立竿见影的方法就是在页面上加个提示，提示用户换浏览器</li>
+<li>换浏览器之后还是有些页面比较慢，可以在上面加loading提示，在视觉上减少加载时间</li>
+<li>view层的页面重构，将慢的页面嵌套看能不能精简，这个实际上跟业务有点关系，页面显示效果恐怕就会变了</li>
+<li>业务层面拆分，将本来一页显示的内容变为多页，这得修改该模块的架构，包括controller，view等，修改量更大</li>
+<li>代码逐句调优，比如说缓存select，工作量不小，效果不大。</li>
+<li>如果还是慢只能将该部分页面由ExtJS换为jquery自己模拟实现，难度更大。</li>
+</ul>
+<div class="section" id="id6">
+<h3>优化记录<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>将layout由hbox方式改为table方式，效率差不多</p>
+<p>使用fieldset隐藏不需要马上渲染的组件，可以有效减少加载时间:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="n">xtype</span> <span class="p">:</span> <span class="s">&#39;fieldset&#39;</span><span class="p">,</span><span class="n">collapsible</span> <span class="p">:</span> <span class="n">true</span><span class="p">,</span><span class="n">collapsed</span><span class="p">:</span> <span class="n">true</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 

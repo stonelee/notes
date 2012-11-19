@@ -7,6 +7,9 @@ js
 技巧
 =============================
 
+* 字符转ascii码：charCodeAt()
+* ascii码砖字符：fromCharCode()
+
 判断为list，而不是object::
 
   if (obj.length === +obj.length) {}
@@ -316,6 +319,18 @@ spm
   mkdir libs
   cd libs/
   spm install all
+
+js文件名中不能有“.”，应该使用“-”
+
+js变量名中不能有“-”，改为驼峰式
+
+require('./jquery.mousewheel')会导致spm build时认为要寻找jquery.js，因此改为require('./jquery-mousewheel')
+
+如果不build到modules中，那么类中的this指向window
+
+去掉coffee打包::
+
+  spm build --enableCoffee=false
 
 bootstrap
 -----------

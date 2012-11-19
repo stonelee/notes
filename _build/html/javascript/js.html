@@ -120,6 +120,10 @@
 <span id="id1"></span><h1>js<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
 <h2>技巧<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>字符转ascii码：charCodeAt()</li>
+<li>ascii码砖字符：fromCharCode()</li>
+</ul>
 <p>判断为list，而不是object:</p>
 <div class="highlight-python"><pre>if (obj.length === +obj.length) {}</pre>
 </div>
@@ -365,6 +369,13 @@ spm init</pre>
 <div class="highlight-python"><pre>mkdir libs
 cd libs/
 spm install all</pre>
+</div>
+<p>js文件名中不能有“.”，应该使用“-”</p>
+<p>js变量名中不能有“-”，改为驼峰式</p>
+<p>require(&#8216;./jquery.mousewheel&#8217;)会导致spm build时认为要寻找jquery.js，因此改为require(&#8216;./jquery-mousewheel&#8217;)</p>
+<p>如果不build到modules中，那么类中的this指向window</p>
+<p>去掉coffee打包:</p>
+<div class="highlight-python"><pre>spm build --enableCoffee=false</pre>
 </div>
 </div>
 <div class="section" id="bootstrap">

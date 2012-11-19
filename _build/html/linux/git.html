@@ -60,7 +60,12 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">版本控制</a><ul>
-<li><a class="reference internal" href="#id2">git</a></li>
+<li><a class="reference internal" href="#id2">git</a><ul>
+<li><a class="reference internal" href="#id3">如何建立自己的分支</a></li>
+<li><a class="reference internal" href="#id4">如何将牛人的远程分支更新到自己的本地分支？</a></li>
+<li><a class="reference internal" href="#push-ssh">避免push时填入密码，通过ssh</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#git-pages">git pages</a></li>
 <li><a class="reference internal" href="#hg">hg</a><ul>
 <li><a class="reference internal" href="#ignore">使用本地ignore</a></li>
@@ -127,6 +132,32 @@ fatal: The remote end hung up unexpectedly</pre>
 </div>
 <p>提交:</p>
 <div class="highlight-python"><pre>git commit -a -m 'Validation!'</pre>
+</div>
+<p>如果Fork别人的项目或者多人合作项目，最好每人都拥有一个独立分支，然后由项目维护人合并。</p>
+<div class="section" id="id3">
+<h3>如何建立自己的分支<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>git branch yourbranch 创建分支</li>
+<li>git checkout yourbranch 切换到yourbranch</li>
+<li>开发yourbranch分支，然后开发之后与master分支合并</li>
+<li>git checkout master</li>
+<li>git merge yourbranch</li>
+<li>git branch -d yourbranch 合并完后删除local</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>如何将牛人的远程分支更新到自己的本地分支？<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>git remote 查看当前项目下远程</li>
+<li>增加新的分支链接，例如 git remote add niuren giturl…</li>
+<li>获取牛人的远程更新 git fetch niuren</li>
+<li>将牛人的远程更新合并到本地分支 git merge niuren/master</li>
+</ul>
+</div>
+<div class="section" id="push-ssh">
+<h3>避免push时填入密码，通过ssh<a class="headerlink" href="#push-ssh" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>git remote set-url origin git@github.com:user/repo.git</pre>
+</div>
 </div>
 </div>
 <div class="section" id="git-pages">
