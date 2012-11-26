@@ -258,6 +258,8 @@ IE6/7不支持JSON，需要借助json2.js，其他版本原生支持
 js库
 =============================
 
+DD_belatedPNG解决IE6下PNG不透明问题
+
 多选控件，包括自动补全，ajax等功能
 http://textextjs.com/
 

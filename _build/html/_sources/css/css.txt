@@ -5,6 +5,15 @@
 css
 ***************
 
+左中定宽，右自适应方法：左中float:left，右margin-left
+
+貌似可以取代float::
+
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+
+
 position:absolute中的width，height是相对父relative来定义的
 
 em 强调
