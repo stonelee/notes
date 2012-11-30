@@ -144,3 +144,13 @@ Tags先空着
 每月末，将统计html导出到octopress/source/records
 
 在index.html中写月总结
+
+版本号规范
+==============
+
+版本号用 x.y.z 来表示
+
+* 纯兼容式 bug fix 升 z
+* 有功能增加或非兼容式修改时，升 y
+* 大量重构，革命性的，升 x
+

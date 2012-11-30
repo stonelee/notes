@@ -9,10 +9,9 @@
 git
 =============================
 
-github更新子模块::
+升级子模块::
 
-	$ git submodule init
-	$ git submodule update
+  $ git submodule update --init --recursive
 
 RhodeCode中推送已经存在的库::
 

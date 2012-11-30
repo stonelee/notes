@@ -5,6 +5,8 @@
 extjs
 ***************
 
+Ext.DomHelper.append貌似不能正常添加bgsound，使用dom语句生成在IE各版本中表现一致
+
 基本API
 =============================
 

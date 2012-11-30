@@ -245,8 +245,29 @@ constructor
 
   Person.prototype.constructor = Person;
 
+播放声音
+--------------
+
+chrome中优先使用audio，使用ogg格式文件::
+
+  voice.self = Ext.DomHelper.append(document.body, {tag: 'audio', src: 'horse.ogg'});
+  voice.self.play();
+
+如果要使用wav格式::
+
+  IE下{tag: 'bgsound', src: file, loop: 1, autostart: true}
+  非IE{tag: 'embed', src: file, hidden: true, autostart: true, loop: false}
+
+
 思考
 =============================
+
+javascript三大主神
+
+* Brendan Eich：javascript之父
+* Dean Edwards：IE7.js、Base2框架、packer压缩器、cssQuery、moz-behaviors.xml的作者
+* Douglas Crockford：JSON、JSLint、JSMin、ADSafe与蝴蝶书的作者
+
 
 搞清组件的核心功能，果断调用。如jQuery为DOM/Ajax/Anim 操作类库
 
