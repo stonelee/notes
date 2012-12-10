@@ -5,6 +5,10 @@
 css
 ***************
 
+缩进2字符::
+
+  text-indent: 2em;
+
 左中定宽，右自适应方法：左中float:left，右margin-left
 
 貌似可以取代float::

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>css &mdash; stonelee&#39;s notes 0 documentation</title>
+    <title>css顺序 &mdash; stonelee&#39;s notes 0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
-    <link rel="next" title="bootstrap" href="bootstrap.html" />
-    <link rel="prev" title="svg" href="../javascript/svg.html" /> 
+    <link rel="up" title="css" href="index.html" />
+    <link rel="next" title="linux" href="../linux/index.html" />
+    <link rel="prev" title="html" href="html.html" /> 
   </head>
   <body>
 
@@ -42,28 +43,29 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="bootstrap.html" title="bootstrap"
+          <a href="../linux/index.html" title="linux"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../javascript/svg.html" title="svg"
+          <a href="html.html" title="html"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">home</a>|&nbsp;</li>
         <li><a href="../search.html">search</a>|&nbsp;</li>
- 
+
+          <li><a href="index.html" accesskey="U">css</a> &raquo;</li> 
       </ul>
     </div>
 
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../javascript/svg.html"
-                        title="previous chapter">svg</a></p>
+  <p class="topless"><a href="html.html"
+                        title="previous chapter">html</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="bootstrap.html"
-                        title="next chapter">bootstrap</a></p>
+  <p class="topless"><a href="../linux/index.html"
+                        title="next chapter">linux</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/css/index.txt"
+    <li><a href="../_sources/css/order.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -88,34 +90,101 @@
           <div class="body">
             
   <div class="section" id="css">
-<h1>css<a class="headerlink" href="#css" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="bootstrap.html">bootstrap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="css.html">css</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="css.html#position">position</a></li>
-<li class="toctree-l2"><a class="reference internal" href="css.html#float-vs-position">float vs position</a></li>
-<li class="toctree-l2"><a class="reference internal" href="css.html#block-formatting-context">block formatting context</a></li>
-<li class="toctree-l2"><a class="reference internal" href="css.html#haslayoutbfc">hasLayout和BFC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="css.html#id2">字体</a></li>
-<li class="toctree-l2"><a class="reference internal" href="css.html#id3">渐进增强与平稳退化</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="css.html#id4">渐进增强实例</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="css.html#css3">CSS3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="css.html#less">less</a></li>
-<li class="toctree-l2"><a class="reference internal" href="css.html#jqueryui">jqueryui</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="django-cms.html">django-cms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="django-cms.html#id2">技巧</a></li>
-<li class="toctree-l2"><a class="reference internal" href="django-cms.html#id3">知识点</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="html.html">html</a></li>
-<li class="toctree-l1"><a class="reference internal" href="order.html">css顺序</a></li>
-</ul>
+<span id="order"></span><h1>css顺序<a class="headerlink" href="#css" title="Permalink to this headline">¶</a></h1>
+<p>Mozilla method:</p>
+<div class="highlight-python"><pre>display: ;
+visibility: ;
+float: ;
+clear: ;
+
+position: ;
+top: ;
+right: ;
+bottom: ;
+left: ;
+z-index: ;
+
+width: ;
+min-width: ;
+max-width: ;
+height: ;
+min-height: ;
+max-height: ;
+overflow: ;
+
+margin: ;
+margin-top: ;
+margin-right: ;
+margin-bottom: ;
+margin-left: ;
+
+padding: ;
+padding-top: ;
+padding-right: ;
+padding-bottom: ;
+padding-left: ;
+
+border: ;
+border-top: ;
+border-right: ;
+border-bottom: ;
+border-left: ;
+
+border-width: ;
+border-top-width: ;
+border-right-width: ;
+border-bottom-width: ;
+border-left-width: ;
+
+border-style: ;
+border-top-style: ;
+border-right-style: ;
+border-bottom-style: ;
+border-left-style: ;
+
+border-color: ;
+border-top-color: ;
+border-right-color: ;
+border-bottom-color: ;
+border-left-color: ;
+
+outline: ;
+
+list-style: ;
+
+table-layout: ;
+caption-side: ;
+border-collapse: ;
+border-spacing: ;
+empty-cells: ;
+
+font: ;
+font-family: ;
+font-size: ;
+line-height: ;
+font-weight: ;
+text-align: ;
+text-indent: ;
+text-transform: ;
+text-decoration: ;
+letter-spacing: ;
+word-spacing: ;
+white-space: ;
+vertical-align: ;
+color: ;
+
+background: ;
+background-color: ;
+background-image: ;
+background-repeat: ;
+background-position: ;
+
+opacity: ;
+
+cursor: ;
+
+content: ;
+quotes: ;</pre>
 </div>
 </div>
 
@@ -132,14 +201,15 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="bootstrap.html" title="bootstrap"
+          <a href="../linux/index.html" title="linux"
              >next</a> |</li>
         <li class="right" >
-          <a href="../javascript/svg.html" title="svg"
+          <a href="html.html" title="html"
              >previous</a> |</li>
         <li><a href="../index.html">home</a>|&nbsp;</li>
         <li><a href="../search.html">search</a>|&nbsp;</li>
- 
+
+          <li><a href="index.html" >css</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

@@ -148,6 +148,8 @@ Tags先空着
 版本号规范
 ==============
 
+Semantic Versioning: http://semver.org/
+
 版本号用 x.y.z 来表示
 
 * 纯兼容式 bug fix 升 z

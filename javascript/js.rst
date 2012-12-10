@@ -368,8 +368,8 @@ bootstrap-dropdown.js通过toggleClass('open')实现下拉列表的显示和隐�
 aralejs
 -----------
 
-widget中
+widget中，当attrs中的activeIndex变化时，会触发其change事件，通过_onRenderActiveIndex可以对其响应
 
-当attrs中的activeIndex变化时，会触发其change事件，通过_onRenderActiveIndex可以对其响应
+overlay可以在window.resize时自动定位. _blurHide设置document.click时元素blur自动hide
 
 .. image:: aralejs.png
