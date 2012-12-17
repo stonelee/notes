@@ -7,8 +7,24 @@ js
 技巧
 =============================
 
-* 字符转ascii码：charCodeAt()
-* ascii码砖字符：fromCharCode()
+console.dir()可以显示类.如使用log显示function会返回函数定义内容,而使用dir可以查看整个类结构.
+
+* 2进制转化为10进制：parseInt(a,2)
+* 10进制转化为16进制：a.toString(16));
+
+ascii码为10进制
+
+* 字符转ascii码：'a'.charCodeAt() == 97
+* ascii码砖字符：String.fromCharCode(65) == 'A'
+
+::
+
+  $('pre').innerHTML
+  .replace(/_/g,1)
+  .split(/\s/)
+  .map(function(i){
+    return String.fromCharCode(parseInt(i,2));
+  }).join('');
 
 判断为list，而不是object::
 
@@ -365,11 +381,3 @@ bootstrap-transition.js返回css transition的函数名，例如chrome下为{end
 
 bootstrap-dropdown.js通过toggleClass('open')实现下拉列表的显示和隐藏
 
-aralejs
------------
-
-widget中，当attrs中的activeIndex变化时，会触发其change事件，通过_onRenderActiveIndex可以对其响应
-
-overlay可以在window.resize时自动定位. _blurHide设置document.click时元素blur自动hide
-
-.. image:: aralejs.png

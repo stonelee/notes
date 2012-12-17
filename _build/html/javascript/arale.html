@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>arale &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="javascript" href="index.html" />
+    <link rel="next" title="extjs" href="extjs.html" />
+    <link rel="prev" title="javascript" href="index.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="extjs.html" title="extjs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="javascript"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">arale</a><ul>
+<li><a class="reference internal" href="#class">class</a></li>
+<li><a class="reference internal" href="#base">base</a><ul>
+<li><a class="reference internal" href="#attribute">Attribute</a></li>
+<li><a class="reference internal" href="#aspect">Aspect</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#events">events</a></li>
+<li><a class="reference internal" href="#widget">widget</a><ul>
+<li><a class="reference internal" href="#templatable">templatable</a></li>
+<li><a class="reference internal" href="#daparser">daparser</a></li>
+<li><a class="reference internal" href="#auto-render">auto-render</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overlay">overlay</a></li>
+<li><a class="reference internal" href="#id2">继承结构图</a></li>
+<li><a class="reference internal" href="#seajs">seajs</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">javascript</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="extjs.html"
+                        title="next chapter">extjs</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/javascript/arale.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="arale">
+<span id="id1"></span><h1>arale<a class="headerlink" href="#arale" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class">
+<h2>class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
+<p>查看类的继承关系:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">seajs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dog</span><span class="p">,</span> <span class="s">&#39;dir&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>另外附加prototype方法，会覆盖同名方法:</p>
+<div class="highlight-python"><pre>Implements: [Flyable, Talkable]</pre>
+</div>
+<p>或者:</p>
+<div class="highlight-python"><pre>Dog.implement({
+  talk: function() {
+    return 'I am ' + this.name
+  }
+})</pre>
+</div>
+<p>设置静态属性:</p>
+<div class="highlight-python"><pre>Statics: {
+  COLOR: 'red'
+},</pre>
+</div>
+<p>或者:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Animal</span><span class="o">.</span><span class="n">LEGS</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>为继承自A的类的静态属性设置白名单，防止继承多余的父类的静态属性:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">A</span><span class="o">.</span><span class="n">StaticsWhiteList</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>设置初始值，如new Dog(&#8216;Jack&#8217;):</p>
+<div class="highlight-python"><pre>initialize: function(name) {}</pre>
+</div>
+<p>或者:</p>
+<div class="highlight-python"><pre>function Dog(name)</pre>
+</div>
+<p>调用父类方法:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Dog</span><span class="o">.</span><span class="n">superclass</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="base">
+<h2>base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h2>
+<p>混入了Events，Aspect， Attribute中的方法</p>
+<p>destroy:删除绑定的事件，删除方法</p>
+<p>attribute配置项:</p>
+<div class="highlight-python"><pre>value: '#test',
+readOnly: true
+getter: function() {
+  return this.get('x') + this.get('y');
+},
+setter: function(val) {
+  this.set('x', val[0]);
+  this.set('y', val[1]);
+}</pre>
+</div>
+<p>_onChangeX 方法会自动注册到 change:x 事件:</p>
+<div class="highlight-python"><pre>_onChangeColor: function(val, prev, key) {
+  this.element.css('backgroundColor', val);
+}</pre>
+</div>
+<p>例子:</p>
+<div class="highlight-python"><pre>var A = Base.extend({
+  attrs: {
+    color: '#fff',
+    size: {
+      width: 100,
+      height: 100
+    }
+  },
+  show: function() {
+    // Do some cool stuff
+    this.trigger('show');
+  }
+});</pre>
+</div>
+<p>在配置中响应事件:</p>
+<div class="highlight-python"><pre>var a = new A({
+  color: '#f00',
+  size: {
+    width: 200
+  },
+  onShow: function() {
+    counter++;
+  },
+  afterShow: function() {
+    counter++;
+  },
+  beforeShow: function() {
+    counter++;
+  },
+  onChangeColor: function() {
+    counter++;
+  }
+});</pre>
+</div>
+<p>额外指定事件:</p>
+<div class="highlight-python"><pre>a.on('change:x', function(val, prev, key) {</pre>
+</div>
+<p>aspect:</p>
+<div class="highlight-python"><pre>a.before('xxx', function(n, m) {</pre>
+</div>
+<p>propsInAttrs使得配置项可以像属性一样直接调用:</p>
+<div class="highlight-python"><pre>var T = Base.extend({
+
+  model: {
+    getter: function(val) {
+      return {
+        a: 1,
+        v: val
+      };
+    }
+  },
+
+  propsInAttrs: ['model']
+});
+
+var t = new T();
+expect(t.model.a).to.equal(1);</pre>
+</div>
+<div class="section" id="attribute">
+<h3>Attribute<a class="headerlink" href="#attribute" title="Permalink to this headline">¶</a></h3>
+<p>initAttrs将用户配置与attrs以及继承得到的attrs进行合并，将_onChangeAttr注册为change:attr事件的响应，将配置中的on/before/afterXxx注册为事件响应</p>
+<p>get获取attr的值，可通过getter</p>
+<p>set设置attr的值，可通过setter，默认会触发change:x事件</p>
+<p>change手工触发__changedAttrs的change事件</p>
+</div>
+<div class="section" id="aspect">
+<h3>Aspect<a class="headerlink" href="#aspect" title="Permalink to this headline">¶</a></h3>
+<p>貌似比较鸡肋</p>
+<p>before在指定方法前执行任务，参数与指定方法参数相同，不能通过return false停止向下执行</p>
+<p>after在指定方法后执行任务，参数为指定方法的返回值，貌似对于异步回调依然木办法</p>
+<p>可以同时指定多个方法，用空格隔开</p>
+</div>
+</div>
+<div class="section" id="events">
+<h2>events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<p>监听的事件保存在__events中，__events为对象字面量，key为事件名称（all意味着响应所有事件），值为一维数组，内容为每个响应事件的回调和上下文，两两依次排列</p>
+</div>
+<div class="section" id="widget">
+<h2>widget<a class="headerlink" href="#widget" title="Permalink to this headline">¶</a></h2>
+<p>View 层的管理。</p>
+<ul class="simple">
+<li>描述状态的 attributes 和 properties</li>
+<li>描述行为的 events和 methods</li>
+</ul>
+<dl class="docutils">
+<dt>config 中的这些键值会直接添加到实例上，转换成 properties::</dt>
+<dd>propsInAttrs: [&#8216;element&#8217;, &#8216;template&#8217;, &#8216;model&#8217;, &#8216;events&#8217;]</dd>
+</dl>
+<p>initialize初始化方法，确定组件创建时的基本流程:</p>
+<div class="highlight-python"><pre>初始化 attrs --》 初始化 props --》 初始化 events --》 子类的初始化
+
+// 初始化 attrs，包括用户配置和data-*合并默认属性
+var dataAttrsConfig = this._parseDataAttrsConfig(config)
+this.initAttrs(config, dataAttrsConfig)
+
+// 初始化 props
+this.parseElement()//构建element，如果没有配置就从template构建
+this.initProps()//供子类覆盖
+
+// 初始化 events
+this.delegateEvents()
+
+// 子类自定义的初始化
+this.setup()//供子类覆盖
+
+// 保存实例信息
+this._stamp()</pre>
+</div>
+<p>events通过this.delegateEvents()使用jquery的on方法进行事件绑定，事件都有命名空间.delegate-events-cid以方便删除，select可以使用{{}}语法指定attrs中的属性</p>
+<p>render会当属性xx不为空值时自动调用_onRenderXX(val, prev, key)，并将onRenderXX绑定到change事件</p>
+<p>Widget.query(select)获取节点对应的Widget实例</p>
+<p>Widget.StaticsWhiteList = [&#8216;autoRender&#8217;]指明Widget子类的静态方法只有autoRender</p>
+<p>Widget静态方法还包括query，autoRenderAll</p>
+<p>在标签里使用data-*进行配置跟实例化时指定该element传入配置效果是一致的</p>
+<p>父类继承时attrs中属性，以及model，events会混合，一般的prototype中的object会覆盖</p>
+<div class="section" id="templatable">
+<h3>templatable<a class="headerlink" href="#templatable" title="Permalink to this headline">¶</a></h3>
+<p>提供了handlebars模板，并提供局部渲染功能。默认的widget只是简单的从模板构建element</p>
+<p>混入后, template配置模板，model配置模板变量（也可以用toJSON），templateHelpers配置自定义模板逻辑，由模板自动生成element（jquery对象）</p>
+<p>render将widget渲染到页面上</p>
+<p>renderPartial渲染部分页面</p>
+<p>为了在局部渲染时可以从内部保存的jquery对象中找到正确的区域，为避免标签意外关闭，需要在保存该内部jquery对象时将{{xx}}转换为&lt;!&#8211;{{xx}}&#8211;&gt;，为防止额外加载数据，将src和href替换</p>
+</div>
+<div class="section" id="daparser">
+<h3>daparser<a class="headerlink" href="#daparser" title="Permalink to this headline">¶</a></h3>
+<p>通过方法parseElement解析标签里的data-*属性。值可以为[],{}，默认会按照json进行转化。第二个参数如果设为true则不进行任何转化</p>
+<p>标签里的data-*会在现代浏览器中存储在元素的dataset中，并可以很方便的进行修改</p>
+<p>最好都使用小写, data-some-key会转为someKey</p>
+</div>
+<div class="section" id="auto-render">
+<h3>auto-render<a class="headerlink" href="#auto-render" title="Permalink to this headline">¶</a></h3>
+<p>autoRender，如果子类需要提供更多参数，可以覆盖之</p>
+<p>一般使用autoRenderAll()来自动渲染控件。原理是通过data-widget指定模块，然后使用seajs.use分别调用，然后通过向autoRender传入配置 {element: element, renderType: &#8216;auto&#8217;}，模块实例化后render</p>
+<ul class="simple">
+<li>全局关闭方法：document.body上设置data-api=&#8221;off&#8221;，然后单个开启：element上设置data-api=&#8221;on&#8221;</li>
+<li>关闭单个：element上设置data-api=&#8221;off&#8221;</li>
+</ul>
+</div>
+</div>
+<div class="section" id="overlay">
+<h2>overlay<a class="headerlink" href="#overlay" title="Permalink to this headline">¶</a></h2>
+<p>可以在window.resize时自动定位.</p>
+<p>_blurHide设置document.click时元素blur自动hide</p>
+</div>
+<div class="section" id="id2">
+<h2>继承结构图<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/aralejs.png" src="../_images/aralejs.png" />
+</div>
+<div class="section" id="seajs">
+<h2>seajs<a class="headerlink" href="#seajs" title="Permalink to this headline">¶</a></h2>
+<p>seajs.find(&#8216;widget&#8217;)参数为正则查询,返回结果为匹配数组。如果想精确匹配，可以精确指定使用widget.js</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="extjs.html" title="extjs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="javascript"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

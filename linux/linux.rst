@@ -10,6 +10,15 @@ linux
 基本操作
 =============================
 
+* 判断filename的文件类型	file filename
+* 将filename进行base64编码 base64 filename
+* 将filename进行base64解码 base64 -d filename
+
+
+远程连接桌面::
+
+  rdesktop -u stonelee -p 1Admin 10.10.22.110 -g 1280x1024
+
 重启桌面::
 
   pkill X
@@ -76,6 +85,10 @@ ssh::
 
 	在http://pkgs.org/下载相应的rpm文件，然后
 	rpm -ivh PIL-1.1.7-10.fc16.i686.rpm 
+
+删除rpm::
+
+  rpm -e teamviewer7
 
 下载远程文件::
 

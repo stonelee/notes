@@ -116,6 +116,14 @@
 <p>目前两大主流linux桌面系统GNOME/GTK和 KDE/Qt</p>
 <div class="section" id="id2">
 <h2>基本操作<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>判断filename的文件类型       file filename</li>
+<li>将filename进行base64编码 base64 filename</li>
+<li>将filename进行base64解码 base64 -d filename</li>
+</ul>
+<p>远程连接桌面:</p>
+<div class="highlight-python"><pre>rdesktop -u stonelee -p 1Admin 10.10.22.110 -g 1280x1024</pre>
+</div>
 <p>重启桌面:</p>
 <div class="highlight-python"><pre>pkill X</pre>
 </div>
@@ -164,6 +172,9 @@ printf  格式化输出</pre>
 <p>安装源里没有的程序:</p>
 <div class="highlight-python"><pre>在http://pkgs.org/下载相应的rpm文件，然后
 rpm -ivh PIL-1.1.7-10.fc16.i686.rpm</pre>
+</div>
+<p>删除rpm:</p>
+<div class="highlight-python"><pre>rpm -e teamviewer7</pre>
 </div>
 <p>下载远程文件:</p>
 <div class="highlight-python"><pre>$ scp -r vboxadmin@10.10.22.86:/home/vboxadmin/Videos/冰冻星球/ /media/程序</pre>

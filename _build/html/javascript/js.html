@@ -78,7 +78,6 @@
 <li><a class="reference internal" href="#jscex">Jscex</a></li>
 <li><a class="reference internal" href="#spm">spm</a></li>
 <li><a class="reference internal" href="#bootstrap">bootstrap</a></li>
-<li><a class="reference internal" href="#aralejs">aralejs</a></li>
 </ul>
 </li>
 </ul>
@@ -121,10 +120,23 @@
 <span id="id1"></span><h1>js<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
 <h2>技巧<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>console.dir()可以显示类.如使用log显示function会返回函数定义内容,而使用dir可以查看整个类结构.</p>
 <ul class="simple">
-<li>字符转ascii码：charCodeAt()</li>
-<li>ascii码砖字符：fromCharCode()</li>
+<li>2进制转化为10进制：parseInt(a,2)</li>
+<li>10进制转化为16进制：a.toString(16));</li>
 </ul>
+<p>ascii码为10进制</p>
+<ul class="simple">
+<li>字符转ascii码：&#8217;a&#8217;.charCodeAt() == 97</li>
+<li>ascii码砖字符：String.fromCharCode(65) == &#8216;A&#8217;</li>
+</ul>
+<div class="highlight-python"><pre>$('pre').innerHTML
+.replace(/_/g,1)
+.split(/\s/)
+.map(function(i){
+  return String.fromCharCode(parseInt(i,2));
+}).join('');</pre>
+</div>
 <p>判断为list，而不是object:</p>
 <div class="highlight-python"><pre>if (obj.length === +obj.length) {}</pre>
 </div>
@@ -404,12 +416,6 @@ spm install all</pre>
 <p>bootstrap-transition.js返回css transition的函数名，例如chrome下为{end: &#8220;webkitTransitionEnd&#8221;}
 通过调用css transition在现代浏览器中实现动画效果</p>
 <p>bootstrap-dropdown.js通过toggleClass(&#8216;open&#8217;)实现下拉列表的显示和隐藏</p>
-</div>
-<div class="section" id="aralejs">
-<h3>aralejs<a class="headerlink" href="#aralejs" title="Permalink to this headline">¶</a></h3>
-<p>widget中，当attrs中的activeIndex变化时，会触发其change事件，通过_onRenderActiveIndex可以对其响应</p>
-<p>overlay可以在window.resize时自动定位. _blurHide设置document.click时元素blur自动hide</p>
-<img alt="../_images/aralejs.png" src="../_images/aralejs.png" />
 </div>
 </div>
 </div>

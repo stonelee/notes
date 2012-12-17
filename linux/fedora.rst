@@ -5,6 +5,9 @@
 fedora
 ***************
 
+chrome插件位置::
+
+  ~/.config/google-chrome/Default/Extensions
 
 查看fedora版本::
 

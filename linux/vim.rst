@@ -169,7 +169,11 @@ https://github.com/int3/vim-taglist-plus
 
 	:TlistToggle
 
-ack.vim与jslint.vim有冲突
-============================
+插件冲突与问题
+==================
 
+1.ack.vim与jslint.vim有冲突。
 jslint会覆盖ack的所使用的quickfix窗口，需要:cnew来查看结果
+
+2. snip跟自动提示冲突。
+在预定义变量位置进行编辑时，如果出现自动提示，snip模板中定义的该变量在其他位置的引用均不跟着一起变化

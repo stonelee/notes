@@ -71,7 +71,7 @@
 <li><a class="reference internal" href="#id9">3.使用</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#ack-vimjslint-vim">ack.vim与jslint.vim有冲突</a></li>
+<li><a class="reference internal" href="#id10">插件冲突与问题</a></li>
 </ul>
 </li>
 </ul>
@@ -279,9 +279,12 @@ $ git merge require/master</pre>
 </div>
 </div>
 </div>
-<div class="section" id="ack-vimjslint-vim">
-<h2>ack.vim与jslint.vim有冲突<a class="headerlink" href="#ack-vimjslint-vim" title="Permalink to this headline">¶</a></h2>
-<p>jslint会覆盖ack的所使用的quickfix窗口，需要:cnew来查看结果</p>
+<div class="section" id="id10">
+<h2>插件冲突与问题<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<p>1.ack.vim与jslint.vim有冲突。
+jslint会覆盖ack的所使用的quickfix窗口，需要:cnew来查看结果</p>
+<p>2. snip跟自动提示冲突。
+在预定义变量位置进行编辑时，如果出现自动提示，snip模板中定义的该变量在其他位置的引用均不跟着一起变化</p>
 </div>
 </div>
 

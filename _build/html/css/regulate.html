@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>css顺序 &mdash; stonelee&#39;s notes 0 documentation</title>
+    <title>css规范 &mdash; stonelee&#39;s notes 0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -57,6 +57,15 @@
 
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">css规范</a><ul>
+<li><a class="reference internal" href="#id1">顺序</a></li>
+<li><a class="reference internal" href="#hacks">Hacks</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="html.html"
                         title="previous chapter">html</a></p>
@@ -65,7 +74,7 @@
                         title="next chapter">linux</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/css/order.txt"
+    <li><a href="../_sources/css/regulate.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -90,7 +99,9 @@
           <div class="body">
             
   <div class="section" id="css">
-<span id="order"></span><h1>css顺序<a class="headerlink" href="#css" title="Permalink to this headline">¶</a></h1>
+<span id="regulate"></span><h1>css规范<a class="headerlink" href="#css" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>顺序<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Mozilla method:</p>
 <div class="highlight-python"><pre>display
 visibility
@@ -140,6 +151,28 @@ cursor
 
 content
 quotes</pre>
+</div>
+</div>
+<div class="section" id="hacks">
+<h2>Hacks<a class="headerlink" href="#hacks" title="Permalink to this headline">¶</a></h2>
+<p>来自豆瓣css规范： <a class="reference external" href="https://github.com/kejun/CSS-Code-Guideline">https://github.com/kejun/CSS-Code-Guideline</a></p>
+<div class="highlight-python"><pre>区别属性：
+
+IE6   _property:value
+IE6/7 *property:value
+IE6/7/8/9     property:value\9
+非IE6  property//:value
+
+区别规则：
+
+IE6   * html selector { … }
+IE7   *:first-child+html selector { … }
+非IE6  html&gt;body selector { … }
+firefox only  @-moz-document url-prefix() { … }
+saf3+/chrome1+        @media all and (-webkit-min-device-pixel-ratio:0) { … }
+opera only    @media all and (-webkit-min-device-pixel-ratio:10000),not all and (-webkit-min-device-pixel-ratio:0) { … }
+iPhone/mobile webkit  @media screen and (max-device-width: 480px) { … }</pre>
+</div>
 </div>
 </div>
 
