@@ -180,19 +180,18 @@ ignore = /path/to/repo/.hg/hgignore</pre>
 </div>
 <div class="section" id="bitbucket">
 <h3>bitbucket<a class="headerlink" href="#bitbucket" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic">
-<li><p class="first">将~/.ssh/id_rsa.pub添加到网站SSH keys中</p>
-</li>
-<li><p class="first">修改.hg/hgrc文件:</p>
-<div class="highlight-python"><pre>[paths]
-bitbucket = https://istonelee@bitbucket.org/hsialee/ciis
-
-[hostfingerprints]
-bitbucket.org = 24:9c:45:8b:9c:aa:ba:55:4e:01:6d:58:ff:e4:28:7d:2a:14:ae:3b</pre>
-</div>
-</li>
-<li><p class="first">TortorseHg中View-Synchronize，选择相应的url进行操作</p>
-</li>
+<ol class="arabic simple">
+<li>将~/.ssh/id_rsa.pub添加到网站SSH keys中</li>
+<li>修改.hg/hgrc文件:</li>
+</ol>
+<blockquote>
+<div><p>[paths]
+bitbucket = <a class="reference external" href="https://istonelee&#64;bitbucket.org/hsialee/ciis">https://istonelee&#64;bitbucket.org/hsialee/ciis</a></p>
+<p>[hostfingerprints]
+bitbucket.org = 24:9c:45:8b:9c:aa:ba:55:4e:01:6d:58:ff:e4:28:7d:2a:14:ae:3b</p>
+</div></blockquote>
+<ol class="arabic simple">
+<li>TortorseHg中View-Synchronize，选择相应的url进行操作</li>
 </ol>
 </div>
 </div>

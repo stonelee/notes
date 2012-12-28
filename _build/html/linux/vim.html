@@ -60,18 +60,17 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">vim</a><ul>
-<li><a class="reference internal" href="#id2">跳转</a></li>
-<li><a class="reference internal" href="#id3">查找</a></li>
-<li><a class="reference internal" href="#id4">记录</a></li>
-<li><a class="reference internal" href="#id5">分割窗口</a></li>
-<li><a class="reference internal" href="#id6">编译vim</a></li>
+<li><a class="reference internal" href="#id2">查找</a></li>
+<li><a class="reference internal" href="#id3">记录</a></li>
+<li><a class="reference internal" href="#id4">分割窗口</a></li>
+<li><a class="reference internal" href="#id5">编译vim</a></li>
 <li><a class="reference internal" href="#js-taglist">js taglist</a><ul>
-<li><a class="reference internal" href="#id7">1.生成代码分析</a></li>
-<li><a class="reference internal" href="#id8">2.安装vim插件</a></li>
-<li><a class="reference internal" href="#id9">3.使用</a></li>
+<li><a class="reference internal" href="#id6">1.生成代码分析</a></li>
+<li><a class="reference internal" href="#id7">2.安装vim插件</a></li>
+<li><a class="reference internal" href="#id8">3.使用</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id10">插件冲突与问题</a></li>
+<li><a class="reference internal" href="#id9">插件冲突与问题</a></li>
 </ul>
 </li>
 </ul>
@@ -128,73 +127,36 @@
 <p>删除空白行:</p>
 <div class="highlight-python"><pre>:g/^\s*$/d</pre>
 </div>
+<p>跳转</p>
+<div class="highlight-python"><pre>e   下一个单词末
+w   下一个单词开始
+b   上一个单词开始
+
+%   括号跳转
+
+ma    标识本文件缓冲区位置a
+'a    跳到本文件位置a
+mA    标识全局缓冲区位置A
+'A    跳到其他文件位置A
+''    跳回上一个位置
+
+ctrl-o  跳回
+ctrl-i  跳到
+ctrl-]  帮助文件中跳入
+ctrl-t  跳回</pre>
+</div>
 <div class="section" id="id2">
-<h2>跳转<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="81%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">命令</th>
-<th class="head">功能</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>e</td>
-<td>下一个单词末</td>
-</tr>
-<tr class="row-odd"><td>w</td>
-<td>下一个单词开始</td>
-</tr>
-<tr class="row-even"><td>b</td>
-<td>上一个单词开始</td>
-</tr>
-<tr class="row-odd"><td>%</td>
-<td>括号跳转</td>
-</tr>
-<tr class="row-even"><td>ma</td>
-<td>标识本文件缓冲区位置a</td>
-</tr>
-<tr class="row-odd"><td>&#8216;a</td>
-<td>跳到本文件位置a</td>
-</tr>
-<tr class="row-even"><td>mA</td>
-<td>标识全局缓冲区位置A</td>
-</tr>
-<tr class="row-odd"><td>&#8216;A</td>
-<td>跳到其他文件位置A</td>
-</tr>
-<tr class="row-even"><td>&#8216;&#8217;</td>
-<td>跳回上一个位置</td>
-</tr>
-<tr class="row-odd"><td>ctrl-o</td>
-<td>跳回</td>
-</tr>
-<tr class="row-even"><td>ctrl-i</td>
-<td>跳到</td>
-</tr>
-<tr class="row-odd"><td>ctrl-]</td>
-<td>帮助文件中跳入</td>
-</tr>
-<tr class="row-even"><td>ctrl-t</td>
-<td>跳回</td>
-</tr>
-</tbody>
-</table>
+<h2>查找<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>查找  \正则
+强制只搜索小写word  /\Cword
+找到后光标偏移到下面两行的行首  /word/2
+光标偏移到匹配末尾  /word/e
+光标偏移到匹配末尾+1  /word/e+1
+光标偏移到匹配首+1  /word/b+1</pre>
+</div>
 </div>
 <div class="section" id="id3">
-<h2>查找<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><pre>查找      \正则
-强制只搜索小写word     /\Cword
-找到后光标偏移到下面两行的行首 /word/2
-光标偏移到匹配末尾       /word/e
-光标偏移到匹配末尾+1     /word/e+1
-光标偏移到匹配首+1      /word/b+1</pre>
-</div>
-</div>
-<div class="section" id="id4">
-<h2>记录<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>记录<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>qx -&gt; 开始键盘记录（在x缓存中）。（在正常状态）</li>
 <li>要记录的“工作”</li>
@@ -202,8 +164,8 @@
 </ol>
 <p>&#64;x 使用record</p>
 </div>
-<div class="section" id="id5">
-<h2>分割窗口<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>分割窗口<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>尽可能扩展窗口:</p>
 <div class="highlight-python"><pre>CTRL-W _</pre>
 </div>
@@ -229,8 +191,8 @@
 <div class="highlight-python"><pre>[c</pre>
 </div>
 </div>
-<div class="section" id="id6">
-<h2>编译vim<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h2>编译vim<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><pre>yum install ncurses-devel
 yum install python-devel
 yum install libgnome-devel
@@ -249,8 +211,8 @@ cp /usr/bin/gvim /usr/bin/vim</pre>
 <div class="section" id="js-taglist">
 <h2>js taglist<a class="headerlink" href="#js-taglist" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://discontinuously.com/2011/03/vim-support-javascript-taglist-plus/">http://discontinuously.com/2011/03/vim-support-javascript-taglist-plus/</a></p>
-<div class="section" id="id7">
-<h3>1.生成代码分析<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>1.生成代码分析<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>jsctags: <a class="reference external" href="https://github.com/mozilla/doctorjs">https://github.com/mozilla/doctorjs</a></p>
 <p>clone子模块:</p>
 <div class="highlight-python"><pre>$ git clone --recursive https://github.com/mozilla/doctorjs.git
@@ -269,18 +231,18 @@ $ git merge require/master</pre>
 <div class="highlight-python"><pre>$ source ~/.profile</pre>
 </div>
 </div>
-<div class="section" id="id8">
-<h3>2.安装vim插件<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>2.安装vim插件<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://github.com/int3/vim-taglist-plus">https://github.com/int3/vim-taglist-plus</a></p>
 </div>
-<div class="section" id="id9">
-<h3>3.使用<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h3>3.使用<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><pre>:TlistToggle</pre>
 </div>
 </div>
 </div>
-<div class="section" id="id10">
-<h2>插件冲突与问题<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id9">
+<h2>插件冲突与问题<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <p>1.ack.vim与jslint.vim有冲突。
 jslint会覆盖ack的所使用的quickfix窗口，需要:cnew来查看结果</p>
 <p>2. snip跟自动提示冲突。

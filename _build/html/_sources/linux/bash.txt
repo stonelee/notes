@@ -4,6 +4,12 @@
 ***************
 bash
 ***************
+::
+
+  echo '$var' #原样输出
+  echo “$var” #解释后输出
+
+  printf  格式化输出
 
 将文件夹内所有js文件打包成all.js::
 
@@ -15,31 +21,31 @@ bash
 
 取文件名::
 
-	$basename /etc/passwd => passwd
+  $basename /etc/passwd => passwd
 
 取文件路径::
 
-	$dirname /etc/passwd => /etc
+  $dirname /etc/passwd => /etc
 
 循环遍历文件夹里的文件::
 
-	#!/bin/bash
+  #!/bin/bash
 
-	allFiles() {
-		for file in $1/*
-		do
-			if [ -d $file ]; then
-				allFiles $file
-			else
-				echo $file
-			fi
-		done
-	}
+  allFiles() {
+    for file in $1/*
+    do
+      if [ -d $file ]; then
+        allFiles $file
+      else
+        echo $file
+      fi
+    done
+  }
 
-	testdir=/path/to/test/dir
-	allFiles $testdir
+  testdir=/path/to/test/dir
+  allFiles $testdir
 
 删除最后一个字符::
 
-	files=${files%?}
+  files=${files%?}
 

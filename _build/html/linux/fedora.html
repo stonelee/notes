@@ -28,7 +28,7 @@
     <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
     <link rel="up" title="linux" href="index.html" />
     <link rel="next" title="版本控制" href="git.html" />
-    <link rel="prev" title="bash" href="bash.html" /> 
+    <link rel="prev" title="CentOS" href="centos.html" /> 
   </head>
   <body>
 
@@ -46,7 +46,7 @@
           <a href="git.html" title="版本控制"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="bash.html" title="bash"
+          <a href="centos.html" title="CentOS"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">home</a>|&nbsp;</li>
         <li><a href="../search.html">search</a>|&nbsp;</li>
@@ -60,27 +60,21 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">fedora</a><ul>
-<li><a class="reference internal" href="#id2">安装</a><ul>
+<li><a class="reference internal" href="#id2">安装</a></li>
 <li><a class="reference internal" href="#virtualbox">安装virtualbox</a></li>
 <li><a class="reference internal" href="#php">配置php环境</a></li>
 <li><a class="reference internal" href="#rootnginx">非root权限安装nginx</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id3">技巧</a><ul>
-<li><a class="reference internal" href="#id4">fedora启动失败</a></li>
 <li><a class="reference internal" href="#fedora-10sudo">Fedora 10里将普通用户添加到sudo组</a></li>
-<li><a class="reference internal" href="#id5">fedora启动时显示启动信息</a></li>
+<li><a class="reference internal" href="#id3">fedora启动失败</a></li>
+<li><a class="reference internal" href="#id4">fedora启动时显示启动信息</a></li>
 <li><a class="reference internal" href="#ibus-pinyin">给ibus-pinyin加上搜狗细胞词库</a></li>
-<li><a class="reference internal" href="#id6">关闭防火墙</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="bash.html"
-                        title="previous chapter">bash</a></p>
+  <p class="topless"><a href="centos.html"
+                        title="previous chapter">CentOS</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="git.html"
                         title="next chapter">版本控制</a></p>
@@ -179,20 +173,21 @@ npm install -g express
 编译安装node 0.6.11
 要安装openssl-devel</pre>
 </div>
+</div>
 <div class="section" id="virtualbox">
-<h3>安装virtualbox<a class="headerlink" href="#virtualbox" title="Permalink to this headline">¶</a></h3>
+<h2>安装virtualbox<a class="headerlink" href="#virtualbox" title="Permalink to this headline">¶</a></h2>
 <p>yum install kernel-devel</p>
 <p>安装dkms使得内核变动后自动编译</p>
 <p>重新编译内核：/etc/init.d/vboxdrv setup</p>
 <p>虚拟机中的Gateway即为主机的ip，可以直接访问</p>
 </div>
 <div class="section" id="php">
-<h3>配置php环境<a class="headerlink" href="#php" title="Permalink to this headline">¶</a></h3>
+<h2>配置php环境<a class="headerlink" href="#php" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><pre>yum install php</pre>
 </div>
 <p>在/var/www/html中创建测试文件info.php:</p>
 <div class="highlight-python"><pre>&lt;?php
-        phpinfo();
+  phpinfo();
 ?&gt;</pre>
 </div>
 <p>可以看到测试页面。</p>
@@ -203,7 +198,7 @@ npm install -g express
 </div>
 </div>
 <div class="section" id="rootnginx">
-<h3>非root权限安装nginx<a class="headerlink" href="#rootnginx" title="Permalink to this headline">¶</a></h3>
+<h2>非root权限安装nginx<a class="headerlink" href="#rootnginx" title="Permalink to this headline">¶</a></h2>
 <p>编译安装:</p>
 <div class="highlight-python"><pre>./configure --prefix=/home/vboxadmin/lxd/bin/nginx  --without-http_rewrite_module --without-http_gzip_module
 make
@@ -213,22 +208,8 @@ make install</pre>
 <p>运行 sbin/nginx</p>
 <p>停止 sbin/nginx -s stop</p>
 </div>
-</div>
-<div class="section" id="id3">
-<h2>技巧<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id4">
-<h3>fedora启动失败<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<p>启动fedora，提示:</p>
-<div class="highlight-python"><pre>Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)</pre>
-</div>
-<p>更换其他内核可以进入</p>
-<p>查看/bin/grub2/grub.cfg, 发现最新内核下少了initrd/boot/initramfs-*.img</p>
-<p>重新生成img:</p>
-<div class="highlight-python"><pre>$ yum reinstall kernel</pre>
-</div>
-</div>
 <div class="section" id="fedora-10sudo">
-<h3>Fedora 10里将普通用户添加到sudo组<a class="headerlink" href="#fedora-10sudo" title="Permalink to this headline">¶</a></h3>
+<h2>Fedora 10里将普通用户添加到sudo组<a class="headerlink" href="#fedora-10sudo" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>在终端输入su -</li>
 <li>输入密码， 这样就切换到root了</li>
@@ -240,8 +221,19 @@ make install</pre>
 </ol>
 <p>如果一切正常，命令会返回 “root” 这个字。</p>
 </div>
-<div class="section" id="id5">
-<h3>fedora启动时显示启动信息<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h2>fedora启动失败<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>启动fedora，提示:</p>
+<div class="highlight-python"><pre>Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)</pre>
+</div>
+<p>更换其他内核可以进入</p>
+<p>查看/bin/grub2/grub.cfg, 发现最新内核下少了initrd/boot/initramfs-*.img</p>
+<p>重新生成img:</p>
+<div class="highlight-python"><pre>$ yum reinstall kernel</pre>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>fedora启动时显示启动信息<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>编辑/etc/default/grub， 去掉GRUB_CMDLINE_LINUX中quiet和rhgb</li>
 <li>/sbin/grub2-mkconfig -o /boot/grub2/grub.cfg</li>
@@ -249,20 +241,11 @@ make install</pre>
 </ol>
 </div>
 <div class="section" id="ibus-pinyin">
-<h3>给ibus-pinyin加上搜狗细胞词库<a class="headerlink" href="#ibus-pinyin" title="Permalink to this headline">¶</a></h3>
+<h2>给ibus-pinyin加上搜狗细胞词库<a class="headerlink" href="#ibus-pinyin" title="Permalink to this headline">¶</a></h2>
 <p>下载:<a class="reference external" href="https://code.google.com/p/hslinuxextra/downloads/detail?name=sougou-phrases-full.7z&amp;can=2&amp;q=">https://code.google.com/p/hslinuxextra/downloads/detail?name=sougou-phrases-full.7z&amp;can=2&amp;q=</a></p>
 <p>解压后android.db文件就是ibus-pinyin的词库</p>
 <p>打开/usr/share/ibus-pinyin/db，将android.db改名覆盖</p>
 <p>重启ibus激活</p>
-</div>
-<div class="section" id="id6">
-<h3>关闭防火墙<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>/etc/init.d/iptables stop</pre>
-</div>
-<p>修改配置:</p>
-<div class="highlight-python"><pre>/etc/sysconfig/iptables</pre>
-</div>
-</div>
 </div>
 </div>
 
@@ -282,7 +265,7 @@ make install</pre>
           <a href="git.html" title="版本控制"
              >next</a> |</li>
         <li class="right" >
-          <a href="bash.html" title="bash"
+          <a href="centos.html" title="CentOS"
              >previous</a> |</li>
         <li><a href="../index.html">home</a>|&nbsp;</li>
         <li><a href="../search.html">search</a>|&nbsp;</li>

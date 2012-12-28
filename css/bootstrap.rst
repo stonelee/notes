@@ -52,7 +52,7 @@ btn心跳闪烁::
        -moz-animation-duration: 1.5s;
     -webkit-animation-iteration-count: infinite;
        -moz-animation-iteration-count: infinite;
-  }      
+  }
 
 * fluid grid(.row-fluid)在屏幕大于960px时会继续扩大，而fixed grid(.row)不会改变
 * responsive会根据media query在某宽度时更改大小，在屏幕很小时从float改为stack

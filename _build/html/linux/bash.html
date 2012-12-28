@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
     <link rel="up" title="linux" href="index.html" />
-    <link rel="next" title="fedora" href="fedora.html" />
+    <link rel="next" title="CentOS" href="centos.html" />
     <link rel="prev" title="linux" href="index.html" /> 
   </head>
   <body>
@@ -43,7 +43,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="fedora.html" title="fedora"
+          <a href="centos.html" title="CentOS"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="linux"
@@ -61,8 +61,8 @@
   <p class="topless"><a href="index.html"
                         title="previous chapter">linux</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="fedora.html"
-                        title="next chapter">fedora</a></p>
+  <p class="topless"><a href="centos.html"
+                        title="next chapter">CentOS</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/linux/bash.txt"
@@ -91,6 +91,11 @@
             
   <div class="section" id="bash">
 <span id="id1"></span><h1>bash<a class="headerlink" href="#bash" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><pre>echo '$var' #原样输出
+echo “$var” #解释后输出
+
+printf  格式化输出</pre>
+</div>
 <p>将文件夹内所有js文件打包成all.js:</p>
 <div class="highlight-python"><pre>$ find . -type f -name "*.js" -exec cat {} \; &gt; all.js</pre>
 </div>
@@ -107,14 +112,14 @@
 <div class="highlight-python"><pre>#!/bin/bash
 
 allFiles() {
-        for file in $1/*
-        do
-                if [ -d $file ]; then
-                        allFiles $file
-                else
-                        echo $file
-                fi
-        done
+  for file in $1/*
+  do
+    if [ -d $file ]; then
+      allFiles $file
+    else
+      echo $file
+    fi
+  done
 }
 
 testdir=/path/to/test/dir
@@ -138,7 +143,7 @@ allFiles $testdir</pre>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="fedora.html" title="fedora"
+          <a href="centos.html" title="CentOS"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="linux"

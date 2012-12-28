@@ -60,19 +60,27 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">css</a><ul>
+<li><a class="reference internal" href="#id2">默认元素</a></li>
+<li><a class="reference internal" href="#float-vs-position">float vs position</a><ul>
 <li><a class="reference internal" href="#position">position</a></li>
-<li><a class="reference internal" href="#float-vs-position">float vs position</a></li>
-<li><a class="reference internal" href="#block-formatting-context">block formatting context</a></li>
-<li><a class="reference internal" href="#haslayoutbfc">hasLayout和BFC</a></li>
-<li><a class="reference internal" href="#id2">字体</a></li>
-<li><a class="reference internal" href="#id3">渐进增强与平稳退化</a><ul>
-<li><a class="reference internal" href="#id4">渐进增强实例</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#haslayoutbfc">hasLayout和BFC</a><ul>
+<li><a class="reference internal" href="#bfc">BFC</a></li>
+<li><a class="reference internal" href="#haslayout">hasLayout</a></li>
+<li><a class="reference internal" href="#id3">两者的相同点</a></li>
+<li><a class="reference internal" href="#id4">两者的不同点</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">字体</a></li>
+<li><a class="reference internal" href="#id6">渐进增强与平稳退化</a><ul>
+<li><a class="reference internal" href="#id7">渐进增强实例</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#css3">CSS3</a></li>
 <li><a class="reference internal" href="#less">less</a></li>
 <li><a class="reference internal" href="#jqueryui">jqueryui</a></li>
-<li><a class="reference internal" href="#id5">浏览器预设样式</a><ul>
+<li><a class="reference internal" href="#id8">浏览器预设样式</a><ul>
 <li><a class="reference internal" href="#chrome">chrome</a></li>
 </ul>
 </li>
@@ -117,13 +125,13 @@
 <p>缩进2字符:</p>
 <div class="highlight-python"><pre>text-indent: 2em;</pre>
 </div>
-<p>左中定宽，右自适应方法：左中float:left，右margin-left</p>
-<p>貌似可以取代float:</p>
-<div class="highlight-python"><pre>display: inline-block;
-*display: inline;
-*zoom: 1;</pre>
+<p>使用很大的line-height实现文字隐藏:</p>
+<div class="highlight-python"><pre>line-height: 100px;</pre>
 </div>
-<p>position:absolute中的width，height是相对父relative来定义的</p>
+<p>设置最大高度，超过则出现滚动条:</p>
+<div class="highlight-python"><pre>max-height: 80px;
+overflow: auto;</pre>
+</div>
 <p>em 强调</p>
 <ul class="simple">
 <li>a&gt;img</li>
@@ -131,67 +139,223 @@
 <li>h4&gt;a</li>
 </ul>
 <p>image调整垂直位置:vertical-align</p>
-<div class="section" id="position">
-<h2>position<a class="headerlink" href="#position" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>static        在正常流中，忽略left等</li>
-<li>relative      相对于正常位置定位</li>
-<li>absolute      相对于static之外的第一个父元素定位</li>
-</ul>
+<div class="section" id="id2">
+<h2>默认元素<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>block:</p>
+<div class="highlight-python"><pre>div
+p
+h1 h2 h3 h4 h5 h6
+
+table
+fieldset
+form
+ul - 非排序列表
+ol - 排序表单
+dl - 定义列表
+
+blockquote - 块引用
+hr - 水平分隔线
+address - 地址
+pre - 格式化文本</pre>
+</div>
+<p>inline:</p>
+<div class="highlight-python"><pre>a
+span - 常用内联容器，定义文本内区块
+em - 强调
+i - 斜体
+br - 换行
+
+img - 图片
+input - 输入框
+textarea - 多行文本输入框
+label - 表格标签
+
+sub - 下标
+sup - 上标
+big - 大字体
+small - 小字体文本
+strong - 粗体强调
+abbr - 缩写
+acronym - 首字
+cite - 引用
+code - 计算机代码(在引用源码的时候需要)
+dfn - 定义字段</pre>
+</div>
 </div>
 <div class="section" id="float-vs-position">
 <h2>float vs position<a class="headerlink" href="#float-vs-position" title="Permalink to this headline">¶</a></h2>
+<p>脱离文档流的方法:</p>
+<div class="highlight-python"><pre>float:left/right
+postion:absolute/fixed</pre>
+</div>
 <p>从性能上看，将元素的position设置为absolute和fixed可以使元素从DOM树结构中脱离出来独立的存在，
 而浏览器在需要渲染时只需要渲染该元素以及位于该元素下方的元素，从而在某种程度上缩短浏览器渲染时间。
 所以如果是制作js动画等，用absolute或者fixed定位会更好。</p>
 <p>不推荐用position来布局整个页面的大框架，而推荐用float或者文档流的默认方式。</p>
+<p>取代float方式布局:</p>
+<div class="highlight-python"><pre>display: inline-block;
+*display: inline;
+*zoom: 1;</pre>
 </div>
-<div class="section" id="block-formatting-context">
-<h2>block formatting context<a class="headerlink" href="#block-formatting-context" title="Permalink to this headline">¶</a></h2>
-<p>产生条件：</p>
+<div class="section" id="position">
+<h3>position<a class="headerlink" href="#position" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>float not &#8216;none&#8217;: left, right</li>
-<li>overflow not &#8216;visible&#8217;: hidden, scroll, auto</li>
-<li>display: &#8216;table-cell&#8217;, &#8216;table-caption&#8217;, or &#8216;inline-block&#8217;</li>
-<li>position:absolute, fixed</li>
+<li>static  在正常流中，忽略left等</li>
+<li>relative  相对于正常位置定位</li>
+<li>absolute  相对于static之外的第一个父元素定位</li>
 </ul>
-<p>位于normal flow</p>
-<p>效果：</p>
-<ol class="arabic">
-<li><p class="first">prevent margin collapsing</p>
-<blockquote>
-<div><p>位于相同block formatting context中的相邻block boxes会对vertical margins折叠</p>
-<p>消除方法:</p>
-<div class="highlight-python"><pre>overflow:hidden;zoom:1</pre>
+<p>position:absolute中的width，height是相对父relative来定义的</p>
 </div>
-<p>或者设置 border or padding</p>
-</div></blockquote>
-</li>
-<li><p class="first">Block formatting contexts contain floats</p>
-</li>
-</ol>
 </div>
 <div class="section" id="haslayoutbfc">
 <h2>hasLayout和BFC<a class="headerlink" href="#haslayoutbfc" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>block formatting context  块级元素格式上下文</li>
+<li>hasLayout                 IE5.5/6/7上一些奇怪的bug根源</li>
+</ul>
+<p>最常用:</p>
+<div class="highlight-python"><pre>overflow:hidden //触发BFC
+*zoom:1         //IE6中触发hasLayout</pre>
+</div>
 <p>因为CSS的模型和术语脱胎于传统排版，故而与计算机GUI技术通常基于组件的模型相差甚远。
 除了float之外，另一个例子是CSS中上下margin的collapse，显然这是为了满足段落排版的需求。
 所以像float、margin collapse等，在典型的GUI技术中是没有的。
-还有，CSS box model中，width/height不算入padding和border，许多开发者对这点很不适应，这实际上是GUI的控件思维与CSS排版思维的冲突。
+还有，CSS box model中，width/height不算入padding和border，这实际上是GUI的控件思维与CSS排版思维的冲突。
 这个冲突在浏览器技术实现上的遗迹就是IE臭名昭著的“hasLayout”。
 元素“has layout”的真实意思是这样的元素直接对应一个控件。
 也正是由于IE很naive的在实现中直接结合了这两种矛盾的模型，从而导致了无数的布局bug。</p>
-<p>block formatting context        块级元素格式上下文
-hasLayout                       IE5.5/6/7上一些奇怪的bug</p>
-<div class="highlight-python"><pre>overflow:hidden       触发BFC
-*zoom:1                       触发hasLayout</pre>
+<div class="section" id="bfc">
+<h3>BFC<a class="headerlink" href="#bfc" title="Permalink to this headline">¶</a></h3>
+<p>CSS 101: Block Formatting Contexts: <a class="reference external" href="http://www.yuiblog.com/blog/2010/05/19/css-101-block-formatting-contexts">http://www.yuiblog.com/blog/2010/05/19/css-101-block-formatting-contexts</a></p>
+<p>产生条件：</p>
+<ul class="simple">
+<li>float不为none，可以为&#8217;left&#8217;, &#8216;right&#8217;</li>
+<li>overflow不为visible，可以为&#8217;hidden&#8217;, &#8216;scroll&#8217;, &#8216;auto&#8217;</li>
+<li>display为 &#8216;table-cell&#8217;, &#8216;table-caption&#8217;, &#8216;inline-block&#8217;</li>
+<li>position为&#8217;absolute&#8217;, &#8216;fixed&#8217;</li>
+</ul>
+<p>效果：</p>
+<ol class="arabic simple">
+<li>清浮动环绕</li>
+<li>清内部浮动影响</li>
+<li>清嵌套margin折叠</li>
+</ol>
+<p>位于相同BFC中的相邻block boxes会对vertical margins折叠.
+消除方法:</p>
+<div class="highlight-python"><pre>overflow:hidden;*zoom:1</pre>
 </div>
-<p>设置float         触发BFC</p>
-<p>IE中跟尺寸有关的bug往往可以通过layout设置width或者height来解决</p>
-<p>zoom: 1 //IE特有属性来激发layout</p>
+<p>或者设置 border or padding</p>
+</div>
+<div class="section" id="haslayout">
+<h3>hasLayout<a class="headerlink" href="#haslayout" title="Permalink to this headline">¶</a></h3>
+<p>更加直观地了解hasLayout和BFC: <a class="reference external" href="http://www.w3ctech.com/p/1101">http://www.w3ctech.com/p/1101</a>
+On having layout: <a class="reference external" href="http://www.satzansatz.de/cssd/onhavinglayout.html">http://www.satzansatz.de/cssd/onhavinglayout.html</a></p>
+<p>默认拥有layout的元素:</p>
+<div class="highlight-python"><pre>&lt;html&gt;, &lt;body&gt;
+&lt;table&gt;, &lt;tr&gt;, &lt;th&gt;, &lt;td&gt;
+&lt;img&gt;
+&lt;hr&gt;
+&lt;input&gt;, &lt;button&gt;, &lt;select&gt;, &lt;textarea&gt;, &lt;fieldset&gt;, &lt;legend&gt;
+&lt;iframe&gt;, &lt;embed&gt;, &lt;object&gt;, &lt;applet&gt;
+&lt;marquee&gt;</pre>
+</div>
+<p>属性触发:</p>
+<div class="highlight-python"><pre>position: absolute
+float: left|right
+display: inline-block
+width: any value other than 'auto'
+height: any value other than 'auto'
+zoom: any value other than 'normal' （非标准，推荐使用）
+writing-mode: tb-rl
+
+#IE7可以使用
+overflow: hidden|scroll|auto
+overflow-x|-y: hidden|scroll|auto
+position: fixed
+min-width: any value
+max-width: any value other than 'none'
+min-height: any value
+max-height: any value other than 'none'</pre>
+</div>
+<p>IE6 hack:</p>
+<div class="highlight-python"><pre>#Holly hack
+/* \*/
+* html .gainlayout { height: 1%; }
+/* */
+
+#underscore hack:
+.gainlayout { _height: 0; }</pre>
+</div>
 <p>layout元素设置display: inline 相当于通常意义上的inline-block</p>
 </div>
-<div class="section" id="id2">
-<h2>字体<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>两者的相同点<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>1.清浮动环绕</p>
+<p>左右定宽，中间自适应:</p>
+<div class="highlight-python"><pre>左float:left, 右float:right, 中间overflow:hidden来BFC</pre>
+</div>
+<p>当然也可以不用:</p>
+<div class="highlight-python"><pre>//左中定宽，右自适应
+左中float:left，右margin-left</pre>
+</div>
+<p>左图右文，文字不环绕图:</p>
+<div class="highlight-python"><pre>左float:left, 右BFC</pre>
+</div>
+<ol class="arabic simple" start="2">
+<li>清内部浮动影响</li>
+</ol>
+<p>父元素中设置，避免内部元素的float影响外面的元素:</p>
+<div class="highlight-python"><pre>.outer{
+    overflow:hidden;
+    *zoom:1;
+}</pre>
+</div>
+<p>当然也可以不用BFC:</p>
+<div class="highlight-python"><pre>.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
+.clearfix {
+  *height: 1%;//IE6，7
+}</pre>
+</div>
+<ol class="arabic simple" start="3">
+<li>清嵌套margin折叠</li>
+</ol>
+<p>父元素设置，使得嵌套元素的margin都能够奏效，
+如果不设置的话会将嵌套元素边距折叠为最大的:</p>
+<div class="highlight-python"><pre>.div1{
+  overflow:hidden;
+  *zoom:1;
+
+  margin:20px;
+  background:yellow;
+}
+.div2{
+  width:50px;
+  height:50px;
+
+  margin:50px;
+  background:red;
+}</pre>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>两者的不同点<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>1.触发haslayout的元素是可以设置宽高的，而触发BFC的元素不一定可以设置宽高
+比如一个行内元素，设置float或者设置overflow都可以触发BFC，但是前者可以设置宽高，后者却不能</p>
+<p>2.hasLayout的元素设置display:inline后与inline-block行为类似,
+用来解决IE6/7下inline-block问题:</p>
+<div class="highlight-python"><pre>display:inline-block;
+*display:inline;
+*zoom:1;</pre>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>字体<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>字体分为三类（generic family）：Serif、Sans-serif、Monospace</p>
 <p>Serif对某些字符笔画末端加了些小短线做装饰</p>
 <p>在计算机屏幕上Sans-serif比Serif更易读</p>
@@ -202,22 +366,24 @@ hasLayout                       IE5.5/6/7上一些奇怪的bug</p>
 <div class="highlight-python"><pre>font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;</pre>
 </div>
 </div>
-<div class="section" id="id3">
-<h2>渐进增强与平稳退化<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>渐进增强与平稳退化<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>平稳退化 (Graceful Degradation)于1994 年提出，由于其并不真正互联网符合普及的可访问型 Web (Universally Accessible Web)”的设计初衷。2003 年提出渐进增强 (Progressive Enhancement)，聚焦于内容并能为旧设备提供更多实际支持，从而改善内容可利用性 (Content Availability)、全局可访问性 (Overall Accessibility) 和移动设备浏览器的能力。</p>
 <p>它们是看待同种事物的两种观点，都关注于同一网站在不同设备里不同浏览器下的表现程度。关键的区别则在于它们各自关注于何处，以及这种关注如何影响工作的流程。</p>
 <p>&#8220;平稳退化”观点认为应该针对那些最高级、最完善的浏览器来设计网站。而将那些被认为“过时”或有功能缺失的浏览器下的测试工作安排在开发周期的最后阶段，并把测试对象限定为主流浏览器（如 IE、Mozilla 等）的前一个版本。在这种设计范例下，旧版的浏览器被认为仅能提供“简陋却无妨 (poor, but passable)” 的浏览体验。你可以做一些小的调整来适应某个特定的浏览器。但由于它们并非我们所关注的焦点，因此除了修复较大的错误之外，其它的差异将被直接忽略。</p>
 <p>“渐进增强”观点则认为应关注于内容本身.即从内容出发。内容为样式和交互构建起坚实的基础，由上至下分别为：“内容”、“表现”和“客户端脚本”。</p>
 <p>这种开发方式被称为“无侵入 (Unobtrusive)</p>
-<div class="section" id="id4">
-<h3>渐进增强实例<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>渐进增强实例<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>文字阴影：text-shadow: 1px 1px white;（右下白色阴影）</p>
 <p>圆角：border-radius: 3px; （按钮3px，文本框6px）</p>
 <p>盒阴影：box-shadow: 1px 2px 3px rgba(0, 0, 0, .5);（右下透明阴影）</p>
-<p>渐变背景: background:-moz-linear-gradient(top , #F2F2F2, #ffffff 8px);（按钮、标题栏、控件背景）</p>
+<p>渐变背景: background:-webkit-linear-gradient(top , #F2F2F2, #ffffff 8px);（按钮、标题栏、控件背景）</p>
 <p>CSS选择器、伪类：li:first-child{border-top:0;}（去掉第一个li的top border）</p>
 <p>input:focus {border-color:#a0b3d6;}（IE6、7不支持）</p>
 <p>text-overflow：ellipsis （文字溢出特定宽度“点点点”省略号表示）</p>
+<p>图片渐入: -webkit-transition: all 0.3s ease-out 0s;</p>
+<p>图片旋转: -webkit-transform: rotate(360deg);</p>
 </div>
 </div>
 <div class="section" id="css3">
@@ -269,8 +435,8 @@ theme 易变，特别指定
 <li>抽象架构，着眼于扩展</li>
 </ul>
 </div>
-<div class="section" id="id5">
-<h2>浏览器预设样式<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h2>浏览器预设样式<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="chrome">
 <h3>chrome<a class="headerlink" href="#chrome" title="Permalink to this headline">¶</a></h3>
 <p>button 有默认的margin:2px</p>

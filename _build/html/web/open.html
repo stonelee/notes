@@ -1,0 +1,207 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>开放平台 &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="网络应用" href="index.html" />
+    <link rel="next" title="web开发" href="web.html" />
+    <link rel="prev" title="octopress" href="octopress.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="web.html" title="web开发"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="octopress.html" title="octopress"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">网络应用</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">开放平台</a><ul>
+<li><a class="reference internal" href="#douban">douban</a><ul>
+<li><a class="reference internal" href="#id2">1.事先申请</a></li>
+<li><a class="reference internal" href="#authorization-code">2.获取authorization_code</a></li>
+<li><a class="reference internal" href="#access-token">3.获取access_token</a></li>
+<li><a class="reference internal" href="#api">4.调用其他API：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="octopress.html"
+                        title="previous chapter">octopress</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="web.html"
+                        title="next chapter">web开发</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/web/open.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="open">
+<span id="id1"></span><h1>开放平台<a class="headerlink" href="#open" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="douban">
+<h2>douban<a class="headerlink" href="#douban" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>1.事先申请<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>API Key</td>
+<td>097ee65eeca0a0331c7cb31cc5e1e099</td>
+</tr>
+<tr class="row-even"><td>Secret</td>
+<td>fcc8e706abfe1868</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="authorization-code">
+<h3>2.获取authorization_code<a class="headerlink" href="#authorization-code" title="Permalink to this headline">¶</a></h3>
+<p>get，参数为API key:</p>
+<div class="highlight-python"><pre>https://www.douban.com/service/auth2/auth?client_id=097ee65eeca0a0331c7cb31cc5e1e099&amp;redirect_uri=https://www.example.com/back&amp;response_type=code</pre>
+</div>
+<p>用户在豆瓣页面授权，然后跳转页面，url中返回authorization_code:</p>
+<div class="highlight-python"><pre>https://www.example.com/back?code=d899f459b09e3146</pre>
+</div>
+<p>code=&#8217;d899f459b09e3146&#8217;</p>
+</div>
+<div class="section" id="access-token">
+<h3>3.获取access_token<a class="headerlink" href="#access-token" title="Permalink to this headline">¶</a></h3>
+<p>post提交，参数为API Key，secret，authorization code:</p>
+<div class="highlight-python"><pre>tokenUrl='https://www.douban.com/service/auth2/token'
+$.post(tokenUrl,{
+  client_id: '097ee65eeca0a0331c7cb31cc5e1e099',
+  client_secret:'fcc8e706abfe1868',
+  redirect_uri:'https://www.example.com/back',
+  grant_type:'authorization_code',
+  code:code
+  },function(data){
+  console.log(data);
+});</pre>
+</div>
+<p>返回access_token:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;access_token&quot;</span><span class="p">:</span><span class="s">&quot;35caf4330baeb630a160dc99230c2290&quot;</span><span class="p">,</span><span class="s">&quot;douban_user_id&quot;</span><span class="p">:</span><span class="s">&quot;67590112&quot;</span><span class="p">,</span><span class="s">&quot;expires_in&quot;</span><span class="p">:</span><span class="mi">604800</span><span class="p">,</span><span class="s">&quot;refresh_token&quot;</span><span class="p">:</span><span class="s">&quot;78e6fdc92d43d9826ab4f95b87cb8c86&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="api">
+<h3>4.调用其他API：<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h3>
+<p>在header中添加Authorization:Bearer 35caf4330baeb630a160dc99230c2290，然后直接发请求:</p>
+<div class="highlight-python"><pre>curl "https://api.douban.com/v2/user/~me" -H "Authorization:Bearer 35caf4330baeb630a160dc99230c2290"
+curl "https://api.douban.com/v2/book/20383605/collection" -H "Authorization:Bearer 35caf4330baeb630a160dc99230c2290" -X POST -i -v</pre>
+</div>
+<p>或:</p>
+<div class="highlight-python"><pre>$.ajax({
+  type: 'GET',
+  url:'douban/api/user/~me',
+  headers: {
+    Authorization: 'Bearer 35caf4330baeb630a160dc99230c2290'
+  },
+  success:function(data){
+    console.log(data);
+  }
+});</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="web.html" title="web开发"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="octopress.html" title="octopress"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >网络应用</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

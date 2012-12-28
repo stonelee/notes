@@ -126,20 +126,17 @@
 <span id="id1"></span><h1>rails<a class="headerlink" href="#rails" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="ror">
 <h2>安装ROR环境<a class="headerlink" href="#ror" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p class="first">安装RVM:</p>
+<p>安装RVM:</p>
 <div class="highlight-python"><pre>$ curl -L get.rvm.io | bash -s stable
 $ source ~/.bash_profile
 
 $ rvm -v</pre>
 </div>
-</li>
-<li><p class="first">用 RVM 安装 Ruby 环境(Ruby, Ruby Gems):</p>
+<p>用 RVM 安装 Ruby 环境(Ruby, Ruby Gems):</p>
 <div class="highlight-python"><pre>$ rvm pkg install readline
 $ rvm install 1.9.2 --with-readline-dir=$rvm_path/usr</pre>
 </div>
-</li>
-<li><p class="first">设置 Ruby 版本:</p>
+<p>设置 Ruby 版本:</p>
 <div class="highlight-python"><pre>$ rvm 1.9.2 --default
 
 $ ruby -v
@@ -148,8 +145,7 @@ ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-darwin10.8.0]
 $ gem -v
 1.8.6</pre>
 </div>
-</li>
-<li><p class="first">或者创建gemset，来管理多个rails和gem:</p>
+<p>或者创建gemset，来管理多个rails和gem:</p>
 <div class="highlight-python"><pre>$ rvm use 1.9.3
 $ rvm gemset create rails313
 $ rvm use 1.9.3@rails313
@@ -158,13 +154,11 @@ $ rvm use 1.9.3@rails313
 $ rvm list
 $ rvm gemset list</pre>
 </div>
-</li>
-<li><p class="first">设置速度更快的taobao源:</p>
+<p>设置速度更快的taobao源:</p>
 <div class="highlight-python"><pre>$ gem source -r http://rubygems.org/
 $ gem source -a http://ruby.taobao.org</pre>
 </div>
-</li>
-<li><p class="first">安装Rails以及依赖管理工具Bundler:</p>
+<p>安装Rails以及依赖管理工具Bundler:</p>
 <div class="highlight-python"><pre>$ gem install bundler rails
 
 $ bundle -v
@@ -173,8 +167,6 @@ Bundler version 1.0
 $ rails -v
 Rails 3.2.1</pre>
 </div>
-</li>
-</ol>
 <div class="section" id="id2">
 <h3>自动加载环境<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>在项目目录中建立.rvmrc文件, 加入:</p>
@@ -310,18 +302,16 @@ rails g bootstrap:themed Posts</pre>
 <p>Port Forwarding中设置</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="11%" />
-<col width="18%" />
-<col width="18%" />
-<col width="18%" />
-<col width="18%" />
-<col width="18%" />
+<col width="6%" />
+<col width="13%" />
+<col width="33%" />
+<col width="14%" />
+<col width="33%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Name</th>
 <th class="head">Protocol</th>
-<th class="head">Host IP</th>
-<th class="head">Host Port</th>
+<th class="head">Host IP     Host Port</th>
 <th class="head">Guest IP</th>
 <th class="head">Guest Port</th>
 </tr>
@@ -329,8 +319,7 @@ rails g bootstrap:themed Posts</pre>
 <tbody valign="top">
 <tr class="row-even"><td>ssh</td>
 <td>TCP</td>
-<td>10.10.22.84</td>
-<td>2222</td>
+<td>10.10.22.84 2222</td>
 <td>10.0.2.15</td>
 <td>22</td>
 </tr>
@@ -381,14 +370,14 @@ NameVirtualHost *:80
 Listen 80
 
 &lt;VirtualHost *:80&gt;
-        ServerName depot.yourhost.com
-        DocumentRoot /home/stonelee/test/rails32/depot_v/public
-        &lt;Directory /home/stonelee/test/rails32/depot_v/public&gt;
-                AllowOverride all
-                Options -MultiViews
-                Order allow,deny
-                Allow from all
-        &lt;/Directory&gt;
+  ServerName depot.yourhost.com
+  DocumentRoot /home/stonelee/test/rails32/depot_v/public
+  &lt;Directory /home/stonelee/test/rails32/depot_v/public&gt;
+    AllowOverride all
+    Options -MultiViews
+    Order allow,deny
+    Allow from all
+  &lt;/Directory&gt;
 &lt;/VirtualHost&gt;</pre>
 </div>
 <p>/etc/hosts中设置域名:</p>
@@ -406,19 +395,19 @@ Listen 80
 <h3>生产数据库<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <p>Gemfile:</p>
 <div class="highlight-python"><pre>group :production do
-        gem 'mysql2'
+  gem 'mysql2'
 end</pre>
 </div>
 <p>config/database.yml:</p>
 <div class="highlight-python"><pre>production:
-        adapter: mysql2
-        encoding: utf8
-        reconnect: false
-        database: depot_production
-        pool: 5
-        username: username
-        password: password
-        host: localhost</pre>
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: depot_production
+  pool: 5
+  username: username
+  password: password
+  host: localhost</pre>
 </div>
 <div class="highlight-python"><pre>mysql -u root -p
 create database depot_production;</pre>

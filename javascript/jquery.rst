@@ -8,7 +8,7 @@ $.ajax()返回jqXHR，是XMLHTTPRequest的超集
 
 判断是否找到::
 
-	$('#id').length ? 'exist' : 'not'
+  $('#id').length ? 'exist' : 'not'
 
 jquery1.7.2中如果在setInterval中循环getJSON同一个地址时，chrome不会显示发送xhr请求，但是firefox中会显示。jquery1.4.2没有这个问题
 
@@ -16,7 +16,7 @@ $.extend可以merge objects，第一个参数true递归merge(deep copy for objec
 
 防止修改defaults参数::
 
-	var settings = $.extend({}, defaults, options);
+  var settings = $.extend({}, defaults, options);
 
 jquery中.data('kjGrid')，调用时使用kjGrid，kj-grid都可以。反之亦然
 
@@ -26,13 +26,13 @@ intro，outro提供包裹函数，其他函数可以作为全局函数测试，�
 
 jQuery.fn中的this是个[]
 
-* event.stopImmediatePropagation()	阻止冒泡，也阻止其他handlers
-* event.stopPropagation() 	阻止冒泡
+* event.stopImmediatePropagation()  阻止冒泡，也阻止其他handlers
+* event.stopPropagation()   阻止冒泡
 
 event设置命名空间name，方便统一处理同类型的事件::
 
-	bind('click.name',handler)
-	unbind('.name')
+  bind('click.name',handler)
+  unbind('.name')
 
 offsetParent()得到positioned的最近的父元素(relative,absolute,fixed)
 
@@ -45,14 +45,14 @@ clone可以复制选择的element，第一个参数为true可以连同event和da
 
 高亮某项，去掉其他项的高亮::
 
-	if ( !$event_counter.hasClass( "ui-state-hover" ) ) {
-		$event_counter.addClass( "ui-state-hover" )
-			.siblings().removeClass( "ui-state-hover" );
-	}
+  if ( !$event_counter.hasClass( "ui-state-hover" ) ) {
+    $event_counter.addClass( "ui-state-hover" )
+      .siblings().removeClass( "ui-state-hover" );
+  }
 
 限制查找范围,第二个参数为上下文，可以代替find::
 
-	$( "span.count", $event_counter ).text( new_count );
+  $( "span.count", $event_counter ).text( new_count );
 
 text获取所有文本，去除html标签，可应用于xml和html，对于input或者textarea使用val，对于script使用html。text()赋值时会将html标签转义。
 
@@ -61,11 +61,23 @@ typeof null == 'object'
 
 判断::
 
-	empty string is falsey, 
-	empty array with .length == 0
-	empty objects	with $.isEmptyObject()
+  empty string is falsey, 
+  empty array with .length == 0
+  empty objects with $.isEmptyObject()
 
 $.getScript()加载js文件并执行，不缓存
+
+插入jquery
+==============
+
+::
+
+  var head=document.getElementsByTagName('head')[0]
+  var node = document.createElement('script')
+  node.src="http://code.jquery.com/jquery.js"
+  head.appendChild(node)
+
+注意：http方式获取的js不能插入到https方式获取的页面中
 
 Callbacks
 ====================
@@ -74,55 +86,55 @@ $.Callbacks()可以将一组函数进行统一调用。
 
 可以使用add，remove来操作，通过fire来调用
 
-* once	只能执行一次fire
-* momory	对于fire后面的add语句，仍然使用原值进行fire，就好像先add再fire一样，对remove无效
-* unique	如果多次add同一个函数，list中只保留一次
-* stopOnFalse	list中的函数如果返回false则不继续执行
+* once  只能执行一次fire
+* momory  对于fire后面的add语句，仍然使用原值进行fire，就好像先add再fire一样，对remove无效
+* unique  如果多次add同一个函数，list中只保留一次
+* stopOnFalse list中的函数如果返回false则不继续执行
 
 $.Callbacks()返回object，包含add，remove等函数，这几个函数又return this，可以保证链式操作
 
 Callbacks实现pub/sub解耦，以及使用deferred进一步解耦::
 
-	function fn1(value) {
-		console.log(value);
-		return 'result'
-	}
+  function fn1(value) {
+    console.log(value);
+    return 'result'
+  }
 
-	function fn2(value) {
-		fn1("fn2 says:" + value);
-		return false;
-	}
+  function fn2(value) {
+    fn1("fn2 says:" + value);
+    return false;
+  }
 
-	var topics = {};
+  var topics = {};
 
-	jQuery.Topic = function(id) {
-		var callbacks, method, topic = id && topics[id];
-		if (!topic) {
-			callbacks = jQuery.Callbacks();
-			topic = {
-				publish: callbacks.fire,
-				subscribe: callbacks.add,
-				unsubscribe: callbacks.remove
-			};
-			if (id) {
-				topics[id] = topic;
-			}
-		}
-		return topic;
-	};
+  jQuery.Topic = function(id) {
+    var callbacks, method, topic = id && topics[id];
+    if (!topic) {
+      callbacks = jQuery.Callbacks();
+      topic = {
+        publish: callbacks.fire,
+        subscribe: callbacks.add,
+        unsubscribe: callbacks.remove
+      };
+      if (id) {
+        topics[id] = topic;
+      }
+    }
+    return topic;
+  };
 
-	$.Topic("mailArrived").subscribe(fn1);
+  $.Topic("mailArrived").subscribe(fn1);
 
-	//pub/sub
-	$.Topic( "mailArrived" ).publish( "hello world!" );
+  //pub/sub
+  $.Topic( "mailArrived" ).publish( "hello world!" );
 
-	//deferred
-	var topic = $.Topic("mailArrived");
+  //deferred
+  var topic = $.Topic("mailArrived");
 
-	var dfd = $.Deferred();
-	dfd.done(topic.publish);
+  var dfd = $.Deferred();
+  dfd.done(topic.publish);
 
-	dfd.resolve("its been published!");
+  dfd.resolve("its been published!");
 
 Deferred
 ====================
@@ -131,69 +143,69 @@ http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred
 
 Deferred可以用来屏蔽异步/同步操作的差异::
 
-	var cache = {};
+  var cache = {};
 
-	function getData( val ){
+  function getData( val ){
 
-		// return either the cached value or an
-		// jqXHR object (which contains a promise)
-		return cache[ val ] || $.ajax('/foo/', {
-			data: { value: val },
-			dataType: 'json',
-			success: function( resp ){
-				cache[ val ] = resp;
-			}
-		});
-	}
+    // return either the cached value or an
+    // jqXHR object (which contains a promise)
+    return cache[ val ] || $.ajax('/foo/', {
+      data: { value: val },
+      dataType: 'json',
+      success: function( resp ){
+        cache[ val ] = resp;
+      }
+    });
+  }
 
-	$.when(getData('foo')).then(function(resp){
-		// do something with the response, which may
-		// or may not have been retreived using an
-		// XHR request.
-	});
+  $.when(getData('foo')).then(function(resp){
+    // do something with the response, which may
+    // or may not have been retreived using an
+    // XHR request.
+  });
 
 方便多个操作::
 
-	$.when( $.getJSON('/some/data/'), $.get('template.tpl') ).then(function( data, tmpl ){
+  $.when( $.getJSON('/some/data/'), $.get('template.tpl') ).then(function( data, tmpl ){
 
-		$( tmpl ) // create a jQuery object out of the template
-			.tmpl( data) // compile it
-			.appendTo( "#target" ); // insert it into the DOM
+    $( tmpl ) // create a jQuery object out of the template
+      .tmpl( data) // compile it
+      .appendTo( "#target" ); // insert it into the DOM
 
-	});
+  });
 
 编译jquery
 ================
 
 node切换到正式版本::
 
-	$ git checkout v0.6.19-release
+  $ git checkout v0.6.19-release
 
 编译::
 
-	# ./configure
-	# make
-	# make install
+  # ./configure
+  # make
+  # make install
  
 查看node版本::
 
-	$ node --version
-	v0.6.19
+  $ node --version
+  v0.6.19
 
 进入jquery目录，安装node依赖::
 
-	$ cd jquery && npm install
+  $ cd jquery && npm install
 
 编译jquery::
 
-	$ node_modules/grunt/bin/grunt
+  $ node_modules/grunt/bin/grunt
 
 jquery UI
 ====================
 
 ::
 
-	$.widget('custom.colorize',{options:{}})
+  $.widget('custom.colorize',{options:{}})
 
 定义了custome命名空间下的colorize控件。
 options为配置参数，使用this.options.name来调用。还包括回调函数，使用this._trigger('')来调用。用户实例化控件时直接定义即可。
@@ -203,16 +215,16 @@ this.element为调用该控件的jquery对象。
 
 实例化方法::
 
-	$("#myid").colorize({});
+  $("#myid").colorize({});
 
 引用所有实例::
 
-	$(':custom-colorize')
+  $(':custom-colorize')
 
 
 寻找data中有droppable的::
 
-	this.element.find(":data(droppable)")
+  this.element.find(":data(droppable)")
 
 jqueryui中widget中通过this定义函数和变量会保存在$('#id').data()中
 

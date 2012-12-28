@@ -60,21 +60,24 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">linux</a><ul>
-<li><a class="reference internal" href="#id2">基本操作</a><ul>
-<li><a class="reference internal" href="#ssh">ssh</a></li>
-<li><a class="reference internal" href="#id3">工具</a></li>
-<li><a class="reference internal" href="#id4">下载整个网站</a></li>
-<li><a class="reference internal" href="#curl">curl</a></li>
-<li><a class="reference internal" href="#jobs">jobs</a></li>
-<li><a class="reference internal" href="#id5">输入输出重定向</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id6">基本理论</a><ul>
-<li><a class="reference internal" href="#selinux">SELinux</a></li>
-<li><a class="reference internal" href="#id7">链接</a></li>
+<li><a class="reference internal" href="#id2">文件</a><ul>
+<li><a class="reference internal" href="#id3">链接</a></li>
 <li><a class="reference internal" href="#unix">Unix目录结构</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#id4">系统</a><ul>
+<li><a class="reference internal" href="#rpm">rpm程序安装</a></li>
+<li><a class="reference internal" href="#id5">用户组</a></li>
+<li><a class="reference internal" href="#jobs">jobs</a></li>
+<li><a class="reference internal" href="#id6">输入输出重定向</a></li>
+<li><a class="reference internal" href="#selinux">SELinux</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">网络</a><ul>
+<li><a class="reference internal" href="#ssh-scp-sftp">ssh scp sftp访问远程机器免输入密码</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">工具</a></li>
 </ul>
 </li>
 </ul>
@@ -113,77 +116,85 @@
             
   <div class="section" id="linux">
 <span id="id1"></span><h1>linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h1>
-<p>目前两大主流linux桌面系统GNOME/GTK和 KDE/Qt</p>
 <div class="section" id="id2">
-<h2>基本操作<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>判断filename的文件类型       file filename</li>
-<li>将filename进行base64编码 base64 filename</li>
-<li>将filename进行base64解码 base64 -d filename</li>
-</ul>
-<p>远程连接桌面:</p>
-<div class="highlight-python"><pre>rdesktop -u stonelee -p 1Admin 10.10.22.110 -g 1280x1024</pre>
+<h2>文件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>判断文件类型:</p>
+<div class="highlight-python"><pre>file filename</pre>
 </div>
-<p>重启桌面:</p>
-<div class="highlight-python"><pre>pkill X</pre>
-</div>
-<div class="highlight-python"><pre>echo '$var'     #原样输出
-echo “$var”     #解释后输出
-
-printf  格式化输出</pre>
+<p>文件base64编码解码:</p>
+<div class="highlight-python"><pre># 编码
+base64 filename
+# 解码
+base64 -d filename</pre>
 </div>
 <p>文件夹中查找字符串:</p>
-<div class="highlight-python"><pre>$ grep 'makeprg' * -r</pre>
-</div>
-<p>指定文件中查找字符:</p>
-<div class="highlight-python"><pre>grep text filename.js</pre>
+<div class="highlight-python"><pre>$ grep 'makeprg' * -r
+
+#指定文件中查找字符
+grep text filename.js</pre>
 </div>
 <p>搜索文件名:</p>
-<div class="highlight-python"><pre>$ find . | grep '开发'</pre>
-</div>
-<p>或者:</p>
-<div class="highlight-python"><pre>find '/home' -name "abc*.conf"</pre>
-</div>
-<p>从某扩展名中搜索:</p>
-<div class="highlight-python"><pre>$ find . -name "*.xx" | xargs grep -r "key"</pre>
-</div>
-<p>定位命令:</p>
-<div class="highlight-python"><pre>$ which [</pre>
+<div class="highlight-python"><pre>$ find . | grep '开发'
+
+#或者
+find '/home' -name "abc*.conf"
+
+#从当前目录下扩展名为xx的文件中搜索字符串key搜索
+$ find . -name "*.xx" | xargs grep -r "key"</pre>
 </div>
 <p>树状形式显示当前文件夹下的两层目录结构:</p>
 <div class="highlight-python"><pre>tree -L 2 .</pre>
 </div>
-<p>查看系统资源使用情况：top （P 按CPU排序；M 按内存使用排序）</p>
-<p>ssh:</p>
-<div class="highlight-python"><pre>ssh vboxadmin@10.10.22.86</pre>
-</div>
-<p>查看端口号被谁占用:</p>
-<div class="highlight-python"><pre>lsof -i:80</pre>
-</div>
 <p>级联更改文件夹权限:</p>
 <div class="highlight-python"><pre>chmod -R 777 dir/</pre>
 </div>
-<p>随机启动:</p>
-<div class="highlight-python"><pre>sudo chkconfig --levels 235 mongod on</pre>
+<p>更改文件所有者，-R表示递归更改:</p>
+<div class="highlight-python"><pre>chown -R stonelee:stonelee some/</pre>
 </div>
 <p>图形界面打开当前文件夹:</p>
 <div class="highlight-python"><pre>$ gnome-open .</pre>
 </div>
-<p>安装源里没有的程序:</p>
-<div class="highlight-python"><pre>在http://pkgs.org/下载相应的rpm文件，然后
-rpm -ivh PIL-1.1.7-10.fc16.i686.rpm</pre>
+<div class="section" id="id3">
+<h3>链接<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>可以通过软链接来以虚拟路径的方式共享文件：ln -s 源文件夹 目标文件夹</p>
+<p>硬链接相当于新建一个文件指针，只有将全部指针删除后，文件内容才会从磁盘上删除。缺点是不可以在不同文件系统的文件间建立链接，不能为目录创建硬链接。</p>
+<p>软链接(-s)相当与建立新的快捷方式，没有任何文件系统的限制，可以创建指向目录的符号链接。缺点是如果源文件路径改变，那么链接失效，而且要系统分配额外的空间用于建立新的索引节点和保存原文件的路径。</p>
+<p>一般config文件用硬链接即可。引用lib包（如extjs）可使用软链接</p>
 </div>
-<p>删除rpm:</p>
-<div class="highlight-python"><pre>rpm -e teamviewer7</pre>
+<div class="section" id="unix">
+<h3>Unix目录结构<a class="headerlink" href="#unix" title="Permalink to this headline">¶</a></h3>
+<p>《Unix文件系统结构标准》（Filesystem Hierarchy Standard）
+<a class="reference external" href="http://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard">http://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard</a></p>
+<div class="highlight-python"><pre>/：存放系统程序，也就是At&amp;t开发的Unix程序。
+/usr：存放Unix系统商（比如IBM和HP）开发的程序。
+/usr/local：存放用户自己安装的程序。
+/opt：在某些系统，用于存放第三方厂商开发的程序，所以取名为option，意为"选装"。</pre>
 </div>
-<p>下载远程文件:</p>
-<div class="highlight-python"><pre>$ scp -r vboxadmin@10.10.22.86:/home/vboxadmin/Videos/冰冻星球/ /media/程序</pre>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>系统<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>目前两大主流linux桌面系统GNOME/GTK和 KDE/Qt</p>
+<p>service可以启动，关闭或者重启/etc/init.d下的脚本</p>
+<p>重启桌面:</p>
+<div class="highlight-python"><pre>pkill X</pre>
+</div>
+<p>定位命令:</p>
+<div class="highlight-python"><pre>$ which [</pre>
+</div>
+<p>查看系统资源使用情况:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#P 按CPU排序；M 按内存使用排序</span>
+<span class="n">top</span>
+</pre></div>
+</div>
+<p>查看端口号被谁占用:</p>
+<div class="highlight-python"><pre>lsof -i:80</pre>
+</div>
+<p>随机启动:</p>
+<div class="highlight-python"><pre>sudo chkconfig --levels 235 mongod on</pre>
 </div>
 <p>查看进程:</p>
 <div class="highlight-python"><pre>ps -aux |grep mongo</pre>
-</div>
-<p>查看安装的软件:</p>
-<div class="highlight-python"><pre>rpm -qa | grep kernel</pre>
 </div>
 <p>查看内核:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">uname</span> <span class="o">-</span><span class="n">r</span>
@@ -193,87 +204,29 @@ rpm -ivh PIL-1.1.7-10.fc16.i686.rpm</pre>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">uname</span> <span class="o">-</span><span class="n">a</span>
 </pre></div>
 </div>
-<div class="section" id="ssh">
-<h3>ssh<a class="headerlink" href="#ssh" title="Permalink to this headline">¶</a></h3>
-<p>ssh scp sftp访问远程机器免输入密码</p>
-<p>本机生成密钥:</p>
-<div class="highlight-python"><pre>$ ssh-keygen -t rsa</pre>
+<div class="section" id="rpm">
+<h3>rpm程序安装<a class="headerlink" href="#rpm" title="Permalink to this headline">¶</a></h3>
+<p>安装源里没有的程序:</p>
+<div class="highlight-python"><pre>在http://pkgs.org/下载相应的rpm文件，然后
+rpm -ivh PIL-1.1.7-10.fc16.i686.rpm</pre>
 </div>
-<p>公共密钥保存在 ~/.ssh/id_rsa.pub
-私有密钥保存在 ~/.ssh/id_rsa</p>
-<p>将公共密钥复制到要访问的机器上:</p>
-<div class="highlight-python"><pre>$ scp ~/.ssh/id_rsa.pub vboxadmin@10.10.22.86:/home/vboxadmin/.ssh/authorized_keys</pre>
+<p>删除rpm:</p>
+<div class="highlight-python"><pre>rpm -e teamviewer7</pre>
+</div>
+<p>查看安装的软件:</p>
+<div class="highlight-python"><pre>rpm -qa | grep kernel</pre>
 </div>
 </div>
-<div class="section" id="id3">
-<h3>工具<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<p>代码统计: <a class="reference external" href="http://cloc.sourceforge.net/">cloc</a></p>
+<div class="section" id="id5">
+<h3>用户组<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>查看用户所属的组:</p>
+<div class="highlight-python"><pre>$ groups user</pre>
 </div>
-<div class="section" id="id4">
-<h3>下载整个网站<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>$ wget -U "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; GTB5)" -r -p -k -nc -np -o down.log https://www.django-cms.org/ --no-check-certificate</pre>
+<p>修改默认组:</p>
+<div class="highlight-python"><pre>usermod -g nginx stonelee</pre>
 </div>
-<table border="1" class="docutils">
-<colgroup>
-<col width="2%" />
-<col width="98%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>-U</td>
-<td>修改agent</td>
-</tr>
-<tr class="row-even"><td>-r</td>
-<td>递归</td>
-</tr>
-<tr class="row-odd"><td>-nc</td>
-<td>不下载已经存在的文件</td>
-</tr>
-<tr class="row-even"><td>-np</td>
-<td>表示不跟随链接，只下载指定目录及子目录里的东西；</td>
-</tr>
-<tr class="row-odd"><td>-p</td>
-<td>下载页面显示所需的所有文件。比如页面中包含了图片，但是图片并不在/yourdir目录中，而在/images目录下，有此参数，图片依然会被正常下载。</td>
-</tr>
-<tr class="row-even"><td>-k</td>
-<td>修复下载文件中的绝对连接为相对连接，这样方便本地阅读。</td>
-</tr>
-</tbody>
-</table>
-<table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group" colspan="2">
-<kbd><span class="option">--no-check-certificate</span></kbd></td>
-</tr>
-<tr><td>&nbsp;</td><td>https链接需要</td></tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="curl">
-<h3>curl<a class="headerlink" href="#curl" title="Permalink to this headline">¶</a></h3>
-<p>crud貌似有问题，使用firefox插件Poster来代替:</p>
-<div class="highlight-python"><pre>curl -v -H "Content-Type:application/json" -H "Accept:application/json" \
-         -d  "{\"location\":{\"name\":test, \"desc\":\"testdesc\"}}" \
-         http://api.waldstat.com/locations/create?api_key=1234567890abcdefghijk
-
--v      显示交互详细信息
--i      显示response头信息
--H      附加请求头
--X      pass a HTTP method name
--d      添加参数</pre>
-</div>
-<p>POST:</p>
-<div class="highlight-python"><pre>curl -i -H "Accept: application/json" -X POST -d "firstName=james" http://192.168.0.165/persons/person</pre>
-</div>
-<p>PUT:</p>
-<div class="highlight-python"><pre>curl -i -H "Accept: application/json" -X PUT -d "phone=1-800-999-9999" http://192.168.0.165/persons/person/1</pre>
-</div>
-<p>GET:</p>
-<div class="highlight-python"><pre>curl -i -H "Accept: application/json" "http://192.168.0.165/persons?firstName=james&amp;lastName=wallis"</pre>
-</div>
-<p>DELETE:</p>
-<div class="highlight-python"><pre>curl -i -H "Accept: application/json" -X DELETE http://192.168.0.165/persons/person/1</pre>
+<p>修改所属的组，多个组名用“,“隔开:</p>
+<div class="highlight-python"><pre>usermod -G nginx stonelee</pre>
 </div>
 </div>
 <div class="section" id="jobs">
@@ -290,21 +243,19 @@ jobs -l 可显示pid
 ctrl + z 将一个正在前台执行的命令放到后台，并且暂停</pre>
 </div>
 </div>
-<div class="section" id="id5">
-<h3>输入输出重定向<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>输入输出重定向用符号&#8221; &lt;&#8221;和&#8221;&gt;&#8221;来表示</p>
-<p>0、1和2分别表示标准输入、标准输出和标准错误信息输出</p>
-<p>2&gt;a.txt 表示将错误信息输出到文件a.txt中。</p>
-<p>2&gt;&amp;1 表示将错误信息重定向到标准输出</p>
-<p>&gt;log 表示把标准输出重新定向到文件log中</p>
-<p>&gt;&amp; log 表示把标准输出和错误输出都定向到文件log中，相当于 &gt;log 2&gt;&amp;1</p>
-<p>不需要回显程序的所有信息时，就可以将输出重定向到/dev/null。</p>
-<p>如果想要正常输出和错误信息都不显示，则要把标准输出和标准错误都重定向到/dev/null， 例如：</p>
-<p># ls 1&gt;/dev/null 2&gt;/dev/null</p>
-</div>
-</div>
 <div class="section" id="id6">
-<h2>基本理论<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<h3>输入输出重定向<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>输入输出重定向用符号"&lt;"和"&gt;"来表示, 0、1和2分别表示标准输入、标准输出和标准错误信息输出
+
+2&gt;a.txt 表示将错误信息输出到文件a.txt中。
+2&gt;&amp;1 表示将错误信息重定向到标准输出
+&gt;log 表示把标准输出重新定向到文件log中
+&gt;&amp; log 表示把标准输出和错误输出都定向到文件log中，相当于 &gt;log 2&gt;&amp;1
+
+不需要回显程序的所有信息时，就可以将输出重定向到/dev/null,如
+# ls 1&gt;/dev/null 2&gt;/dev/null</pre>
+</div>
+</div>
 <div class="section" id="selinux">
 <h3>SELinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h3>
 <p>SELinux 全称 Security Enhanced Linux (安全强化 Linux)，是 MAC (Mandatory Access Control，强制访问控制系统)的一个实现，目的在于明确的指明某个进程可以访问哪些资源(文件、网络端口等)。
@@ -318,23 +269,69 @@ ctrl + z 将一个正在前台执行的命令放到后台，并且暂停</pre>
 </div>
 <p>看看到底是不是 SELinux 导致某个服务或者程序无法运行</p>
 </div>
+</div>
 <div class="section" id="id7">
-<h3>链接<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<p>可以通过软链接来以虚拟路径的方式共享文件：ln -s 源文件夹 目标文件夹</p>
-<p>硬链接相当于新建一个文件指针，只有将全部指针删除后，文件内容才会从磁盘上删除。缺点是不可以在不同文件系统的文件间建立链接，不能为目录创建硬链接。</p>
-<p>软链接(-s)相当与建立新的快捷方式，没有任何文件系统的限制，可以创建指向目录的符号链接。缺点是如果源文件路径改变，那么链接失效，而且要系统分配额外的空间用于建立新的索引节点和保存原文件的路径。</p>
-<p>一般config文件用硬链接即可。引用lib包（如extjs）可使用软链接</p>
+<h2>网络<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>远程连接桌面:</p>
+<div class="highlight-python"><pre>#-g为分辨率
+rdesktop -u stonelee -p 1Admin 10.10.22.110 -g 1280x1024</pre>
 </div>
-<div class="section" id="unix">
-<h3>Unix目录结构<a class="headerlink" href="#unix" title="Permalink to this headline">¶</a></h3>
-<p>《Unix文件系统结构标准》（Filesystem Hierarchy Standard）
-<a class="reference external" href="http://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard">http://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard</a></p>
-<div class="highlight-python"><pre>/：存放系统程序，也就是At&amp;t开发的Unix程序。
-/usr：存放Unix系统商（比如IBM和HP）开发的程序。
-/usr/local：存放用户自己安装的程序。
-/opt：在某些系统，用于存放第三方厂商开发的程序，所以取名为option，意为"选装"。</pre>
+<p>ssh:</p>
+<div class="highlight-python"><pre>ssh vboxadmin@10.10.22.86</pre>
+</div>
+<p>下载远程文件:</p>
+<div class="highlight-python"><pre>$ scp -r vboxadmin@10.10.22.86:/home/vboxadmin/Videos/冰冻星球/ /media/程序</pre>
+</div>
+<p>下载整个网站:</p>
+<div class="highlight-python"><pre>$ wget -U "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; GTB5)" -r -p -k -nc -np -o down.log https://www.django-cms.org/ --no-check-certificate
+
+-U  修改agent
+-r  递归
+-nc 不下载已经存在的文件
+-np 表示不跟随链接，只下载指定目录及子目录里的东西；
+-p  下载页面显示所需的所有文件。比如页面中包含了图片，但是图片并不在/yourdir目录中，而在/images目录下，有此参数，图片依然会被正常下载。
+-k  修复下载文件中的绝对连接为相对连接，这样方便本地阅读。
+--no-check-certificate  https链接需要</pre>
+</div>
+<p>curl:</p>
+<div class="highlight-python"><pre>curl -v -H "Content-Type:application/json" -H "Accept:application/json" \
+   -d  "{\"location\":{\"name\":test, \"desc\":\"testdesc\"}}" \
+   http://api.waldstat.com/locations/create?api_key=1234567890abcdefghijk
+
+-v  显示交互详细信息
+-i  显示response头信息
+-H  附加请求头
+-X  pass a HTTP method name
+-d  添加参数
+
+#POST
+curl -i -H "Accept: application/json" -X POST -d "firstName=james" http://192.168.0.165/persons/person
+
+#PUT
+curl -i -H "Accept: application/json" -X PUT -d "phone=1-800-999-9999" http://192.168.0.165/persons/person/1
+
+#GET
+curl -i -H "Accept: application/json" "http://192.168.0.165/persons?firstName=james&amp;lastName=wallis"
+
+#DELETE
+curl -i -H "Accept: application/json" -X DELETE http://192.168.0.165/persons/person/1</pre>
+</div>
+<p>crud貌似有问题，使用firefox插件Poster来代替:</p>
+<div class="section" id="ssh-scp-sftp">
+<h3>ssh scp sftp访问远程机器免输入密码<a class="headerlink" href="#ssh-scp-sftp" title="Permalink to this headline">¶</a></h3>
+<p>本机生成密钥:</p>
+<div class="highlight-python"><pre>$ ssh-keygen -t rsa</pre>
+</div>
+<p>公共密钥保存在 ~/.ssh/id_rsa.pub
+私有密钥保存在 ~/.ssh/id_rsa</p>
+<p>将公共密钥复制到要访问的机器上:</p>
+<div class="highlight-python"><pre>$ scp ~/.ssh/id_rsa.pub vboxadmin@10.10.22.86:/home/vboxadmin/.ssh/authorized_keys</pre>
 </div>
 </div>
+</div>
+<div class="section" id="id8">
+<h2>工具<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>代码统计: <a class="reference external" href="http://cloc.sourceforge.net/">cloc</a></p>
 </div>
 </div>
 
