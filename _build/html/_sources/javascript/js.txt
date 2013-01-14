@@ -7,6 +7,16 @@ js
 技巧
 =============================
 
+获取某位置处的元素::
+
+  document.elementFromPoint
+
+设置css::
+
+.style.cssText
+
+[2,3].toString() == '2,3'
+
 console.dir()可以显示类.如使用log显示function会返回函数定义内容,而使用dir可以查看整个类结构.
 
 * 2进制转化为10进制：parseInt(a,2)
@@ -274,6 +284,21 @@ chrome中优先使用audio，使用ogg格式文件::
   IE下{tag: 'bgsound', src: file, loop: 1, autostart: true}
   非IE{tag: 'embed', src: file, hidden: true, autostart: true, loop: false}
 
+图形
+=============
+
+开源库
+
+* raphael	svg/vml 绘图
+* d3		数据绑定
+* datav	数据可视化
+
+方案
+
+* svg在Android 3.0以上版本才支持
+* paper.js  canvas绘图
+
+桌面平台使用raphael，移动端使用paper
 
 思考
 =============================

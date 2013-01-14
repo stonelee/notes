@@ -33,6 +33,14 @@ RhodeCode中推送已经存在的库::
 
   git commit -a -m 'Validation!'
 
+添加远程仓库::
+
+  git remote add office http://stonelee:mima@10.10.22.86:1080/raphael
+
+提交::
+
+  git push office
+
 如果Fork别人的项目或者多人合作项目，最好每人都拥有一个独立分支，然后由项目维护人合并。
 
 如何建立自己的分支

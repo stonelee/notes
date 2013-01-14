@@ -27,6 +27,14 @@ em 强调
 
 image调整垂直位置:vertical-align
 
+hsl::
+
+  svg中设置
+    fill:'hsl(72deg,1,.37)'
+
+  css中设置
+    background: hsl(72,100%,37%);
+
 默认元素
 -----------------
 
