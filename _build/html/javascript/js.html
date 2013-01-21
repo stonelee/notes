@@ -121,6 +121,18 @@
 <span id="id1"></span><h1>js<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
 <h2>技巧<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>case语句如果不使用break，会继续执行下面的case语句，而不再判断条件:</p>
+<div class="highlight-python"><pre>switch ('y') {
+  case 'y':
+    console.log('y');
+  case 'other':
+    console.log('other');
+}
+
+结果为:
+y
+other</pre>
+</div>
 <p>获取某位置处的元素:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">document</span><span class="o">.</span><span class="n">elementFromPoint</span>
 </pre></div>

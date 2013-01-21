@@ -7,6 +7,19 @@ js
 技巧
 =============================
 
+case语句如果不使用break，会继续执行下面的case语句，而不再判断条件::
+
+  switch ('y') {
+    case 'y':
+      console.log('y');
+    case 'other':
+      console.log('other');
+  }
+
+  结果为:
+  y
+  other
+
 获取某位置处的元素::
 
   document.elementFromPoint

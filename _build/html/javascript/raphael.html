@@ -60,7 +60,9 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">raphael</a><ul>
-<li><a class="reference internal" href="#id2">记录</a></li>
+<li><a class="reference internal" href="#id2">源码</a></li>
+<li><a class="reference internal" href="#id3">记录</a></li>
+<li><a class="reference internal" href="#id4">问题</a></li>
 </ul>
 </li>
 </ul>
@@ -100,10 +102,28 @@
   <div class="section" id="raphael">
 <span id="id1"></span><h1>raphael<a class="headerlink" href="#raphael" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
-<h2>记录<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>transform，path参数可以为字符串或数组</p>
-<p>b.attr(&#8216;path&#8217;)
-chrome下返回值为path数组，IE下为字符串</p>
+<h2>源码<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">R</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="n">paperproto</span> <span class="o">=</span> <span class="n">Paper</span><span class="o">.</span><span class="n">prototype</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">prototype</span><span class="p">;</span>
+<span class="n">R</span><span class="o">.</span><span class="n">el</span> <span class="o">=</span> <span class="n">elproto</span> <span class="o">=</span> <span class="n">Element</span><span class="o">.</span><span class="n">prototype</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>记录<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>Element.transform([tstr]):</p>
+<div class="highlight-python"><pre>参数可以为字符串或数组
+t - translate, r- rotate, s -scale, m -matrix
+大写为绝对变形
+
+t100,100(translate by 100, 100)
+r30,100,100(rotate 30° around 100, 100)
+s2,2,100,100(scale twice around 100, 100)
+r45(rotate 45° around centre)
+s1.5(scale 1.5 times relative to centre)</pre>
+</div>
+<p>不要使用translate等函数，在setViewBox后不同浏览器中的返回值可能不一样。
+使用transform([&#8216;t&#8217;,10,10])来替代</p>
+<p>b.attr(&#8216;path&#8217;) 在chrome下返回值为path数组，IE下为字符串</p>
 <p>path绘制:</p>
 <div class="highlight-python"><pre>C     三次曲线    (x1 y1 x2 y2 x y)+
 S     平滑三次曲线  (x2 y2 x y)+
@@ -112,6 +132,12 @@ T     平滑二次曲线，貌似要用在Q后面 (x y)+
 A     elliptical arc  (rx ry x-axis-rotation large-arc-flag sweep-flag x y)+
 R     Catmull-Rom curveto*    x1 y1 (x y)+</pre>
 </div>
+</div>
+<div class="section" id="id4">
+<h2>问题<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>vml中图片放大两倍（size，position）时内存占用也会变为两倍
+&lt;rvml:fill class=rvml rotate=&#8221;t&#8221; src=&#8221;mine.png&#8221; type=&#8221;tile&#8221; size=&#8221;3200,2400&#8221; position=&#8221;-1600,-1200&#8221;&gt;&lt;/rvml:fill&gt;</p>
+<p>IE下setViewBox是对每个元素进行控制，速度太慢，还是换回ASV吧</p>
 </div>
 </div>
 
