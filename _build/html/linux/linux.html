@@ -179,6 +179,10 @@ $ find . -name "*.xx" | xargs grep -r "key"</pre>
 <p>重启桌面:</p>
 <div class="highlight-python"><pre>pkill X</pre>
 </div>
+<p>查看pid:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pgrep</span>
+</pre></div>
+</div>
 <p>定位命令:</p>
 <div class="highlight-python"><pre>$ which [</pre>
 </div>
@@ -187,6 +191,7 @@ $ find . -name "*.xx" | xargs grep -r "key"</pre>
 <span class="n">top</span>
 </pre></div>
 </div>
+<p>top -p 指定pid或列表</p>
 <p>查看端口号被谁占用:</p>
 <div class="highlight-python"><pre>lsof -i:80</pre>
 </div>

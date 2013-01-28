@@ -52,3 +52,13 @@ svgicons默认将svg图形用data URI的方式进行编码，然后作为图标�
 * no_img直接加载svg
 * 页面不同标签加载同一图像时，使用placement
 * resize更改图像大小
+
+
+
+ASV
+==============
+
+ASV中没有style这种直接赋值的方法，应该使用setAttribute::
+
+  node.setAttribute('style', 'fill:#ccc;');
+  //node.style['fill'] = '#ccc';

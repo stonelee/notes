@@ -8,6 +8,10 @@
 git
 =============================
 
+git使用代理::
+
+  git config --global http.proxy http://127.0.0.1:8087
+
 升级子模块::
 
   $ git submodule update --init --recursive

@@ -87,6 +87,9 @@ service可以启动，关闭或者重启/etc/init.d下的脚本
 
   pkill X
 
+查看pid::
+
+  pgrep
 
 定位命令::
 
@@ -96,6 +99,8 @@ service可以启动，关闭或者重启/etc/init.d下的脚本
 
   #P 按CPU排序,M 按内存使用排序,N以进程排序, u指定特定的用户, c查看命令行参数，s调整刷新时间
   top
+
+top -p 指定pid或列表
 
 查看端口号被谁占用::
 
