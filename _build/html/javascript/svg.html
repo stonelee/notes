@@ -62,6 +62,7 @@
 <li><a class="reference internal" href="#">svg</a><ul>
 <li><a class="reference internal" href="#svg-editor">svg-editor</a></li>
 <li><a class="reference internal" href="#asv">ASV</a></li>
+<li><a class="reference internal" href="#id2">绘制svg图形</a></li>
 </ul>
 </li>
 </ul>
@@ -148,6 +149,17 @@
 <div class="highlight-python"><pre>node.setAttribute('style', 'fill:#ccc;');
 //node.style['fill'] = '#ccc';</pre>
 </div>
+<p>ASV中png透明无效</p>
+<p>ASV中使用getElementsByTagName得到的数组没有[0]这种取值法，只能使用item(0)</p>
+</div>
+<div class="section" id="id2">
+<h2>绘制svg图形<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>在网上找到目标图形</li>
+<li>file-import 导入到inkscape中，将层透明度改为20%，锁定该层</li>
+<li>建新层，使用Bezier lines工具沿着原图边框描一遍，放大调整细节，然后Path-simplify进行适当简化</li>
+<li>全选，Path-Combine合并为一个路径</li>
+</ul>
 </div>
 </div>
 

@@ -61,9 +61,10 @@
   <ul>
 <li><a class="reference internal" href="#">版本控制</a><ul>
 <li><a class="reference internal" href="#id2">git</a><ul>
+<li><a class="reference internal" href="#rhodecode">RhodeCode</a></li>
 <li><a class="reference internal" href="#id3">如何建立自己的分支</a></li>
 <li><a class="reference internal" href="#id4">如何将牛人的远程分支更新到自己的本地分支？</a></li>
-<li><a class="reference internal" href="#push-ssh">避免push时填入密码，通过ssh</a></li>
+<li><a class="reference internal" href="#id5">如何建立远程库进行管理</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#git-pages">git pages</a></li>
@@ -113,21 +114,14 @@
 <span id="id1"></span><h1>版本控制<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
 <h2>git<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>git使用代理:</p>
+<p>避免push时填入密码，通过ssh:</p>
+<div class="highlight-python"><pre>git remote set-url origin git@github.com:user/repo.git</pre>
+</div>
+<p>使用代理:</p>
 <div class="highlight-python"><pre>git config --global http.proxy http://127.0.0.1:8087</pre>
 </div>
 <p>升级子模块:</p>
-<div class="highlight-python"><pre>$ git submodule update --init --recursive</pre>
-</div>
-<p>RhodeCode中推送已经存在的库:</p>
-<div class="highlight-python"><pre>$ git push http://stonelee@10.10.22.86:1080/parseCSV master</pre>
-</div>
-<p>如果报错:</p>
-<div class="highlight-python"><pre>RhodeCode error: RPC failed; result=22, HTTP code = 502
-fatal: The remote end hung up unexpectedly</pre>
-</div>
-<p>应该设置:</p>
-<div class="highlight-python"><pre>$ git config http.postBuffer 524288000</pre>
+<div class="highlight-python"><pre>git submodule update --init --recursive</pre>
 </div>
 <p>如果做了修改或删除，想回到版本控制的状态:</p>
 <div class="highlight-python"><pre>git checkout .</pre>
@@ -142,6 +136,19 @@ fatal: The remote end hung up unexpectedly</pre>
 <div class="highlight-python"><pre>git push office</pre>
 </div>
 <p>如果Fork别人的项目或者多人合作项目，最好每人都拥有一个独立分支，然后由项目维护人合并。</p>
+<div class="section" id="rhodecode">
+<h3>RhodeCode<a class="headerlink" href="#rhodecode" title="Permalink to this headline">¶</a></h3>
+<p>RhodeCode中推送已经存在的库:</p>
+<div class="highlight-python"><pre>$ git push http://stonelee@10.10.22.86:1080/parseCSV master</pre>
+</div>
+<p>如果报错:</p>
+<div class="highlight-python"><pre>RhodeCode error: RPC failed; result=22, HTTP code = 502
+fatal: The remote end hung up unexpectedly</pre>
+</div>
+<p>应该设置:</p>
+<div class="highlight-python"><pre>$ git config http.postBuffer 524288000</pre>
+</div>
+</div>
 <div class="section" id="id3">
 <h3>如何建立自己的分支<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -162,9 +169,22 @@ fatal: The remote end hung up unexpectedly</pre>
 <li>将牛人的远程更新合并到本地分支 git merge niuren/master</li>
 </ul>
 </div>
-<div class="section" id="push-ssh">
-<h3>避免push时填入密码，通过ssh<a class="headerlink" href="#push-ssh" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>git remote set-url origin git@github.com:user/repo.git</pre>
+<div class="section" id="id5">
+<h3>如何建立远程库进行管理<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>远程机器建立空的库:</p>
+<div class="highlight-python"><pre>git clone --bare raphael.git</pre>
+</div>
+<p>本地设置远程访问路径:</p>
+<div class="highlight-python"><pre>git remote add centos ssh://stonelee@10.10.22.82/home/stonelee/raphael</pre>
+</div>
+<p>推送:</p>
+<div class="highlight-python"><pre>git push centos svg</pre>
+</div>
+<p>其他人拉取:</p>
+<div class="highlight-python"><pre>git clone ssh://stonelee@10.10.22.82/home/stonelee/raphael</pre>
+</div>
+<p>切换到svg分支:</p>
+<div class="highlight-python"><pre>git checkout svg</pre>
 </div>
 </div>
 </div>

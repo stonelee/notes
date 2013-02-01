@@ -8,26 +8,17 @@
 git
 =============================
 
-git使用代理::
+避免push时填入密码，通过ssh::
+
+  git remote set-url origin git@github.com:user/repo.git
+
+使用代理::
 
   git config --global http.proxy http://127.0.0.1:8087
 
 升级子模块::
 
-  $ git submodule update --init --recursive
-
-RhodeCode中推送已经存在的库::
-
-  $ git push http://stonelee@10.10.22.86:1080/parseCSV master
-
-如果报错::
-
-  RhodeCode error: RPC failed; result=22, HTTP code = 502
-  fatal: The remote end hung up unexpectedly
-
-应该设置::
-
-  $ git config http.postBuffer 524288000
+  git submodule update --init --recursive
 
 如果做了修改或删除，想回到版本控制的状态::
 
@@ -46,6 +37,23 @@ RhodeCode中推送已经存在的库::
   git push office
 
 如果Fork别人的项目或者多人合作项目，最好每人都拥有一个独立分支，然后由项目维护人合并。
+
+RhodeCode
+--------------
+
+RhodeCode中推送已经存在的库::
+
+  $ git push http://stonelee@10.10.22.86:1080/parseCSV master
+
+如果报错::
+
+  RhodeCode error: RPC failed; result=22, HTTP code = 502
+  fatal: The remote end hung up unexpectedly
+
+应该设置::
+
+  $ git config http.postBuffer 524288000
+
 
 如何建立自己的分支
 ----------------------
@@ -66,12 +74,28 @@ RhodeCode中推送已经存在的库::
 * 将牛人的远程更新合并到本地分支 git merge niuren/master
 
 
-避免push时填入密码，通过ssh
----------------------------------
+如何建立远程库进行管理
+------------------------------
 
-::
+远程机器建立空的库::
 
-  git remote set-url origin git@github.com:user/repo.git
+  git clone --bare raphael.git
+
+本地设置远程访问路径::
+
+  git remote add centos ssh://stonelee@10.10.22.82/home/stonelee/raphael
+
+推送::
+
+  git push centos svg
+
+其他人拉取::
+
+  git clone ssh://stonelee@10.10.22.82/home/stonelee/raphael
+
+切换到svg分支::
+
+  git checkout svg
 
 git pages
 =============================

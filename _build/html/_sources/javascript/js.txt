@@ -24,6 +24,8 @@ case语句如果不使用break，会继续执行下面的case语句，而不再�
 
   document.elementFromPoint
 
+document.createDocumentFragment();可以避免每次进行Dom操作时的页面刷新
+
 设置css::
 
 .style.cssText

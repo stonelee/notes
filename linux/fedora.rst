@@ -176,3 +176,15 @@ fedora启动时显示启动信息
 打开/usr/share/ibus-pinyin/db，将android.db改名覆盖
 
 重启ibus激活
+
+
+访问远程共享文件
+-------------------------
+
+* 文件夹管理器中File-Connect to Server
+* server填远程机器的ip，type选Windows share，填入用户名，密码即可
+
+window访问远程共享文件
+
+开始-搜索中输入\\10.10.22.110，然后就可以打开该机器的共享文件夹
+

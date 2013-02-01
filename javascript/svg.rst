@@ -62,3 +62,15 @@ ASV中没有style这种直接赋值的方法，应该使用setAttribute::
 
   node.setAttribute('style', 'fill:#ccc;');
   //node.style['fill'] = '#ccc';
+
+ASV中png透明无效
+
+ASV中使用getElementsByTagName得到的数组没有[0]这种取值法，只能使用item(0)
+
+绘制svg图形
+==============
+
+* 在网上找到目标图形
+* file-import 导入到inkscape中，将层透明度改为20%，锁定该层
+* 建新层，使用Bezier lines工具沿着原图边框描一遍，放大调整细节，然后Path-simplify进行适当简化
+* 全选，Path-Combine合并为一个路径

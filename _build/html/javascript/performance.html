@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>高性能JavaScript &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="javascript" href="index.html" />
+    <link rel="next" title="raphael" href="raphael.html" />
+    <link rel="prev" title="node" href="node.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="raphael.html" title="raphael"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="node.html" title="node"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">高性能JavaScript</a><ul>
+<li><a class="reference internal" href="#chapter-6-responsive-interfaces">Chapter 6 Responsive Interfaces</a></li>
+<li><a class="reference internal" href="#chapter-8-programming-practices">Chapter 8 Programming Practices</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="node.html"
+                        title="previous chapter">node</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="raphael.html"
+                        title="next chapter">raphael</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/javascript/performance.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="javascript">
+<span id="performance"></span><h1>高性能JavaScript<a class="headerlink" href="#javascript" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="chapter-6-responsive-interfaces">
+<h2>Chapter 6 Responsive Interfaces<a class="headerlink" href="#chapter-6-responsive-interfaces" title="Permalink to this headline">¶</a></h2>
+<p>js代码和UI更新（例如按钮按下）以队列的形式在浏览器UI线程中依次执行</p>
+<p>浏览器对js代码的最长运行时间有限制，在超过后会进行提示，最好的解决方案就是减少js代码运行时间，可以采用setTimeout或setInterval的方式。</p>
+<p>100ms以下的延迟用户几乎无法察觉</p>
+<p>windows中的setTimeout时间的偏移幅度为15ms，因此如果低于15ms可能会造成IE浏览器锁住</p>
+<p>对于不要求同步和顺序执行的耗时循环，可以使用对数组分片，延迟执行的方式，来给予UI更新，避免浏览器假死</p>
+<p>原始:</p>
+<div class="highlight-python"><pre>for (var i=0, len=items.length; i &lt; len; i++){
+  process(items[i]);
+}</pre>
+</div>
+<p>优化为:</p>
+<div class="highlight-python"><pre>function processArray(items, process, callback) {
+  var todo = items.concat();
+
+  setTimeout(function f() {
+    process(todo.shift());
+    if (todo.length &gt; 0) {
+      setTimeout(f, 25);
+    } else {
+      callback(items);
+    }
+  }, 25);
+}</pre>
+</div>
+<p>调用:</p>
+<div class="highlight-python"><pre>var items = [123, 789, 323, 778, 232, 654, 219, 543, 321, 160];
+
+function outputValue(value) {
+  console.log(value);
+}
+processArray(items, outputValue, function() {
+  console.log("Done!");
+});</pre>
+</div>
+<p>对于包含多个步骤的大任务，可以通过分解步骤的方法，将所有步骤放到数组中，然后采用数组延迟的方法进行优化</p>
+<p>在每次延迟中执行尽可能多的任务片，取50ms，可以大幅度减少整体运行时间:</p>
+<div class="highlight-python"><pre>var start = +new Date();
+do {
+  process(todo.shift());
+} while (todo.length &gt; 0 &amp;&amp; (+new Date() - start &lt; 50));</pre>
+</div>
+<p>+new Date()</p>
+<p>1s以上延迟的timer不会对响应造成影响，但是多个高频率的timer会导致系统反应显著变慢，因此建议仅仅使用一个timer，完成所有操作</p>
+<p>对于不容易分片的耗时任务，例如大量json解析，可以使用Web Worker</p>
+<p>每个worker使用自己的线程，不会影响UI线程的正常响应</p>
+<p>通过onmessage(event)，postMessage来进行UI与worker，或者worker之间的通信，传递格式可以为object，Array和基本类型</p>
+</div>
+<div class="section" id="chapter-8-programming-practices">
+<h2>Chapter 8 Programming Practices<a class="headerlink" href="#chapter-8-programming-practices" title="Permalink to this headline">¶</a></h2>
+<p>四种解析字符串的方法，会创建新的编译环境，所以非常慢。因此避免使用eval和Function，setTimeout和setInterval使用匿名函数:</p>
+<div class="highlight-python"><pre>var num1 = 5,
+num2 = 6,
+
+result = eval("num1 + num2"),
+sum = new Function("arg1", "arg2", "return arg1 + arg2");
+setTimeout("sum = num1 + num2", 100);
+setInterval("sum = num1 + num2", 100);</pre>
+</div>
+<p>使用Object/Array字面量会更方便更快</p>
+<p>消除重复判断的两种方法：lazy loading和Conditional Advance Loading</p>
+<p>lazy loading在首次执行时重新定义该函数。这种方法初次执行较慢，适合不立即使用的场合:</p>
+<div class="highlight-python"><pre>function addHandler(target, eventType, handler) {
+  //overwrite the existing function
+  if (target.addEventListener) {
+    //DOM2 Events
+    addHandler = function(target, eventType, handler) {
+      target.addEventListener(eventType, handler, false);
+    };
+  } else {
+    //IE
+    addHandler = function(target, eventType, handler) {
+      target.attachEvent("on" + eventType, handler);
+    };
+  }
+  //call the new function
+  addHandler(target, eventType, handler);
+}</pre>
+</div>
+<p>Conditional Advance Loading适用于立即使用的场合:</p>
+<div class="highlight-python"><pre>var addHandler = document.body.addEventListener ?
+                function(target, eventType, handler) {
+                  target.addEventListener(eventType, handler, false);
+                } : function(target, eventType, handler) {
+                  target.attachEvent("on" + eventType, handler);
+                };</pre>
+</div>
+<p>10进制 -&gt; 2进制:</p>
+<div class="highlight-python"><pre>var num1 = 25,
+alert(num1.toString(2)); //"11001"</pre>
+</div>
+<p>位运算:</p>
+<div class="highlight-python"><pre>and   &amp;
+or    |
+xor   ^
+not ~</pre>
+</div>
+<p>判断奇偶:</p>
+<div class="highlight-python"><pre>传统：i%2
+位：i &amp; 1</pre>
+</div>
+<p>bitmask，常用于多个布尔型选项:</p>
+<div class="highlight-python"><pre>var a = 1,
+  b = 2,
+  c = 4,
+  d = 8;
+//所有可能的属性
+var options = a | c | d;
+//c在options中
+if (options &amp; c) {}</pre>
+</div>
+<p>优先使用原生方法</p>
+<ul class="simple">
+<li>Math库</li>
+<li>用于CSS查询的querySelector() and querySelectorAll()</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="raphael.html" title="raphael"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="node.html" title="node"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
