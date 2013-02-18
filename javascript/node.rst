@@ -133,3 +133,16 @@ methodOverride在req.method中存放method，用来rest，原来的method放在r
 cookieParser将cookie放到req.cookies中
 
 session提供了基于memory等的session操作，通过req.session访问
+
+常用库
+==========
+
+jinja(Swig): django模板
+
+jshint: 代码静态检查
+
+mocha: js test framework
+
+should: node中使用，扩展了Object
+
+robotskirt: markdown解析

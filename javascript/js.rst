@@ -421,3 +421,9 @@ bootstrap-transition.js返回css transition的函数名，例如chrome下为{end
 
 bootstrap-dropdown.js通过toggleClass('open')实现下拉列表的显示和隐藏
 
+underscore
+--------------
+
+生成_的新对象，将obj保存在this._wrapped中，以便通过value方法取得最终值。
+
+chain方法标记_chain为true，以供内部函数result返回新的_对象来进行链式调用

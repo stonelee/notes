@@ -275,3 +275,6 @@ ssh scp sftp访问远程机器免输入密码
 
 代码统计: `cloc <http://cloc.sourceforge.net/>`_
 
+xml格式化::
+
+  xmllint --format

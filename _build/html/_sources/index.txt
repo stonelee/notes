@@ -25,6 +25,7 @@ Contents:
    server/index.rst
    web/index.rst
    algorithm/index.rst
+   life/index.rst
 
 Indices and tables
 ==================
