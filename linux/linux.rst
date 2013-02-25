@@ -122,6 +122,10 @@ top -p 指定pid或列表
 
   uname -a
 
+关机::
+
+  shutdown -h now
+
 rpm程序安装
 ============
 

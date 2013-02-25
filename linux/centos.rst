@@ -151,3 +151,10 @@ nginx.conf中配置user为网站目录所有者::
 结果::
 
   -rwxr-xr-x. 1 stonelee stonelee 342 Dec 26 09:59 index.html
+
+mongodb
+===============
+
+首先要启动 mongod
+
+报错：mkdir -p /data/db

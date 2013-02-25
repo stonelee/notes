@@ -28,6 +28,10 @@ npm install -g会安装为命令行工具，但是node环境下依然无法requi
 
 	npm install some.tgz --verbose
 
+控制台彩色字体::
+
+  node -e 'process.stdout.write("\033[32m\033[1mhello world\033[0m")'
+
 socketio
 ==========
 

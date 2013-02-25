@@ -7,6 +7,67 @@ js
 技巧
 =============================
 
+变量声明会自动提前到作用域的顶部，但是赋值不会提前::
+
+  if (!("a" in window)) {
+      var a = 1;
+  }
+  alert(a);
+
+相当于::
+
+  var a;
+  if (!("a" in window)) {
+      a = 1;
+  }
+  alert(a);
+
+因此答案为undefined
+
+
+函数声明::
+
+  function functionName(arg1, arg2){
+      //函数体
+  }
+
+函数表达式::
+
+ b = function a(x) {}
+
+函数声明会提前，函数表达式相当于变量赋值，没有新的声明。
+
+函数声明会覆盖变量声明，但不会覆盖变量赋值::
+
+  function value(){
+      return 1;
+  }
+  var value;
+  alert(typeof value);    //"function"
+
+赋值后::
+
+  function value(){
+      return 1;
+  }
+  var value = 1;
+  alert(typeof value);    //"number"
+
+arguments会更改传入参数::
+
+  function b(x, y, a) {
+      arguments[2] = 10;
+      alert(a);              //10
+  }
+  b(1, 2, 3);
+
+如果第一个参数传入的对象调用者是null或者undefined，call方法将把全局对象（也就是window）作为this的值::
+
+  function a() {
+      alert(this);     //[object window]
+  }
+  a.call(null);
+
 case语句如果不使用break，会继续执行下面的case语句，而不再判断条件::
 
   switch ('y') {
