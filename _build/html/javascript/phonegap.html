@@ -1,0 +1,153 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PhoneGap &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="javascript" href="index.html" />
+    <link rel="next" title="raphael" href="raphael.html" />
+    <link rel="prev" title="高性能JavaScript" href="performance.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="raphael.html" title="raphael"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="performance.html" title="高性能JavaScript"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">PhoneGap</a><ul>
+<li><a class="reference internal" href="#id2">PhoneGap使用</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="performance.html"
+                        title="previous chapter">高性能JavaScript</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="raphael.html"
+                        title="next chapter">raphael</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/javascript/phonegap.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="phonegap">
+<span id="id1"></span><h1>PhoneGap<a class="headerlink" href="#phonegap" title="Permalink to this headline">¶</a></h1>
+<p>jre中:</p>
+<div class="highlight-python"><pre>keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000</pre>
+</div>
+<div class="section" id="id2">
+<h2>PhoneGap使用<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>环境变量中加入android sdk，jdk，ant:</p>
+<div class="highlight-python"><pre>E:\mobile\adt-bundle-windows-x86\sdk\platform-tools;
+E:\mobile\adt-bundle-windows-x86\sdk\tools;
+D:\Program Files\Java\jdk1.6.0_20\bin;
+E:\mobile\apache-ant-1.8.4\bin;</pre>
+</div>
+<p>创建工程:</p>
+<div class="highlight-python"><pre>E:\mobile\phonegap-master\lib\android\bin\create.bat E:\mobile\my_project info.stonelee.demo Demo</pre>
+</div>
+<p>报错：没有文件扩展“.js”的脚本引擎。
+注册表把[HKEY_CLASSES_ROOT.js] 项下的那个默认值改成 &#8220;JSFile&#8221; 就可以正常运行JS 文件了.</p>
+<p>build:</p>
+<div class="highlight-python"><pre>$ /path/to/my_new_cordova_project/cordova/build.bat</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="raphael.html" title="raphael"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="performance.html" title="高性能JavaScript"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >javascript</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

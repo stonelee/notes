@@ -5,7 +5,6 @@
 css
 ***************
 
-
 缩进2字符::
 
   text-indent: 2em;
@@ -100,6 +99,10 @@ float vs position
   *display: inline;
   *zoom: 1;
 
+yui grid: http://yui.yahooapis.com/3.3.0/build/cssgrids/grids.css
+
+inline-block 前世今生: http://ued.taobao.com/blog/2012/08/15/inline-block/
+
 position
 ============
 
@@ -159,6 +162,7 @@ hasLayout
 =============
 
 更加直观地了解hasLayout和BFC: http://www.w3ctech.com/p/1101
+
 On having layout: http://www.satzansatz.de/cssd/onhavinglayout.html
 
 默认拥有layout的元素::
@@ -392,3 +396,9 @@ chrome
 ===========
 
 button 有默认的margin:2px
+
+HTML5 Doctype下，如果div包含img，div会自动增加4px的bottom margin::
+
+  原因：这是为了方便在div中直接添加text
+  解决方法：div设置line-height:0; 或者 img设置display:block;
+

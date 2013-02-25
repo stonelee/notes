@@ -204,6 +204,8 @@ postion:absolute/fixed</pre>
 *display: inline;
 *zoom: 1;</pre>
 </div>
+<p>yui grid: <a class="reference external" href="http://yui.yahooapis.com/3.3.0/build/cssgrids/grids.css">http://yui.yahooapis.com/3.3.0/build/cssgrids/grids.css</a></p>
+<p>inline-block 前世今生: <a class="reference external" href="http://ued.taobao.com/blog/2012/08/15/inline-block/">http://ued.taobao.com/blog/2012/08/15/inline-block/</a></p>
 <div class="section" id="position">
 <h3>position<a class="headerlink" href="#position" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -255,8 +257,8 @@ postion:absolute/fixed</pre>
 </div>
 <div class="section" id="haslayout">
 <h3>hasLayout<a class="headerlink" href="#haslayout" title="Permalink to this headline">¶</a></h3>
-<p>更加直观地了解hasLayout和BFC: <a class="reference external" href="http://www.w3ctech.com/p/1101">http://www.w3ctech.com/p/1101</a>
-On having layout: <a class="reference external" href="http://www.satzansatz.de/cssd/onhavinglayout.html">http://www.satzansatz.de/cssd/onhavinglayout.html</a></p>
+<p>更加直观地了解hasLayout和BFC: <a class="reference external" href="http://www.w3ctech.com/p/1101">http://www.w3ctech.com/p/1101</a></p>
+<p>On having layout: <a class="reference external" href="http://www.satzansatz.de/cssd/onhavinglayout.html">http://www.satzansatz.de/cssd/onhavinglayout.html</a></p>
 <p>默认拥有layout的元素:</p>
 <div class="highlight-python"><pre>&lt;html&gt;, &lt;body&gt;
 &lt;table&gt;, &lt;tr&gt;, &lt;th&gt;, &lt;td&gt;
@@ -447,6 +449,10 @@ theme 易变，特别指定
 <div class="section" id="chrome">
 <h3>chrome<a class="headerlink" href="#chrome" title="Permalink to this headline">¶</a></h3>
 <p>button 有默认的margin:2px</p>
+<p>HTML5 Doctype下，如果div包含img，div会自动增加4px的bottom margin:</p>
+<div class="highlight-python"><pre>原因：这是为了方便在div中直接添加text
+解决方法：div设置line-height:0; 或者 img设置display:block;</pre>
+</div>
 </div>
 </div>
 </div>

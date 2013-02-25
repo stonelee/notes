@@ -7,6 +7,12 @@ js
 技巧
 =============================
 
+onclick事件中，如果return false会阻止默认事件发生::
+
+    eleBtn.onclick = function() {
+      return false;
+    };
+
 变量声明会自动提前到作用域的顶部，但是赋值不会提前::
 
   if (!("a" in window)) {

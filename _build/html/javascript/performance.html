@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
     <link rel="up" title="javascript" href="index.html" />
-    <link rel="next" title="raphael" href="raphael.html" />
+    <link rel="next" title="PhoneGap" href="phonegap.html" />
     <link rel="prev" title="node" href="node.html" /> 
   </head>
   <body>
@@ -43,7 +43,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="raphael.html" title="raphael"
+          <a href="phonegap.html" title="PhoneGap"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="node.html" title="node"
@@ -60,8 +60,13 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">高性能JavaScript</a><ul>
+<li><a class="reference internal" href="#chapter-2-data-access">Chapter 2 Data Access</a></li>
+<li><a class="reference internal" href="#chapter-3-dom-scripting">CHAPTER 3 DOM Scripting</a></li>
+<li><a class="reference internal" href="#chapter-4-algorithms-and-flow-control">CHAPTER 4 Algorithms and Flow Control</a></li>
 <li><a class="reference internal" href="#chapter-6-responsive-interfaces">Chapter 6 Responsive Interfaces</a></li>
+<li><a class="reference internal" href="#chapter-7-ajax">Chapter 7 Ajax</a></li>
 <li><a class="reference internal" href="#chapter-8-programming-practices">Chapter 8 Programming Practices</a></li>
+<li><a class="reference internal" href="#chapter-9-building-and-deploying-high-performance-javascript-applications">CHAPTER 9 Building and Deploying High-Performance JavaScript Applications</a></li>
 </ul>
 </li>
 </ul>
@@ -70,8 +75,8 @@
   <p class="topless"><a href="node.html"
                         title="previous chapter">node</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="raphael.html"
-                        title="next chapter">raphael</a></p>
+  <p class="topless"><a href="phonegap.html"
+                        title="next chapter">PhoneGap</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/javascript/performance.txt"
@@ -100,6 +105,205 @@
             
   <div class="section" id="javascript">
 <span id="performance"></span><h1>高性能JavaScript<a class="headerlink" href="#javascript" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="chapter-2-data-access">
+<h2>Chapter 2 Data Access<a class="headerlink" href="#chapter-2-data-access" title="Permalink to this headline">¶</a></h2>
+<p>越现代的浏览器这些优化越不明显</p>
+<p>Literal values和Variables要快于Array items和Object members</p>
+<p>作用域链越深，读写越慢。因此如果使用全局变量多于一次，可以使用内部变量进行引用</p>
+<p>with可以改变作用域链，会将with指定值的作用域作为第一链，而原来的内部变量成为第二链，反而影响了调用性能</p>
+<p>catch也会改变作用域链，因此在catch中的语句越少越好，可以采用如下方法优化:</p>
+<div class="highlight-python"><pre>try {
+    methodThatMightCauseAnError();
+} catch (ex){
+    handleError(ex);  //delegate to handler method
+}</pre>
+</div>
+<p>with，catch，eval都是dynamic scopes，也就是作用域只能在代码执行过程中确定，而静态分析无法判断，
+因此无法在现代浏览器中进行优化，所以要谨慎使用</p>
+<p>闭包会创建自己的作用域链，因此会占用更多的内存。
+尤其IE中的DOM Objects不是原生Javascript对象，因此在销毁时会导致内存泄露。
+而且闭包作为out of scope变量，引用速度不如内部变量快，可以通过内部变量引用的方式解决。</p>
+<p>Firefox, Safari, and Chrome可以使用__proto__取得其原型</p>
+<p>原型链越长，方法调用越慢</p>
+<p>nested调用越长越慢，例如window.location.href</p>
+<p>如果方法不存在将更慢</p>
+<p>如果在某函数中调用某对象的方法超过一次，最好将其使用内部对象进行引用，但是方法使用this的话除外</p>
+</div>
+<div class="section" id="chapter-3-dom-scripting">
+<h2>CHAPTER 3 DOM Scripting<a class="headerlink" href="#chapter-3-dom-scripting" title="Permalink to this headline">¶</a></h2>
+<p>DOM scripting is expensive</p>
+<ul class="simple">
+<li>IE中的js实现是JScript，位于jscript.dll;DOM实现位于mshtml.dll，内部称为Trident</li>
+<li>Safari使用WebKit’s WebCore实现DOM,js引擎为dubbed SquirrelFish</li>
+<li>Chrome使用WebKit渲染页面，js引擎为V8</li>
+<li>Firefox使用Gecko渲染页面，js引擎为SpiderMonkey</li>
+</ul>
+<p>两者的独立使得DOM操作比较慢（通信需要代价）</p>
+<p>innerHTML比标准createElement要快一些（IE6中快3倍），但是在webkit中要慢一些。因此更应该从可读性、可维护性方面进行考虑。</p>
+<p>使用element.cloneNode()来代替document.createElement()会快一丁点</p>
+<p>HTML Collections是类似array的节点数组，
+例如document.getElementsByName()，document.getElementsByClassName()，document.getElementsByTagName()，
+document.images，document.links，document.forms，document.forms[0].elements（All fields in the first form on the page）.
+会在document更新时自动更新，尤其在循环中会有严重的效率问题，因此应在循环外面使用内部变量引用（包括要使用的length）:</p>
+<div class="highlight-python"><pre>// length导致不停的查询，结果死循环
+var alldivs = document.getElementsByTagName('div');
+for (var i = 0; i &lt; alldivs.length; i++) {
+    document.body.appendChild(document.createElement('div'))
+}</pre>
+</div>
+<p>在遍历dom的问题上，nextSibling比childNodes方法在IE上要好的多</p>
+<p>childNodes, firstChild, nextSibling这样的DOM属性不区分element nodes和其他节点（例如comments，text nodes，空格换行）.
+现代浏览器提供了只获取element的属性，IE中只有children，但是IE中的children要远远快于childNodes:</p>
+<div class="highlight-python"><pre>children                          childNodes
+childElementCount                 childNodes.length
+firstElementChild                 firstChild
+lastElementChild                  lastChild
+nextElementSibling                nextSibling
+previousElementSibling            previousSibling</pre>
+</div>
+<p>现代浏览器（包括IE8）中document.querySelectorAll(&#8216;#menu a&#8217;)，不会随document而自动更新，比自己构建快3倍左右</p>
+<p>querySelector返回第一个</p>
+<p>浏览器完成下载后，会创建DOM tree和render tree，其中hidden DOM elements不会出现在render tree中.
+DOM改变如果对元素尺寸有影响，浏览器会重新计算该元素以及相关元素的render tree，即reflow；然后重绘该部分，即repaint.
+如果没有影响尺寸，如更改背景色，则没有reflow，只有repaint.
+reflow和repaint非常昂贵，会使得界面无法交互.</p>
+<p>为优化性能，浏览器会自动将多个变化排队进行批量处理，
+但是如果用户要取得layout信息（无论与变化元素有无关系），都会发生强制的重绘，从而在各浏览器中导致性能的略微下降，
+因此在变化过程中尽量不使用以下方法:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">offsetTop</span><span class="p">,</span> <span class="n">offsetLeft</span><span class="p">,</span> <span class="n">offsetWidth</span><span class="p">,</span> <span class="n">offsetHeight</span>
+<span class="n">scrollTop</span><span class="p">,</span> <span class="n">scrollLeft</span><span class="p">,</span> <span class="n">scrollWidth</span><span class="p">,</span> <span class="n">scrollHeight</span>
+<span class="n">clientTop</span><span class="p">,</span> <span class="n">clientLeft</span><span class="p">,</span> <span class="n">clientWidth</span><span class="p">,</span> <span class="n">clientHeight</span>
+<span class="n">getComputedStyle</span><span class="p">()</span> <span class="p">(</span><span class="n">currentStyle</span> <span class="ow">in</span> <span class="n">IE</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>特别注意如果有timeout异步查询layout时，很有可能会导致批量处理失效</p>
+<p>尽量减少变化的数量</p>
+<p>优化style:</p>
+<div class="highlight-python"><pre>var el = document.getElementById('mydiv');
+el.style.borderLeft = '1px';
+el.style.borderRight = '2px';
+el.style.padding = '5px';</pre>
+</div>
+<p>优化为:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">el</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">cssText</span> <span class="o">=</span> <span class="s">&#39;border-left: 1px; border-right: 2px; padding: 5px;&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>也可以直接更改className:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">el</span><span class="o">.</span><span class="n">className</span> <span class="o">=</span> <span class="s">&#39;active&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>优化dom:</p>
+<div class="highlight-python"><pre>1.先隐藏，然后更改，然后显示
+var ul = document.getElementById('mylist');
+ul.style.display = 'none';
+appendDataToElement(ul, data);
+ul.style.display = 'block';
+
+2.使用document fragment（推荐）
+var fragment = document.createDocumentFragment();
+appendDataToElement(fragment, data);
+document.getElementById('mylist').appendChild(fragment);
+
+3.clone node
+var old = document.getElementById('mylist');
+var clone = old.cloneNode(true);
+appendDataToElement(clone, data);
+old.parentNode.replaceChild(clone, old);</pre>
+</div>
+<p>将获取的尺寸尽量保存为内部变量，减少重复查询</p>
+<p>避免小范围的更改引起大范围的重绘:</p>
+<div class="highlight-python"><pre>使用absolute position脱离文档流，然后动画，最后恢复position使得整体重绘</pre>
+</div>
+<p>IE7之后的:hover可以应用到任何元素，但是如果应用元素过多，会导致严重的性能问题。常见于大table中使用tr:hover改变背景色</p>
+<p>利用事件代理减少事件绑定:</p>
+<div class="highlight-python"><pre>&lt;ul id="menu"&gt;&lt;li&gt;&lt;a href="menu1.html"&gt;menu #1&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</pre>
+</div>
+<p>不支持js则直接跳转页面，支持js则调用ajax局部刷新:</p>
+<div class="highlight-python"><pre>document.getElementById('menu').onclick = function(e) {
+    // x-browser target
+    e = e || window.event;
+    var target = e.target || e.srcElement;
+    var pageid, hrefparts;
+    // only interesed in hrefs
+    // exit the function on non-link clicks
+    if (target.nodeName !== 'A') {
+        return;
+    }
+    // figure out page ID from the link
+    hrefparts = target.href.split('/');
+    pageid = hrefparts[hrefparts.length - 1];
+    pageid = pageid.replace('.html', '');
+    // update the page
+    ajaxRequest('xhr.php?page=' + id, updatePageContents);
+    // x-browser prevent default action and cancel bubbling
+    if (typeof e.preventDefault === 'function') {
+        e.preventDefault();
+        e.stopPropagation();
+    } else {
+        e.returnValue = false;
+        e.cancelBubble = true;
+    }
+};</pre>
+</div>
+</div>
+<div class="section" id="chapter-4-algorithms-and-flow-control">
+<h2>CHAPTER 4 Algorithms and Flow Control<a class="headerlink" href="#chapter-4-algorithms-and-flow-control" title="Permalink to this headline">¶</a></h2>
+<p>for in比其他循环方式慢7倍，不要用于array循环</p>
+<p>优化循环的方法为减少每次的工作量和减少循环次数</p>
+<p>原始:</p>
+<div class="highlight-python"><pre>for (var i=0; i &lt; items.length; i++){</pre>
+</div>
+<p>避免重复计算length:</p>
+<div class="highlight-python"><pre>for (var i=0, len=items.length; i &lt; len; i++){</pre>
+</div>
+<p>反向循环，省掉比较操作，速度更快，缺点是次序颠倒，可读性下降:</p>
+<div class="highlight-python"><pre>for (var i=items.length; i--; ){</pre>
+</div>
+<p>Duff’s Device可以用来减少循环次数，即在每次循环中执行多步循环操作:</p>
+<div class="highlight-python"><pre>//credit: Jeff Greenberg
+var iterations = Math.floor(items.length / 8),
+    startAt    = items.length % 8,
+    i          = 0;
+do {
+    switch(startAt){
+        case 0: process(items[i++]);
+        case 7: process(items[i++]);
+        case 6: process(items[i++]);
+        case 5: process(items[i++]);
+        case 4: process(items[i++]);
+        case 3: process(items[i++]);
+        case 2: process(items[i++]);
+        case 1: process(items[i++]);
+    }
+    startAt = 0;
+} while (--iterations);</pre>
+</div>
+<p>直接展开甚至会更快:</p>
+<div class="highlight-python"><pre>//credit: Jeff Greenberg
+var i = items.length % 8;
+while(i){
+    process(items[i--]);
+}
+i = Math.floor(items.length / 8);
+while(i){
+    process(items[i--]);
+    process(items[i--]);
+    process(items[i--]);
+    process(items[i--]);
+    process(items[i--]);
+    process(items[i--]);
+    process(items[i--]);
+    process(items[i--]);
+}</pre>
+</div>
+<p>超过1000的循环才会比较明显</p>
+<p>原生的forEach虽然好用，但是效率上可能比较慢</p>
+<p>两者比较或者不同类型值比较实用if-else，如果数量比较多用switch。switch效率比较高</p>
+<p>最常发生的情况放到前面</p>
+<p>在数量比较多时，loopup table更快</p>
+<p>浏览器有call stack size的限制，如果迭代不好可能会超出从而引发异常提示，可以使用try-catch捕获
+可以使用循环来代替迭代，使用memoization</p>
+</div>
 <div class="section" id="chapter-6-responsive-interfaces">
 <h2>Chapter 6 Responsive Interfaces<a class="headerlink" href="#chapter-6-responsive-interfaces" title="Permalink to this headline">¶</a></h2>
 <p>js代码和UI更新（例如按钮按下）以队列的形式在浏览器UI线程中依次执行</p>
@@ -148,6 +352,26 @@ do {
 <p>对于不容易分片的耗时任务，例如大量json解析，可以使用Web Worker</p>
 <p>每个worker使用自己的线程，不会影响UI线程的正常响应</p>
 <p>通过onmessage(event)，postMessage来进行UI与worker，或者worker之间的通信，传递格式可以为object，Array和基本类型</p>
+</div>
+<div class="section" id="chapter-7-ajax">
+<h2>Chapter 7 Ajax<a class="headerlink" href="#chapter-7-ajax" title="Permalink to this headline">¶</a></h2>
+<p>readyState === 3 在接收过程中响应事件，可以更快的做出反应，但是IE6,7不支持</p>
+<p>multipart XHR通过一个HTTP请求中返回多种数据，缺点是没有缓存</p>
+<p>如果只想发送数据，例如发送log，可以使用beacons方法，这是最快的，而且不会更改客户端:</p>
+<div class="highlight-python"><pre>var url = '/status_tracker.php';
+var params = [
+    'step=2',
+    'time=1248027314'
+];
+(new Image()).src = url + '?' + params.join('&amp;');</pre>
+</div>
+<p>IE8以上支持xpath，但是不太完整</p>
+<p>jsonp不需要parse时间，因此比json更快</p>
+<p>当用户CPU比带宽更重要时直接传输html</p>
+<p>如果要自定义格式，可以使用chr(1)（u0001）之类的ASCII字符作为分隔符</p>
+<p>浏览器缓存ajax请求:</p>
+<div class="highlight-python"><pre>client使用GET请求，服务端设置Expires header</pre>
+</div>
 </div>
 <div class="section" id="chapter-8-programming-practices">
 <h2>Chapter 8 Programming Practices<a class="headerlink" href="#chapter-8-programming-practices" title="Permalink to this headline">¶</a></h2>
@@ -218,6 +442,79 @@ if (options &amp; c) {}</pre>
 <li>用于CSS查询的querySelector() and querySelectorAll()</li>
 </ul>
 </div>
+<div class="section" id="chapter-9-building-and-deploying-high-performance-javascript-applications">
+<h2>CHAPTER 9 Building and Deploying High-Performance JavaScript Applications<a class="headerlink" href="#chapter-9-building-and-deploying-high-performance-javascript-applications" title="Permalink to this headline">¶</a></h2>
+<p>可用工具Apache Ant,Rake,make</p>
+<p>js打包，目的是减少HTTP request数量，需要注意打包顺序来保持依赖</p>
+<p>js预处理，可以借助C preprocessor (cpp)，使用指定宏进行处理，例如:</p>
+<div class="highlight-python"><pre>#ifdef DEBUG
+(new YAHOO.util.YUILoader({
+  require: ['profiler'],
+  onSuccess: function(o) {
+    YAHOO.tool.Profiler.registerFunction('foo', window);
+  }
+})).insert();
+#endif</pre>
+</div>
+<p>js最小化，目的是减少文件体积，增加下载速度，同时也鼓励写更多的注释
+JSMin 去掉注释和空格
+YUI Compressor 压缩率更高。用更短的变量名，去掉不必要的符号，例如:</p>
+<div class="highlight-python"><pre>foo["bar"] -&gt;foo.bar
+{"foo":"bar"} -&gt; {foo:"bar"}
+'aaa\'bbb' -&gt;  "aaa'bbb"
+"foo"+"bar" -&gt;  "foobar"</pre>
+</div>
+<p>写法影响压缩率。
+例如使用内部变量指代objects/values，使用闭包，使用常量代替字符，
+避免使用eval，Function，以及setTimeout，setInterval的字符串函数，with关键字:</p>
+<div class="highlight-python"><pre>function toggle (element) {
+  var YUD = YAHOO.util.Dom, className = "selected";
+  if (YUD.hasClass(element, className)){
+    YUD.removeClass(element, className);
+  } else {
+    YUD.addClass(element, className);
+  }
+}</pre>
+</div>
+<p>但是可能会影响zip后的文件大小，对性能也可能会产生不好影响，因此不要滥用。</p>
+<p>Closure Compiler 更高级，更激进.
+在firefox中提供Closure Inspector来对源文件进行映射进而调试，但是如果其他浏览器出现问题则不好调试</p>
+<p>everything that can be done at buildtime should not be done at runtime</p>
+<p>js压缩</p>
+<p>浏览器request时通过Accept-Encoding通知web server浏览器支持什么编码的数据.
+可能值为gzip, compress, deflate等</p>
+<p>服务器选择最适合的编码方式，通过Content-Encoding通知浏览器:</p>
+<div class="highlight-python"><pre>Content-Encoding:gzip</pre>
+</div>
+<p>gzip主要用于text，包括js的压缩.
+图片，pdf等已经被压缩过了，因此不需要gzip</p>
+<p>Apache mod_gzip/mod_deflate</p>
+<p>Packer可以进一步压缩，但是在运行时会有速度损耗；通常用于不支持gzip的慢速链接中。</p>
+<p>通常情况下YUI Compressor+gzip已经足够.</p>
+<p>js缓存</p>
+<p>可以显著提升加载速度.
+应该被应用于所有静态文件，包括js，images等</p>
+<p>服务器通过Expires response header告诉浏览器存储时间:</p>
+<div class="highlight-python"><pre>Expires: Thu, 01 Dec 1994 16:00:00 GMT</pre>
+</div>
+<p>根据规范，不应该设置一年以上的过期时间</p>
+<p>需要注意有些手机浏览器对cache有限制，例如iphone上的safari不能缓存25kb以上的数据，因此需要对其优化</p>
+<p>使用浏览器存储，通过js控制过期</p>
+<p>HTML 5 offline application cache,
+a manifest file listing the resources to be cached:</p>
+<div class="highlight-python"><pre>&lt;!DOCTYPE html&gt;
+&lt;html manifest="demo.manifest"&gt;</pre>
+</div>
+<p>通过自动添加timestamp的方式改名，来更新被缓存的文件</p>
+<p>使用CDN实现性能，扩展，稳定:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">yui</span><span class="o">.</span><span class="n">yahooapis</span><span class="o">.</span><span class="n">com</span>
+<span class="n">ajax</span><span class="o">.</span><span class="n">googleapis</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+<p>部署</p>
+<p>复制多个文件到多个远程主机，运行一系列命令，CDN分发</p>
+<p>FTP SCP ssh</p>
+</div>
 </div>
 
 
@@ -233,7 +530,7 @@ if (options &amp; c) {}</pre>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="raphael.html" title="raphael"
+          <a href="phonegap.html" title="PhoneGap"
              >next</a> |</li>
         <li class="right" >
           <a href="node.html" title="node"

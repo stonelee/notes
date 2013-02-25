@@ -122,6 +122,11 @@
 <span id="id1"></span><h1>js<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
 <h2>技巧<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>onclick事件中，如果return false会阻止默认事件发生:</p>
+<div class="highlight-python"><pre>eleBtn.onclick = function() {
+  return false;
+};</pre>
+</div>
 <p>变量声明会自动提前到作用域的顶部，但是赋值不会提前:</p>
 <div class="highlight-python"><pre>if (!("a" in window)) {
     var a = 1;
