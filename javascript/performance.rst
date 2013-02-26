@@ -4,6 +4,111 @@
 高性能JavaScript
 ******************
 
+Chapter 1 Loading and Execution
+-----------------------------------
+
+js天生是阻塞的，即js代码运行时，会阻塞ui等操作
+
+由于js代码执行可能会对页面产生影响，
+因此<script>中的代码，无论是inline的或者是通过src调用外部代码，都会阻止浏览器对页面下载和渲染，
+要等到js代码执行完毕才可以继续。
+
+浏览器在遇到body标签时才开始渲染，因此如果js文件放在head中，会在其执行完毕前，给用户显示空白页面。
+
+多个js文件加载顺序::
+
+  file1.js加载 file1.js执行 file2.js加载 file2.js执行
+
+Internet Explorer 8, Firefox 3.5, Safari 4, and Chrome 2中js可以并行加载，
+但是js加载依然会阻塞其他资源的加载，例如images
+
+为防止影响整个页面的加载，所有<script>都应该放置在body标签的底部
+
+为了保证渲染的正确性，引用外部css的<link>后面的inline script会等待css下载完毕，因此不要将inline script放在link标签后面
+
+合并多个js文件可以有效加快页面加载速度，一般使用工具合并.
+Yahoo! combo handler可以动态合并YUI文件
+
+加载大js文件依然会阻塞浏览器，因此需要不阻塞浏览器的js
+
+非阻塞js的原理是在页面加载后才加载js源文件
+
+1. Deferred Scripts
+
+IE和Firefox3.5+，其他浏览器会忽略::
+
+  <script type="text/javascript" src="file1.js" defer></script>
+
+标识了该文件不会修改DOM，因此可以并行加载，直到DOM完全加载完毕，然后执行（在onload事件触发之前）::
+
+  <script defer>
+    alert("defer");
+  </script>
+  <script>
+    alert("script");
+  </script>
+  <script>
+    window.onload = function(){
+      alert("load");
+    };
+  </script>
+
+  IE中 “script”, “defer”, and “load”
+  chrome中 “defer”, “script”, and “load”
+
+2. Dynamic Script Elements
+
+::
+
+  function loadScript(url, callback){
+    var script = document.createElement("script")
+    script.type = "text/javascript";
+    if (script.readyState){ //IE
+      script.onreadystatechange = function(){
+        if (script.readyState == "loaded" || script.readyState == "complete"){
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function(){
+        callback();
+      };
+    }
+  }
+  script.src = url;
+  document.getElementsByTagName("head")[0].appendChild(script);
+
+加到head中要更安全，如果在page load时加到body中，IE中可能会报错"operation aborted"
+
+如果动态加载的脚本是为了给其他脚本提供调用接口，那么确定其完成时间非常重要
+
+动态加载完成后代码会立即执行，执行顺序不一定，因此需要在回调中予以保证
+
+Firefox和Opera中会等待直到前面的动态脚本执行完成，因此指定顺序就是执行顺序
+
+3. XMLHttpRequest Script Injection
+
+::
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("get", "file1.js", true);
+  xhr.onreadystatechange = function(){
+    if (xhr.readyState == 4){
+      if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304){
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.text = xhr.responseText;
+        document.body.appendChild(script);
+      }
+    }
+  };
+  xhr.send(null);
+
+优点是js执行很灵活，可以随意控制执行顺序
+
+缺点是有跨域问题，有CDN的话不能使用
+
 Chapter 2 Data Access
 ------------------------
 
