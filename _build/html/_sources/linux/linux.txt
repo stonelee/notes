@@ -282,3 +282,23 @@ ssh scp sftp访问远程机器免输入密码
 xml格式化::
 
   xmllint --format
+
+Putty乱码
+==============
+
+Window - Appearance - Font settings 选Fixedsys
+
+translation - Remote character set 选UTF-8
+
+使用GIMP使图片背景透明化
+=========================
+
+* 打开图片。
+* 选gimp第一行，第五个图标(按颜色选择区域)
+* 选定背景区域
+* 选择-反转
+* 编辑-复制
+* 新建-填充类型设置为”透明“
+* 粘贴
+* 文件-另存为-按扩展名-xxx.gif-确定-按动画存储-导出-取消反复循环-确定
+

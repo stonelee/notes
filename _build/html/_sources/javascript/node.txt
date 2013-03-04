@@ -4,6 +4,9 @@
 node
 ***************
 
+* module.exports定义的函数可以require后直接调用
+* exports定义的函数无法调用，只能引用
+
 对于有package.json的node项目，使用npm安装其依赖，-g使得命令行可以调用bin目录中的程序::
 
 	# npm install -g

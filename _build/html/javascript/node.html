@@ -102,6 +102,10 @@
             
   <div class="section" id="node">
 <span id="id1"></span><h1>node<a class="headerlink" href="#node" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>module.exports定义的函数可以require后直接调用</li>
+<li>exports定义的函数无法调用，只能引用</li>
+</ul>
 <p>对于有package.json的node项目，使用npm安装其依赖，-g使得命令行可以调用bin目录中的程序:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># npm install -g</span>
 </pre></div>

@@ -77,7 +77,11 @@
 <li><a class="reference internal" href="#ssh-scp-sftp">ssh scp sftp访问远程机器免输入密码</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id8">工具</a></li>
+<li><a class="reference internal" href="#id8">工具</a><ul>
+<li><a class="reference internal" href="#putty">Putty乱码</a></li>
+<li><a class="reference internal" href="#gimp">使用GIMP使图片背景透明化</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -343,6 +347,24 @@ curl -i -H "Accept: application/json" -X DELETE http://192.168.0.165/persons/per
 <p>xml格式化:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">xmllint</span> <span class="o">--</span><span class="n">format</span>
 </pre></div>
+</div>
+<div class="section" id="putty">
+<h3>Putty乱码<a class="headerlink" href="#putty" title="Permalink to this headline">¶</a></h3>
+<p>Window - Appearance - Font settings 选Fixedsys</p>
+<p>translation - Remote character set 选UTF-8</p>
+</div>
+<div class="section" id="gimp">
+<h3>使用GIMP使图片背景透明化<a class="headerlink" href="#gimp" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>打开图片。</li>
+<li>选gimp第一行，第五个图标(按颜色选择区域)</li>
+<li>选定背景区域</li>
+<li>选择-反转</li>
+<li>编辑-复制</li>
+<li>新建-填充类型设置为”透明“</li>
+<li>粘贴</li>
+<li>文件-另存为-按扩展名-xxx.gif-确定-按动画存储-导出-取消反复循环-确定</li>
+</ul>
 </div>
 </div>
 </div>

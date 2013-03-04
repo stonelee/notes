@@ -63,6 +63,10 @@
 <li><a class="reference internal" href="#id2">插入jquery</a></li>
 <li><a class="reference internal" href="#callbacks">Callbacks</a></li>
 <li><a class="reference internal" href="#deferred">Deferred</a></li>
+<li><a class="reference internal" href="#data">data</a></li>
+<li><a class="reference internal" href="#animate">animate</a></li>
+<li><a class="reference internal" href="#queue">queue</a></li>
+<li><a class="reference internal" href="#expando">expando</a></li>
 <li><a class="reference internal" href="#id3">编译jquery</a></li>
 <li><a class="reference internal" href="#jquery-ui">jquery UI</a></li>
 </ul>
@@ -212,6 +216,41 @@ dfd.done(topic.publish);
 
 dfd.resolve("its been published!");</pre>
 </div>
+<p>CAllbacks（&#8217;once memory&#8217;）适合做hook，参见_queueHooks</p>
+<p>$.Callbacks(&#8216;memory&#8217;) 会在add(fn)后使用原值自动fire，使得后来add的方法也被之前fire过的值调用</p>
+<p>once使得只fire一次</p>
+<div class="highlight-python"><pre>function fn1(value) {
+  console.log('fn1: '+value);
+}
+
+function fn2(value) {
+  console.log('fn2: '+value);
+}
+
+var callbacks = $.Callbacks("once");
+callbacks.add(fn1);
+callbacks.add(fn2);
+callbacks.fire("bar");
+callbacks.fire("foo");
+
+//fn1: bar
+//fn2: bar
+
+var callbacks = $.Callbacks("memory");
+callbacks.add(fn1);
+callbacks.fire("bar");
+callbacks.add(fn2);
+callbacks.fire("foo");
+
+//fn1: bar
+//fn2: bar
+//fn1: foo
+//fn2: foo</pre>
+</div>
+<ul class="simple">
+<li>callbacks.disable() callback完全不再执行</li>
+<li>callbacks.lock() 如果memory，那么原来fire的仍然会执行新的add方法</li>
+</ul>
 </div>
 <div class="section" id="deferred">
 <h2>Deferred<a class="headerlink" href="#deferred" title="Permalink to this headline">¶</a></h2>
@@ -247,6 +286,60 @@ $.when(getData('foo')).then(function(resp){
 
 });</pre>
 </div>
+<p>jQuery.get returns a jqXHR object, which is derived from a Deferred object,
+动画也是</p>
+<p>jQuery.Deferred()构造函数</p>
+<p>jQuery.when()包裹deferreds，如果为一般的object，则为resolved状态</p>
+<p>.promise( [type ] [, target ] )将jquery对象包装为promise object，主要用于动画中。
+默认type为&#8217;fx&#8217;，意思是动画结束后resolved。
+如果有target，将返回包装后的target，而不是新创建一个
+保存在.data()中，因此remove方法会将其删掉，如果想在执行后再删掉，应使用detach，等resolve后removeData</p>
+<div class="highlight-python"><pre>$("button").on( "click", function() {
+  $("p").append( "Started...");
+
+  $("div").each(function( i ) {
+    $( this ).fadeIn().fadeOut( 1000 * (i+1) );
+  });
+
+  $( "div" ).promise().done(function() {
+    $( "p" ).append( " Finished! " );
+  });
+});</pre>
+</div>
+<p>deferred.promise()返回promise，只有与改变执行状态无关的方法（如done，fail），没有resolve，reject等方法，从而对deferred对象进行了保护</p>
+<div class="highlight-python"><pre>state:pending, resolved, rejected
+
+then, always, done, fail, progress
+resolve, resolveWith, reject, rejectWith, notify, notifyWith</pre>
+</div>
+<p>deferred.then( doneFilter [, failFilter ] [, progressFilter ] )同时设定多种状态响应</p>
+<p>always无论接收与否，done接收，fail拒绝</p>
+<p>可以作为filter使用</p>
+</div>
+<div class="section" id="data">
+<h2>data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<p>jQuery.data()可以安全方便的在dom中存取数据，避免内存泄漏</p>
+<p>event handlers等也保存在data中</p>
+<p>xml中不能使用，因为IE不支持</p>
+</div>
+<div class="section" id="animate">
+<h2>animate<a class="headerlink" href="#animate" title="Permalink to this headline">¶</a></h2>
+<p>show，hide以左上角收缩扩展
+slideUp， slideToggle向上收缩，向下扩展</p>
+</div>
+<div class="section" id="queue">
+<h2>queue<a class="headerlink" href="#queue" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>$("div").queue(function () {
+  $(this).addClass("newcolor");
+  $(this).dequeue();
+});</pre>
+</div>
+<p>queue存储到private_data里</p>
+</div>
+<div class="section" id="expando">
+<h2>expando<a class="headerlink" href="#expando" title="Permalink to this headline">¶</a></h2>
+<p>expando 是 expandable object 的缩写，表示可扩展的对象。</p>
+<p>expando property 表示可扩展对象的动态属性，运行时添加的。expando 可以直接表示 expando property.</p>
 </div>
 <div class="section" id="id3">
 <h2>编译jquery<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>

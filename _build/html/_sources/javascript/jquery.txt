@@ -136,6 +136,45 @@ Callbacks实现pub/sub解耦，以及使用deferred进一步解耦::
 
   dfd.resolve("its been published!");
 
+CAllbacks（'once memory'）适合做hook，参见_queueHooks
+
+$.Callbacks('memory') 会在add(fn)后使用原值自动fire，使得后来add的方法也被之前fire过的值调用
+
+once使得只fire一次
+
+::
+
+  function fn1(value) {
+    console.log('fn1: '+value);
+  }
+
+  function fn2(value) {
+    console.log('fn2: '+value);
+  }
+
+  var callbacks = $.Callbacks("once");
+  callbacks.add(fn1);
+  callbacks.add(fn2);
+  callbacks.fire("bar");
+  callbacks.fire("foo");
+
+  //fn1: bar
+  //fn2: bar
+
+  var callbacks = $.Callbacks("memory");
+  callbacks.add(fn1);
+  callbacks.fire("bar");
+  callbacks.add(fn2);
+  callbacks.fire("foo");
+
+  //fn1: bar
+  //fn2: bar
+  //fn1: foo
+  //fn2: foo
+
+* callbacks.disable() callback完全不再执行
+* callbacks.lock() 如果memory，那么原来fire的仍然会执行新的add方法
+
 Deferred
 ====================
 
@@ -173,6 +212,82 @@ Deferred可以用来屏蔽异步/同步操作的差异::
       .appendTo( "#target" ); // insert it into the DOM
 
   });
+
+jQuery.get returns a jqXHR object, which is derived from a Deferred object,
+动画也是
+
+jQuery.Deferred()构造函数
+
+jQuery.when()包裹deferreds，如果为一般的object，则为resolved状态
+
+.promise( [type ] [, target ] )将jquery对象包装为promise object，主要用于动画中。
+默认type为'fx'，意思是动画结束后resolved。
+如果有target，将返回包装后的target，而不是新创建一个
+保存在.data()中，因此remove方法会将其删掉，如果想在执行后再删掉，应使用detach，等resolve后removeData
+
+::
+
+  $("button").on( "click", function() {
+    $("p").append( "Started...");
+
+    $("div").each(function( i ) {
+      $( this ).fadeIn().fadeOut( 1000 * (i+1) );
+    });
+
+    $( "div" ).promise().done(function() {
+      $( "p" ).append( " Finished! " );
+    });
+  });
+
+deferred.promise()返回promise，只有与改变执行状态无关的方法（如done，fail），没有resolve，reject等方法，从而对deferred对象进行了保护
+
+::
+
+  state:pending, resolved, rejected
+
+  then, always, done, fail, progress
+  resolve, resolveWith, reject, rejectWith, notify, notifyWith
+
+deferred.then( doneFilter [, failFilter ] [, progressFilter ] )同时设定多种状态响应
+
+always无论接收与否，done接收，fail拒绝
+
+可以作为filter使用
+
+data
+========
+
+jQuery.data()可以安全方便的在dom中存取数据，避免内存泄漏
+
+event handlers等也保存在data中
+
+xml中不能使用，因为IE不支持
+
+animate
+===========
+
+show，hide以左上角收缩扩展
+slideUp， slideToggle向上收缩，向下扩展
+
+
+queue
+==========
+
+::
+
+  $("div").queue(function () {
+    $(this).addClass("newcolor");
+    $(this).dequeue();
+  });
+
+queue存储到private_data里
+
+expando
+===========
+
+expando 是 expandable object 的缩写，表示可扩展的对象。
+
+expando property 表示可扩展对象的动态属性，运行时添加的。expando 可以直接表示 expando property.
 
 编译jquery
 ================

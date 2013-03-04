@@ -65,6 +65,7 @@
 <li><a class="reference internal" href="#id3">如何建立自己的分支</a></li>
 <li><a class="reference internal" href="#id4">如何将牛人的远程分支更新到自己的本地分支？</a></li>
 <li><a class="reference internal" href="#id5">如何建立远程库进行管理</a></li>
+<li><a class="reference internal" href="#commit">删除错误提交的commit</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#git-pages">git pages</a></li>
@@ -185,6 +186,24 @@ fatal: The remote end hung up unexpectedly</pre>
 </div>
 <p>切换到svg分支:</p>
 <div class="highlight-python"><pre>git checkout svg</pre>
+</div>
+</div>
+<div class="section" id="commit">
+<h3>删除错误提交的commit<a class="headerlink" href="#commit" title="Permalink to this headline">¶</a></h3>
+<p>起因: 不小新把记录了公司服务器IP,账号,密码的文件提交到了git</p>
+<p>方法:</p>
+<div class="highlight-python"><pre>git reset --hard &lt;commit_id&gt;
+git push origin HEAD --force</pre>
+</div>
+<p>其他:</p>
+<div class="highlight-python"><pre>根据–soft –mixed –hard，会对working tree和index和HEAD进行重置:
+git reset –mixed：此为默认方式，不带任何参数的git reset，即时这种方式，它回退到某个版本，只保留源码，回退commit和index信息
+git reset –soft：回退到某个版本，只回退了commit的信息，不会恢复到index file一级。如果还要提交，直接commit即可
+git reset –hard：彻底回退到某个版本，本地的源码也会变为上一个版本的内容
+
+HEAD 最近一个提交
+HEAD^ 上一次
+&lt;commit_id&gt;  每次commit的SHA1值. 可以用git log 看到,也可以在页面上commit标签页里找到.</pre>
 </div>
 </div>
 </div>
