@@ -67,6 +67,11 @@ typeof null == 'object'
 
 $.getScript()加载js文件并执行，不缓存
 
+$('li.item-ii').find('li') is equivalent to $('li', 'li.item-ii')
+
+.is() is often useful inside callbacks, such as event handlers
+positional selectors（如li:first）会在整个document中寻找
+
 插入jquery
 ==============
 
@@ -269,6 +274,7 @@ animate
 show，hide以左上角收缩扩展
 slideUp， slideToggle向上收缩，向下扩展
 
+.animate可以使用数字型的css属性进行动画
 
 queue
 ==========
@@ -281,6 +287,104 @@ queue
   });
 
 queue存储到private_data里
+
+event
+=============
+
+即使on('foo.on')也使用elem.addEventListener
+
+::
+
+  jQuery.Event = function( src, props ) {
+    // Allow instantiation without the 'new' keyword
+    if ( !(this instanceof jQuery.Event) ) {
+      return new jQuery.Event( src, props );
+    }
+
+jQuery._data( cur, "events" )
+
+remove()会将节点连同里面的节点一起删除，包括data和events。
+如果想保留data和event，使用detach()
+
+.addBack()将stack中保存的前面的元素加到当前的集合中
+
+绑定的事件可以查询
+jQuery._data(jQuery("#foo")[0], "events");
+
+bind with data, trigger with data::
+
+  var handler = function(event, data) {
+      //Object {name: "tom"} "d"
+      console.log(event.data,data);
+    };
+
+  jQuery("#foo").on("click", {name:'tom'},handler);
+  jQuery("#foo").trigger("click",'d');
+
+
+可以一次绑定多个事件::
+
+  bind("click mouseover", handler)
+
+命名空间::
+
+  bind("focusin.a",f)
+
+
+自定义事件::
+
+ jQuery.event.special["test"] = {
+    _default: function(e, data) {},
+    setup: function() {},
+    teardown: function() {},
+    add: function(handleObj) {},
+    remove: function() {}
+  };
+
+  bind后触发setup，add
+  trigger后触发绑定的事件，_default
+  unbind后触发remove，teardown
+
+绑定多个事件::
+
+  .bind({
+    "click":handler,
+    "mouseover":handler
+  },2)
+
+只触发一次::
+
+  .one()
+
+1.7jquery使用on off one代替之前的bind，delegate，live
+
+为方便remove和trigger，可以使用命名空间
+
+event handler如果只是return false那么可以只指定false即可
+
+IE8以下change，sbumit等事件没有冒泡，所以jquery进行了模拟
+
+如果没有指定selector，那么事件在该节点上触发或者冒泡到该节点都会响应。
+如果指定了selector，那么只能冒泡才响应.
+
+只能绑定执行on方法时页面中存在的节点，如果要绑定未来的节点，使用冒泡.
+可以用于MVC结构的container元素，或者整个document（存在于head，因此可以在其他元素加载完成前获得）
+
+* 阻止附加的其他事件发生，也阻止冒泡event.stopImmediatePropagation()
+* 阻止冒泡event.stopPropagation()
+* 阻止浏览器默认事件发生event.preventDefault()
+
+return false = event.stopPropagation() + event.preventDefault();
+
+event.target是事件发生的节点，this是事件被附加或者selector的节点，两者可能不一致
+
+object, embed, applet不能附加data，因此不能附加jquery events
+
+focus和blur在W3C标准中不能冒泡，但是jQuery中实现为focusin和focusout可以冒泡？？？
+
+load，scroll, error不能冒泡，IE8以下paste，reset不能冒泡，因此这些事件都不能delegate
+
+window.onerror参数和返回值都不同，因此在jquery中没有支持
 
 expando
 ===========

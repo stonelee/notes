@@ -141,6 +141,36 @@ cookieParser将cookie放到req.cookies中
 
 session提供了基于memory等的session操作，通过req.session访问
 
+grunt
+============
+
+grunt的async提供了promise机制::
+
+  // Tell grunt this task is asynchronous.
+  var done = this.async();
+
+  // Write the contents of the target file to the new location
+  fs.writeFile(pathToWrite, data, function (err) {
+    if (err) throw err;
+    console.log(pathToWrite + ' saved!');
+    // Tell grunt the async task is complete
+    done();
+  });
+
+  http.get(pathToRead, function(res) {
+    // Pipe the data from the response stream to a static file.
+    res.pipe(fs.createWriteStream(pathToWrite));
+    // Tell grunt the async task is complete
+    res.on('end', function() {
+      console.log(pathToWrite + ' saved!');
+      done();
+    });
+  }).on('error', function(e) {
+    console.log("Got error: " + e.message);
+    // Tell grunt the async task failed
+    done(false);
+  });
+
 常用库
 ==========
 

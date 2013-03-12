@@ -302,3 +302,11 @@ translation - Remote character set 选UTF-8
 * 粘贴
 * 文件-另存为-按扩展名-xxx.gif-确定-按动画存储-导出-取消反复循环-确定
 
+启动nginx报错
+=====================
+
+Starting nginx (via systemctl):  Job failed. See system logs and 'systemctl status' for details.
+
+查看::
+
+  cat /var/log/messages|grep nginx

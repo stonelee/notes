@@ -63,6 +63,7 @@
 <li><a class="reference internal" href="#socketio">socketio</a></li>
 <li><a class="reference internal" href="#express">express</a></li>
 <li><a class="reference internal" href="#connect">connect</a></li>
+<li><a class="reference internal" href="#grunt">grunt</a></li>
 <li><a class="reference internal" href="#id2">常用库</a></li>
 </ul>
 </li>
@@ -216,6 +217,35 @@ app.listen(3000);</pre>
 <p>methodOverride在req.method中存放method，用来rest，原来的method放在req.originalMethod中。form中使用_method来提交rest method</p>
 <p>cookieParser将cookie放到req.cookies中</p>
 <p>session提供了基于memory等的session操作，通过req.session访问</p>
+</div>
+<div class="section" id="grunt">
+<h2>grunt<a class="headerlink" href="#grunt" title="Permalink to this headline">¶</a></h2>
+<p>grunt的async提供了promise机制:</p>
+<div class="highlight-python"><pre>// Tell grunt this task is asynchronous.
+var done = this.async();
+
+// Write the contents of the target file to the new location
+fs.writeFile(pathToWrite, data, function (err) {
+  if (err) throw err;
+  console.log(pathToWrite + ' saved!');
+  // Tell grunt the async task is complete
+  done();
+});
+
+http.get(pathToRead, function(res) {
+  // Pipe the data from the response stream to a static file.
+  res.pipe(fs.createWriteStream(pathToWrite));
+  // Tell grunt the async task is complete
+  res.on('end', function() {
+    console.log(pathToWrite + ' saved!');
+    done();
+  });
+}).on('error', function(e) {
+  console.log("Got error: " + e.message);
+  // Tell grunt the async task failed
+  done(false);
+});</pre>
+</div>
 </div>
 <div class="section" id="id2">
 <h2>常用库<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>

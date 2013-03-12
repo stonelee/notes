@@ -7,6 +7,87 @@ js
 技巧
 =============================
 
+对象为引用赋值，原对象改变新对象也跟着改变，但是如果原对象重新赋值，新对象不变::
+
+  var a = {
+    name: 'tom'
+  };
+  var b = a;
+  console.log(b.name); //tom
+
+  a.name = 'jerry';
+  console.log(b.name); //jerry
+
+  a = null;
+  console.log(b.name); //jerry
+
+document.activeElement用来管理DOM焦点，获得DOM中当前获得焦点的元素。
+元素获得焦点的方式有页面加载、用户输入（通常是通过按Tab键）和在代码中调用focus()方法
+
+继承
+--------
+
+::
+
+  function Animal() {}
+  function Dog() {}
+
+Chrome下::
+
+  // 要让 Dog 继承 Animal, 只需：
+  Dog.prototype.__proto__ = Animal.prototype;
+
+  // 实例化后
+  var dog = new Dog();
+  // dog.__proto__ 指向 Dog.prototype
+  // dog.__proto__.__proto__ 指向 Animal.prototype
+  // 原型链已成功建立起来，而且很清晰
+
+IE下只能::
+
+  Dog.prototype=new Animate;
+
+Arale做法::
+
+  function Ctor() { }
+
+  // See: http://jsperf.com/object-create-vs-new-ctor
+  var createProto = Object.__proto__ ?
+    function(proto) {
+      return { __proto__: proto }
+    } :
+    function(proto) {
+      Ctor.prototype = proto
+      return new Ctor()
+    }
+
+  Dog.prototype=createProto(Animate.prototype);
+
+
+下面的a赋值会将a声明提前，但是赋值没有提前，因此undefined++会输出NaN.
+function a(){}与var a=function(){}不同，没有重新给a赋值::
+
+  function fn() {
+    return a++;
+  }
+
+  function fn2() {
+    var a = 1;
+    return fn();
+  }
+  //NaN
+  console.log(fn2());
+
+  var a = 3;
+  //number
+  console.log(typeof a);
+
+  function a() {
+    console.log('d');
+  }
+  //number
+  console.log(typeof a);
+
 onclick事件中，如果return false会阻止默认事件发生::
 
     eleBtn.onclick = function() {

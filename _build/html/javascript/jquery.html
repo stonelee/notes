@@ -66,6 +66,7 @@
 <li><a class="reference internal" href="#data">data</a></li>
 <li><a class="reference internal" href="#animate">animate</a></li>
 <li><a class="reference internal" href="#queue">queue</a></li>
+<li><a class="reference internal" href="#event">event</a></li>
 <li><a class="reference internal" href="#expando">expando</a></li>
 <li><a class="reference internal" href="#id3">编译jquery</a></li>
 <li><a class="reference internal" href="#jquery-ui">jquery UI</a></li>
@@ -154,6 +155,9 @@ empty array with .length == 0
 empty objects with $.isEmptyObject()</pre>
 </div>
 <p>$.getScript()加载js文件并执行，不缓存</p>
+<p>$(&#8216;li.item-ii&#8217;).find(&#8216;li&#8217;) is equivalent to $(&#8216;li&#8217;, &#8216;li.item-ii&#8217;)</p>
+<p>.is() is often useful inside callbacks, such as event handlers
+positional selectors（如li:first）会在整个document中寻找</p>
 <div class="section" id="id2">
 <h2>插入jquery<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><pre>var head=document.getElementsByTagName('head')[0]
@@ -326,6 +330,7 @@ resolve, resolveWith, reject, rejectWith, notify, notifyWith</pre>
 <h2>animate<a class="headerlink" href="#animate" title="Permalink to this headline">¶</a></h2>
 <p>show，hide以左上角收缩扩展
 slideUp， slideToggle向上收缩，向下扩展</p>
+<p>.animate可以使用数字型的css属性进行动画</p>
 </div>
 <div class="section" id="queue">
 <h2>queue<a class="headerlink" href="#queue" title="Permalink to this headline">¶</a></h2>
@@ -335,6 +340,80 @@ slideUp， slideToggle向上收缩，向下扩展</p>
 });</pre>
 </div>
 <p>queue存储到private_data里</p>
+</div>
+<div class="section" id="event">
+<h2>event<a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h2>
+<p>即使on(&#8216;foo.on&#8217;)也使用elem.addEventListener</p>
+<div class="highlight-python"><pre>jQuery.Event = function( src, props ) {
+  // Allow instantiation without the 'new' keyword
+  if ( !(this instanceof jQuery.Event) ) {
+    return new jQuery.Event( src, props );
+  }</pre>
+</div>
+<p>jQuery._data( cur, &#8220;events&#8221; )</p>
+<p>remove()会将节点连同里面的节点一起删除，包括data和events。
+如果想保留data和event，使用detach()</p>
+<p>.addBack()将stack中保存的前面的元素加到当前的集合中</p>
+<p>绑定的事件可以查询
+jQuery._data(jQuery(&#8220;#foo&#8221;)[0], &#8220;events&#8221;);</p>
+<p>bind with data, trigger with data:</p>
+<div class="highlight-python"><pre>var handler = function(event, data) {
+    //Object {name: "tom"} "d"
+    console.log(event.data,data);
+  };
+
+jQuery("#foo").on("click", {name:'tom'},handler);
+jQuery("#foo").trigger("click",'d');</pre>
+</div>
+<p>可以一次绑定多个事件:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bind</span><span class="p">(</span><span class="s">&quot;click mouseover&quot;</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>命名空间:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bind</span><span class="p">(</span><span class="s">&quot;focusin.a&quot;</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>自定义事件:</p>
+<div class="highlight-python"><pre>jQuery.event.special["test"] = {
+   _default: function(e, data) {},
+   setup: function() {},
+   teardown: function() {},
+   add: function(handleObj) {},
+   remove: function() {}
+ };
+
+ bind后触发setup，add
+ trigger后触发绑定的事件，_default
+ unbind后触发remove，teardown</pre>
+</div>
+<p>绑定多个事件:</p>
+<div class="highlight-python"><pre>.bind({
+  "click":handler,
+  "mouseover":handler
+},2)</pre>
+</div>
+<p>只触发一次:</p>
+<div class="highlight-python"><pre>.one()</pre>
+</div>
+<p>1.7jquery使用on off one代替之前的bind，delegate，live</p>
+<p>为方便remove和trigger，可以使用命名空间</p>
+<p>event handler如果只是return false那么可以只指定false即可</p>
+<p>IE8以下change，sbumit等事件没有冒泡，所以jquery进行了模拟</p>
+<p>如果没有指定selector，那么事件在该节点上触发或者冒泡到该节点都会响应。
+如果指定了selector，那么只能冒泡才响应.</p>
+<p>只能绑定执行on方法时页面中存在的节点，如果要绑定未来的节点，使用冒泡.
+可以用于MVC结构的container元素，或者整个document（存在于head，因此可以在其他元素加载完成前获得）</p>
+<ul class="simple">
+<li>阻止附加的其他事件发生，也阻止冒泡event.stopImmediatePropagation()</li>
+<li>阻止冒泡event.stopPropagation()</li>
+<li>阻止浏览器默认事件发生event.preventDefault()</li>
+</ul>
+<p>return false = event.stopPropagation() + event.preventDefault();</p>
+<p>event.target是事件发生的节点，this是事件被附加或者selector的节点，两者可能不一致</p>
+<p>object, embed, applet不能附加data，因此不能附加jquery events</p>
+<p>focus和blur在W3C标准中不能冒泡，但是jQuery中实现为focusin和focusout可以冒泡？？？</p>
+<p>load，scroll, error不能冒泡，IE8以下paste，reset不能冒泡，因此这些事件都不能delegate</p>
+<p>window.onerror参数和返回值都不同，因此在jquery中没有支持</p>
 </div>
 <div class="section" id="expando">
 <h2>expando<a class="headerlink" href="#expando" title="Permalink to this headline">¶</a></h2>

@@ -61,19 +61,20 @@
   <ul>
 <li><a class="reference internal" href="#">js</a><ul>
 <li><a class="reference internal" href="#id2">技巧</a><ul>
+<li><a class="reference internal" href="#id3">继承</a></li>
 <li><a class="reference internal" href="#url">解析url</a></li>
 <li><a class="reference internal" href="#document-documentmode">document.documentMode</a></li>
 <li><a class="reference internal" href="#json">json标准格式</a></li>
-<li><a class="reference internal" href="#id3">位运算</a></li>
+<li><a class="reference internal" href="#id4">位运算</a></li>
 <li><a class="reference internal" href="#escape">escape</a></li>
 <li><a class="reference internal" href="#iframe">通过iframe实现跨域通信</a></li>
 <li><a class="reference internal" href="#constructor">constructor</a></li>
-<li><a class="reference internal" href="#id4">播放声音</a></li>
+<li><a class="reference internal" href="#id5">播放声音</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id5">图形</a></li>
-<li><a class="reference internal" href="#id6">思考</a></li>
-<li><a class="reference internal" href="#id7">js库</a><ul>
+<li><a class="reference internal" href="#id6">图形</a></li>
+<li><a class="reference internal" href="#id7">思考</a></li>
+<li><a class="reference internal" href="#id8">js库</a><ul>
 <li><a class="reference internal" href="#qunit">QUnit</a></li>
 <li><a class="reference internal" href="#async">async</a></li>
 <li><a class="reference internal" href="#jscex">Jscex</a></li>
@@ -122,6 +123,77 @@
 <span id="id1"></span><h1>js<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
 <h2>技巧<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>对象为引用赋值，原对象改变新对象也跟着改变，但是如果原对象重新赋值，新对象不变:</p>
+<div class="highlight-python"><pre>var a = {
+  name: 'tom'
+};
+var b = a;
+console.log(b.name); //tom
+
+a.name = 'jerry';
+console.log(b.name); //jerry
+
+a = null;
+console.log(b.name); //jerry</pre>
+</div>
+<p>document.activeElement用来管理DOM焦点，获得DOM中当前获得焦点的元素。
+元素获得焦点的方式有页面加载、用户输入（通常是通过按Tab键）和在代码中调用focus()方法</p>
+<div class="section" id="id3">
+<h3>继承<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>function Animal() {}
+function Dog() {}</pre>
+</div>
+<p>Chrome下:</p>
+<div class="highlight-python"><pre>// 要让 Dog 继承 Animal, 只需：
+Dog.prototype.__proto__ = Animal.prototype;
+
+// 实例化后
+var dog = new Dog();
+// dog.__proto__ 指向 Dog.prototype
+// dog.__proto__.__proto__ 指向 Animal.prototype
+// 原型链已成功建立起来，而且很清晰</pre>
+</div>
+<p>IE下只能:</p>
+<div class="highlight-python"><pre>Dog.prototype=new Animate;</pre>
+</div>
+<p>Arale做法:</p>
+<div class="highlight-python"><pre>function Ctor() { }
+
+// See: http://jsperf.com/object-create-vs-new-ctor
+var createProto = Object.__proto__ ?
+  function(proto) {
+    return { __proto__: proto }
+  } :
+  function(proto) {
+    Ctor.prototype = proto
+    return new Ctor()
+  }
+
+Dog.prototype=createProto(Animate.prototype);</pre>
+</div>
+<p>下面的a赋值会将a声明提前，但是赋值没有提前，因此undefined++会输出NaN.
+function a(){}与var a=function(){}不同，没有重新给a赋值:</p>
+<div class="highlight-python"><pre>function fn() {
+  return a++;
+}
+
+function fn2() {
+  var a = 1;
+  return fn();
+}
+//NaN
+console.log(fn2());
+
+var a = 3;
+//number
+console.log(typeof a);
+
+function a() {
+  console.log('d');
+}
+//number
+console.log(typeof a);</pre>
+</div>
 <p>onclick事件中，如果return false会阻止默认事件发生:</p>
 <div class="highlight-python"><pre>eleBtn.onclick = function() {
   return false;
@@ -298,6 +370,7 @@ $element[0].offsetHeight</pre>
 <li>整个浏览器的宽度 window.outerWidth</li>
 <li>显示器宽度 screen.width</li>
 </ul>
+</div>
 <div class="section" id="url">
 <h3>解析url<a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/location.png" src="../_images/location.png" />
@@ -317,8 +390,8 @@ $element[0].offsetHeight</pre>
 <p>key加双引号</p>
 <p>value加双引号，可以为数字（不加引号），可以为list([])</p>
 </div>
-<div class="section" id="id3">
-<h3>位运算<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>位运算<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://www.w3school.com.cn/js/pro_js_operators_bitwise.asp">http://www.w3school.com.cn/js/pro_js_operators_bitwise.asp</a></p>
 <div class="highlight-python"><pre>&lt;&lt; 左移
 &gt;&gt; 右移
@@ -406,8 +479,8 @@ console.log(f.constructor.prototype.constructor===Foo);// true</pre>
 </pre></div>
 </div>
 </div>
-<div class="section" id="id4">
-<h3>播放声音<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>播放声音<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>chrome中优先使用audio，使用ogg格式文件:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">voice</span><span class="o">.</span><span class="n">self</span> <span class="o">=</span> <span class="n">Ext</span><span class="o">.</span><span class="n">DomHelper</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="s">&#39;audio&#39;</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="s">&#39;horse.ogg&#39;</span><span class="p">});</span>
 <span class="n">voice</span><span class="o">.</span><span class="n">self</span><span class="o">.</span><span class="n">play</span><span class="p">();</span>
@@ -419,8 +492,8 @@ console.log(f.constructor.prototype.constructor===Foo);// true</pre>
 </div>
 </div>
 </div>
-<div class="section" id="id5">
-<h2>图形<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>图形<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>开源库</p>
 <ul class="simple">
 <li>raphael       svg/vml 绘图</li>
@@ -434,8 +507,8 @@ console.log(f.constructor.prototype.constructor===Foo);// true</pre>
 </ul>
 <p>桌面平台使用raphael，移动端使用paper</p>
 </div>
-<div class="section" id="id6">
-<h2>思考<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h2>思考<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <p>javascript三大主神</p>
 <ul class="simple">
 <li>Brendan Eich：javascript之父</li>
@@ -446,8 +519,8 @@ console.log(f.constructor.prototype.constructor===Foo);// true</pre>
 <p>对于非核心功能，可以考虑在自己组件里实现。如$.extend 或 $.each</p>
 <p>IE6/7不支持JSON，需要借助json2.js，其他版本原生支持</p>
 </div>
-<div class="section" id="id7">
-<h2>js库<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h2>js库<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <p>DD_belatedPNG解决IE6下PNG不透明问题</p>
 <p>多选控件，包括自动补全，ajax等功能
 <a class="reference external" href="http://textextjs.com/">http://textextjs.com/</a></p>

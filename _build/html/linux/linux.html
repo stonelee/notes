@@ -80,6 +80,7 @@
 <li><a class="reference internal" href="#id8">工具</a><ul>
 <li><a class="reference internal" href="#putty">Putty乱码</a></li>
 <li><a class="reference internal" href="#gimp">使用GIMP使图片背景透明化</a></li>
+<li><a class="reference internal" href="#nginx">启动nginx报错</a></li>
 </ul>
 </li>
 </ul>
@@ -365,6 +366,13 @@ curl -i -H "Accept: application/json" -X DELETE http://192.168.0.165/persons/per
 <li>粘贴</li>
 <li>文件-另存为-按扩展名-xxx.gif-确定-按动画存储-导出-取消反复循环-确定</li>
 </ul>
+</div>
+<div class="section" id="nginx">
+<h3>启动nginx报错<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h3>
+<p>Starting nginx (via systemctl):  Job failed. See system logs and &#8216;systemctl status&#8217; for details.</p>
+<p>查看:</p>
+<div class="highlight-python"><pre>cat /var/log/messages|grep nginx</pre>
+</div>
 </div>
 </div>
 </div>
