@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
     <link rel="up" title="css" href="index.html" />
-    <link rel="next" title="linux" href="../linux/index.html" />
+    <link rel="next" title="css规范" href="regulate.html" />
     <link rel="prev" title="django-cms" href="django-cms.html" /> 
   </head>
   <body>
@@ -43,7 +43,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../linux/index.html" title="linux"
+          <a href="regulate.html" title="css规范"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="django-cms.html" title="django-cms"
@@ -57,12 +57,20 @@
 
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">html</a><ul>
+<li><a class="reference internal" href="#id2">语义化</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="django-cms.html"
                         title="previous chapter">django-cms</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../linux/index.html"
-                        title="next chapter">linux</a></p>
+  <p class="topless"><a href="regulate.html"
+                        title="next chapter">css规范</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/css/html.txt"
@@ -93,6 +101,23 @@
 <span id="id1"></span><h1>html<a class="headerlink" href="#html" title="Permalink to this headline">¶</a></h1>
 <p>label for对应input id</p>
 <p>input name在submit时提交</p>
+<div class="section" id="id2">
+<h2>语义化<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>&lt;!Doctype html&gt;</p>
+<p>为关键链接添加 accesskey:</p>
+<div class="highlight-python"><pre>&lt;a href="" title="" accesskey="M" rel=""&gt;Link&lt;/a&gt;</pre>
+</div>
+<p>abbr应该添加一个 title 属性对缩写进行描述:</p>
+<div class="highlight-python"><pre>&lt;abbr title="Web Developer" &gt;WD&lt;/abbr&gt;</pre>
+</div>
+<p>大段引用: &lt;blockquote&gt;，一般引用: &lt;cite&gt;</p>
+<p>删除：&lt;del&gt;</p>
+<p>定义列表：&lt;dl&gt;</p>
+<p>格式化片段 &lt;code&gt;/&lt;pre&gt;，&lt;pre&gt; 的范围更广</p>
+<p>强调: strong &gt; em ≈ cite</p>
+<p>表单项:&lt;label for=&#8221;firstname&#8221;&gt;</p>
+<p>&lt;img src=&#8221;&#8221; alt=&#8221;替代文本&#8221; /&gt;</p>
+</div>
 </div>
 
 
@@ -108,7 +133,7 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../linux/index.html" title="linux"
+          <a href="regulate.html" title="css规范"
              >next</a> |</li>
         <li class="right" >
           <a href="django-cms.html" title="django-cms"

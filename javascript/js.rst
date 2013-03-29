@@ -7,6 +7,21 @@ js
 技巧
 =============================
 
+window.undefined可能会被覆盖，所以void 0才是真正的undefined，而且字符更少
+
+使用concat来实现shallow flatten::
+
+  Array.prototype.concat.apply(Array.prototype,[[2,5],3]) //[2,5,3]
+
+var ctor = function(){};
+ctor为constructor构造函数的缩写
+
+IE中无法解析
+Date.parse('2013-3-28 15:05:38')
+
+必须为
+Date.parse('2013/3/28 15:05:38')
+
 对象为引用赋值，原对象改变新对象也跟着改变，但是如果原对象重新赋值，新对象不变::
 
   var a = {
@@ -575,3 +590,5 @@ underscore
 生成_的新对象，将obj保存在this._wrapped中，以便通过value方法取得最终值。
 
 chain方法标记_chain为true，以供内部函数result返回新的_对象来进行链式调用
+
+_.bind模拟Function.bind(), 不仅能将函数绑定为方法，而且可以作为柯里化使用

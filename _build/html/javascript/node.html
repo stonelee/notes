@@ -64,7 +64,9 @@
 <li><a class="reference internal" href="#express">express</a></li>
 <li><a class="reference internal" href="#connect">connect</a></li>
 <li><a class="reference internal" href="#grunt">grunt</a></li>
+<li><a class="reference internal" href="#chromenodenode-inspector">使用chrome调试node程序node-inspector</a></li>
 <li><a class="reference internal" href="#id2">常用库</a></li>
+<li><a class="reference internal" href="#id3">各种node资源</a></li>
 </ul>
 </li>
 </ul>
@@ -247,6 +249,19 @@ http.get(pathToRead, function(res) {
 });</pre>
 </div>
 </div>
+<div class="section" id="chromenodenode-inspector">
+<h2>使用chrome调试node程序node-inspector<a class="headerlink" href="#chromenodenode-inspector" title="Permalink to this headline">¶</a></h2>
+<p>Install:</p>
+<div class="highlight-python"><pre>$ npm install -g node-inspector</pre>
+</div>
+<p>启动被调试的程序:</p>
+<div class="highlight-python"><pre>$ node --debug-brk your/short/node/script.js</pre>
+</div>
+<p>打开调试后端:</p>
+<div class="highlight-python"><pre>$ node-inspector &amp;</pre>
+</div>
+<p>在chrome中打开页面 <a class="reference external" href="http://127.0.0.1:8080/debug?port=5858">http://127.0.0.1:8080/debug?port=5858</a> ，可以下断点，各种调试</p>
+</div>
 <div class="section" id="id2">
 <h2>常用库<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>jinja(Swig): django模板</p>
@@ -254,6 +269,10 @@ http.get(pathToRead, function(res) {
 <p>mocha: js test framework</p>
 <p>should: node中使用，扩展了Object</p>
 <p>robotskirt: markdown解析</p>
+</div>
+<div class="section" id="id3">
+<h2>各种node资源<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://nodeknockout.com/resources">http://nodeknockout.com/resources</a></p>
 </div>
 </div>
 

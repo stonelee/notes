@@ -4,6 +4,8 @@
 svg
 ***************
 
+获取path长度: getTotalLength
+
 requiredFeatures可以检测浏览器对svg的支持情况::
 
 	<rect class="ok" x="10" y="10" height="25" width="430"

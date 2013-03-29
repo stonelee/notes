@@ -171,6 +171,23 @@ grunt的async提供了promise机制::
     done(false);
   });
 
+使用chrome调试node程序node-inspector
+=========================================
+
+Install::
+
+  $ npm install -g node-inspector
+
+启动被调试的程序::
+
+  $ node --debug-brk your/short/node/script.js
+
+打开调试后端::
+
+  $ node-inspector &
+
+在chrome中打开页面 http://127.0.0.1:8080/debug?port=5858 ，可以下断点，各种调试
+
 常用库
 ==========
 
@@ -183,3 +200,8 @@ mocha: js test framework
 should: node中使用，扩展了Object
 
 robotskirt: markdown解析
+
+各种node资源
+==========
+
+http://nodeknockout.com/resources
