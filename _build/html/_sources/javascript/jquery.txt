@@ -4,6 +4,9 @@
 jquery
 ***************
 
+基本使用
+--------------
+
 $.ajax()返回jqXHR，是XMLHTTPRequest的超集
 
 判断是否找到::
@@ -72,6 +75,26 @@ $('li.item-ii').find('li') is equivalent to $('li', 'li.item-ii')
 .is() is often useful inside callbacks, such as event handlers
 positional selectors（如li:first）会在整个document中寻找
 
+
+prop vs val
+=============
+
+改变checked，selected，disabled等属性应该使用prop，value应该使用val
+
+attr返回的是节点属性，不做转化。prop返回的是标准值::
+
+  <input type="checkbox" checked="checked" />
+  $(elem).prop("checked") 返回true (Boolean)
+  $(elem).attr("checked") 返回checked (String)
+
+判断checkbox是否被选择::
+
+  if ( elem.checked )
+  if ( $(elem).prop("checked") )
+  if ( $(elem).is(":checked") )
+
+在IE9之前版本，如果使用prop设置非基本类型数据到DOM中，如果节点销毁前没有使用removeProp移除，会造成内存泄漏，因此应该使用data
+
 插入jquery
 ==============
 
@@ -83,6 +106,9 @@ positional selectors（如li:first）会在整个document中寻找
   head.appendChild(node)
 
 注意：http方式获取的js不能插入到https方式获取的页面中
+
+源码分析
+---------------
 
 Callbacks
 ====================
@@ -393,8 +419,8 @@ expando 是 expandable object 的缩写，表示可扩展的对象。
 
 expando property 表示可扩展对象的动态属性，运行时添加的。expando 可以直接表示 expando property.
 
-编译jquery
-================
+编译
+-------------
 
 node切换到正式版本::
 
@@ -420,7 +446,7 @@ node切换到正式版本::
   $ node_modules/grunt/bin/grunt
 
 jquery UI
-====================
+---------------
 
 ::
 

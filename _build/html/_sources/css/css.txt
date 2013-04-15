@@ -34,6 +34,10 @@ hsl::
   css中设置
     background: hsl(72,100%,37%);
 
+div:after 相当于在div里加入一个标签，放到最后，content设置内容。before放到最前。
+
+垂直对齐使用 vertical-align，只应用于inline level, inline-block level 及 table-cells 元素上
+
 默认元素
 -----------------
 

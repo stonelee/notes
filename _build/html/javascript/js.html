@@ -123,6 +123,31 @@
 <span id="id1"></span><h1>js<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
 <h2>技巧<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>element.attributes会返回所有属性的数组，每个属性都是一个key为name，value的object</p>
+<p>location.replace设置当前文档，并在history中移除，防止后退:</p>
+<div class="highlight-python"><pre>location.replace('about:blank') 空白页
+location.replace('javascript:""') url不变，页面空白</pre>
+</div>
+<p>checkbox使用鼠标选中时，在标签中不会添加checked属性，因此[checked]选择是无效的，可以直接使用node.checked来判断是否选中</p>
+<p>is-disabled时禁止点击事件:</p>
+<div class="highlight-python"><pre>$(function() {
+  $('#toggle').click(function() {
+    if ($('.btn').hasClass('is-disabled')) {
+      $('.btn').removeClass('is-disabled');
+    } else {
+      $('.btn').addClass('is-disabled');
+    }
+  });
+  $('.btn').click(function(e) {
+    if ($(this).hasClass('is-disabled')) {
+      e.stopImmediatePropagation();
+    }
+  });
+  $('.btn').click(function() {
+    console.log('some');
+  });
+});</pre>
+</div>
 <p>window.undefined可能会被覆盖，所以void 0才是真正的undefined，而且字符更少</p>
 <p>使用concat来实现shallow flatten:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">Array</span><span class="o">.</span><span class="n">prototype</span><span class="o">.</span><span class="n">concat</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Array</span><span class="o">.</span><span class="n">prototype</span><span class="p">,[[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">3</span><span class="p">])</span> <span class="o">//</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>

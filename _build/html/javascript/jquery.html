@@ -60,7 +60,12 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">jquery</a><ul>
-<li><a class="reference internal" href="#id2">插入jquery</a></li>
+<li><a class="reference internal" href="#id2">基本使用</a><ul>
+<li><a class="reference internal" href="#prop-vs-val">prop vs val</a></li>
+<li><a class="reference internal" href="#id3">插入jquery</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">源码分析</a><ul>
 <li><a class="reference internal" href="#callbacks">Callbacks</a></li>
 <li><a class="reference internal" href="#deferred">Deferred</a></li>
 <li><a class="reference internal" href="#data">data</a></li>
@@ -68,7 +73,9 @@
 <li><a class="reference internal" href="#queue">queue</a></li>
 <li><a class="reference internal" href="#event">event</a></li>
 <li><a class="reference internal" href="#expando">expando</a></li>
-<li><a class="reference internal" href="#id3">编译jquery</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">编译</a></li>
 <li><a class="reference internal" href="#jquery-ui">jquery UI</a></li>
 </ul>
 </li>
@@ -108,6 +115,8 @@
             
   <div class="section" id="jquery">
 <span id="id1"></span><h1>jquery<a class="headerlink" href="#jquery" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>基本使用<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>$.ajax()返回jqXHR，是XMLHTTPRequest的超集</p>
 <p>判断是否找到:</p>
 <div class="highlight-python"><pre>$('#id').length ? 'exist' : 'not'</pre>
@@ -158,8 +167,23 @@ empty objects with $.isEmptyObject()</pre>
 <p>$(&#8216;li.item-ii&#8217;).find(&#8216;li&#8217;) is equivalent to $(&#8216;li&#8217;, &#8216;li.item-ii&#8217;)</p>
 <p>.is() is often useful inside callbacks, such as event handlers
 positional selectors（如li:first）会在整个document中寻找</p>
-<div class="section" id="id2">
-<h2>插入jquery<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prop-vs-val">
+<h3>prop vs val<a class="headerlink" href="#prop-vs-val" title="Permalink to this headline">¶</a></h3>
+<p>改变checked，selected，disabled等属性应该使用prop，value应该使用val</p>
+<p>attr返回的是节点属性，不做转化。prop返回的是标准值:</p>
+<div class="highlight-python"><pre>&lt;input type="checkbox" checked="checked" /&gt;
+$(elem).prop("checked") 返回true (Boolean)
+$(elem).attr("checked") 返回checked (String)</pre>
+</div>
+<p>判断checkbox是否被选择:</p>
+<div class="highlight-python"><pre>if ( elem.checked )
+if ( $(elem).prop("checked") )
+if ( $(elem).is(":checked") )</pre>
+</div>
+<p>在IE9之前版本，如果使用prop设置非基本类型数据到DOM中，如果节点销毁前没有使用removeProp移除，会造成内存泄漏，因此应该使用data</p>
+</div>
+<div class="section" id="id3">
+<h3>插入jquery<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><pre>var head=document.getElementsByTagName('head')[0]
 var node = document.createElement('script')
 node.src="http://code.jquery.com/jquery.js"
@@ -167,8 +191,11 @@ head.appendChild(node)</pre>
 </div>
 <p>注意：http方式获取的js不能插入到https方式获取的页面中</p>
 </div>
+</div>
+<div class="section" id="id4">
+<h2>源码分析<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="callbacks">
-<h2>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this headline">¶</a></h2>
+<h3>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this headline">¶</a></h3>
 <p>$.Callbacks()可以将一组函数进行统一调用。</p>
 <p>可以使用add，remove来操作，通过fire来调用</p>
 <ul class="simple">
@@ -257,7 +284,7 @@ callbacks.fire("foo");
 </ul>
 </div>
 <div class="section" id="deferred">
-<h2>Deferred<a class="headerlink" href="#deferred" title="Permalink to this headline">¶</a></h2>
+<h3>Deferred<a class="headerlink" href="#deferred" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html">http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html</a></p>
 <p>Deferred可以用来屏蔽异步/同步操作的差异:</p>
 <div class="highlight-python"><pre>var cache = {};
@@ -321,19 +348,19 @@ resolve, resolveWith, reject, rejectWith, notify, notifyWith</pre>
 <p>可以作为filter使用</p>
 </div>
 <div class="section" id="data">
-<h2>data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<h3>data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
 <p>jQuery.data()可以安全方便的在dom中存取数据，避免内存泄漏</p>
 <p>event handlers等也保存在data中</p>
 <p>xml中不能使用，因为IE不支持</p>
 </div>
 <div class="section" id="animate">
-<h2>animate<a class="headerlink" href="#animate" title="Permalink to this headline">¶</a></h2>
+<h3>animate<a class="headerlink" href="#animate" title="Permalink to this headline">¶</a></h3>
 <p>show，hide以左上角收缩扩展
 slideUp， slideToggle向上收缩，向下扩展</p>
 <p>.animate可以使用数字型的css属性进行动画</p>
 </div>
 <div class="section" id="queue">
-<h2>queue<a class="headerlink" href="#queue" title="Permalink to this headline">¶</a></h2>
+<h3>queue<a class="headerlink" href="#queue" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><pre>$("div").queue(function () {
   $(this).addClass("newcolor");
   $(this).dequeue();
@@ -342,7 +369,7 @@ slideUp， slideToggle向上收缩，向下扩展</p>
 <p>queue存储到private_data里</p>
 </div>
 <div class="section" id="event">
-<h2>event<a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h2>
+<h3>event<a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h3>
 <p>即使on(&#8216;foo.on&#8217;)也使用elem.addEventListener</p>
 <div class="highlight-python"><pre>jQuery.Event = function( src, props ) {
   // Allow instantiation without the 'new' keyword
@@ -416,12 +443,13 @@ jQuery("#foo").trigger("click",'d');</pre>
 <p>window.onerror参数和返回值都不同，因此在jquery中没有支持</p>
 </div>
 <div class="section" id="expando">
-<h2>expando<a class="headerlink" href="#expando" title="Permalink to this headline">¶</a></h2>
+<h3>expando<a class="headerlink" href="#expando" title="Permalink to this headline">¶</a></h3>
 <p>expando 是 expandable object 的缩写，表示可扩展的对象。</p>
 <p>expando property 表示可扩展对象的动态属性，运行时添加的。expando 可以直接表示 expando property.</p>
 </div>
-<div class="section" id="id3">
-<h2>编译jquery<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id5">
+<h2>编译<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>node切换到正式版本:</p>
 <div class="highlight-python"><pre>$ git checkout v0.6.19-release</pre>
 </div>

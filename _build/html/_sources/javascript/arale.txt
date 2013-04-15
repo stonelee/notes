@@ -37,6 +37,8 @@ class
 
   A.StaticsWhiteList = ['a']
 
+如果不设置此属性则不使用白名单过滤
+
 设置初始值，如new Dog('Jack')::
 
   initialize: function(name) {}
@@ -48,6 +50,12 @@ class
 调用父类方法::
 
   Dog.superclass.initialize()
+
+events
+------------
+
+监听的事件保存在__events中，__events为对象字面量，key为事件名称（all意味着响应所有事件,在on中指定），
+值为一维数组，内容为每个响应事件的回调和上下文，两两依次排列
 
 base
 ----------------
@@ -119,10 +127,13 @@ aspect::
 
   a.before('xxx', function(n, m) {
 
-propsInAttrs使得配置项可以像属性一样直接调用::
+propsInAttrs使得位于attrs之外的配置也可以通过getter,setter调用,同时也保存在attrs中,
+调用也非常方便::
 
   var T = Base.extend({
-
+    attrs:{
+      foo:'foo'
+    },
     model: {
       getter: function(val) {
         return {
@@ -131,23 +142,33 @@ propsInAttrs使得配置项可以像属性一样直接调用::
         };
       }
     },
-
     propsInAttrs: ['model']
   });
 
-  var t = new T();
-  expect(t.model.a).to.equal(1);
+  var t = new T({
+    foo:'abc',
+    model:'my',
+  });
+
+  console.log(t.get('foo'));//abc
+  console.log(t.model);//{a:1,v:"my"}
+  console.log(t.get('model'));//{a:1,v:"my"}
 
 Attribute
 ==============
 
-initAttrs将用户配置与attrs以及继承得到的attrs进行合并，将_onChangeAttr注册为change:attr事件的响应，将配置中的on/before/afterXxx注册为事件响应
+initAttrs将用户配置与attrs以及继承得到的attrs进行合并，将实例方法_onChangeAttr注册为change:attr事件的响应，
+将用户配置中的on/before/afterXxx注册为事件响应
 
 get获取attr的值，可通过getter
 
-set设置attr的值，可通过setter，默认会触发change:x事件
+set设置attr的值，可通过setter，默认会触发change:x事件，
+如果设置参数slient:true, 此时不会自动触发change:x事件, 会设置__changedAttrs.
+默认新旧值merge，如果设置参数override:true, 则直接覆盖
 
 change手工触发__changedAttrs的change事件
+
+用户调用可配置内容包括：attrs,on/before/afterXxx,propsInAttrs
 
 Aspect
 ============
@@ -160,11 +181,6 @@ after在指定方法后执行任务，参数为指定方法的返回值，貌似
 
 可以同时指定多个方法，用空格隔开
 
-events
-------------
-
-监听的事件保存在__events中，__events为对象字面量，key为事件名称（all意味着响应所有事件），值为一维数组，内容为每个响应事件的回调和上下文，两两依次排列
-
 widget
 --------------
 
@@ -174,6 +190,7 @@ View 层的管理。
 * 描述行为的 events和 methods
 
 config 中的这些键值会直接添加到实例上，转换成 properties::
+
   propsInAttrs: ['element', 'template', 'model', 'events']
 
 initialize初始化方法，确定组件创建时的基本流程::
@@ -194,12 +211,12 @@ initialize初始化方法，确定组件创建时的基本流程::
   // 子类自定义的初始化
   this.setup()//供子类覆盖
 
-  // 保存实例信息
+  // 保存实例信息,会在节点上标记data-widget-cid,让element与Widget实例建立关联
   this._stamp()
 
 events通过this.delegateEvents()使用jquery的on方法进行事件绑定，事件都有命名空间.delegate-events-cid以方便删除，select可以使用{{}}语法指定attrs中的属性
 
-render会当属性xx不为空值时自动调用_onRenderXX(val, prev, key)，并将onRenderXX绑定到change事件
+render会当属性xx不为空值时自动调用_onRenderXX(val, prev, key)，并将_onRenderXX绑定到change事件，默认绑定了属性id，style，className，parentNode
 
 Widget.query(select)获取节点对应的Widget实例
 
@@ -214,20 +231,22 @@ Widget静态方法还包括query，autoRenderAll
 templatable
 ============
 
-提供了handlebars模板，并提供局部渲染功能。默认的widget只是简单的从模板构建element
+默认的widget只是简单的从模板构建element,这个组件通过覆盖parseElementFromTemplate方法提供了handlebars模板，并提供局部渲染功能。
 
 混入后, template配置模板，model配置模板变量（也可以用toJSON），templateHelpers配置自定义模板逻辑，由模板自动生成element（jquery对象）
 
 render将widget渲染到页面上
 
-renderPartial渲染部分页面
+renderPartial渲染部分页面,参数为选择器
 
-为了在局部渲染时可以从内部保存的jquery对象中找到正确的区域，为避免标签意外关闭，需要在保存该内部jquery对象时将{{xx}}转换为<!--{{xx}}-->，为防止额外加载数据，将src和href替换
+为了在局部渲染时可以从内部保存的jquery对象中找到正确的区域，
+为避免标签意外关闭，在保存该内部jquery对象时,将{{xx}}转换为<!--{{xx}}-->，
+为防止额外加载数据，将src和href替换
 
 daparser
 ============
 
-通过方法parseElement解析标签里的data-\*属性。值可以为[],{}，默认会按照json进行转化。第二个参数如果设为true则不进行任何转化
+提供方法parseElement,解析标签里的data-\*属性。值可以为[],{}，默认会按照json进行转化，并处理为各种易用的类型。第二个参数如果设为true则不进行任何转化
 
 标签里的data-\*会在现代浏览器中存储在元素的dataset中，并可以很方便的进行修改
 
@@ -249,6 +268,23 @@ overlay
 可以在window.resize时自动定位.
 
 _blurHide设置document.click时元素blur自动hide
+
+fixed
+----------
+
+实现跟随滚动的效果，可以设置marginTop，当超出该值时才fixed
+
+实现原理是在ie6下监听scroll事件,然后设置::
+
+  position: 'absolute',
+  top: marginTop + doc.scrollTop()
+
+messender
+------------
+
+iframe通信
+
+优先使用postMessge.IE中同域使用自定义事件，跨域使用两个隐藏iframe，通过改变其name实现通信
 
 继承结构图
 -----------

@@ -7,6 +7,35 @@ js
 技巧
 =============================
 
+element.attributes会返回所有属性的数组，每个属性都是一个key为name，value的object
+
+location.replace设置当前文档，并在history中移除，防止后退::
+
+  location.replace('about:blank') 空白页
+  location.replace('javascript:""') url不变，页面空白
+
+checkbox使用鼠标选中时，在标签中不会添加checked属性，因此[checked]选择是无效的，可以直接使用node.checked来判断是否选中
+
+is-disabled时禁止点击事件::
+
+  $(function() {
+    $('#toggle').click(function() {
+      if ($('.btn').hasClass('is-disabled')) {
+        $('.btn').removeClass('is-disabled');
+      } else {
+        $('.btn').addClass('is-disabled');
+      }
+    });
+    $('.btn').click(function(e) {
+      if ($(this).hasClass('is-disabled')) {
+        e.stopImmediatePropagation();
+      }
+    });
+    $('.btn').click(function() {
+      console.log('some');
+    });
+  });
+
 window.undefined可能会被覆盖，所以void 0才是真正的undefined，而且字符更少
 
 使用concat来实现shallow flatten::
