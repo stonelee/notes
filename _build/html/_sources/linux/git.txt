@@ -118,6 +118,35 @@ RhodeCode中推送已经存在的库::
   HEAD^ 上一次
   <commit_id>  每次commit的SHA1值. 可以用git log 看到,也可以在页面上commit标签页里找到.
 
+使用submodule
+-------------------
+
+clone::
+
+  git clone /path/to/repos/foo.git
+  git submodule init
+  git submodule update
+
+或者::
+
+  git clone --recursive /path/to/repos/foo.git
+
+添加::
+
+  git submodule add ~/submd/repos/lib1.git libs/lib1
+
+删除::
+
+  git rm --cached event-simulate
+
+修改子项目::
+
+  在子项目目录中修改并git push后，还要在工程项目中更新commit id
+
+更新::
+
+  git submodule foreach git pull
+
 git pages
 =============================
 

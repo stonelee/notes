@@ -4,6 +4,12 @@
 node
 ***************
 
+package.json中dependencies格式::
+
+  "~1.2.3" = ">=1.2.3 <1.3.0"
+
+生产环境下 npm install --production 将不安装devDependencies中的包
+
 * module.exports定义的函数可以require后直接调用
 * exports定义的函数无法调用，只能引用
 
@@ -202,6 +208,6 @@ should: node中使用，扩展了Object
 robotskirt: markdown解析
 
 各种node资源
-==========
+================
 
 http://nodeknockout.com/resources

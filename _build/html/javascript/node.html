@@ -105,6 +105,11 @@
             
   <div class="section" id="node">
 <span id="id1"></span><h1>node<a class="headerlink" href="#node" title="Permalink to this headline">¶</a></h1>
+<p>package.json中dependencies格式:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;~1.2.3&quot;</span> <span class="o">=</span> <span class="s">&quot;&gt;=1.2.3 &lt;1.3.0&quot;</span>
+</pre></div>
+</div>
+<p>生产环境下 npm install &#8211;production 将不安装devDependencies中的包</p>
 <ul class="simple">
 <li>module.exports定义的函数可以require后直接调用</li>
 <li>exports定义的函数无法调用，只能引用</li>

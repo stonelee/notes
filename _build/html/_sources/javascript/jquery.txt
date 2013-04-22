@@ -7,6 +7,9 @@ jquery
 基本使用
 --------------
 
+$.map()的参数次序为data，index。
+$.each .each .map与之相反，为index，data
+
 $.ajax()返回jqXHR，是XMLHTTPRequest的超集
 
 判断是否找到::

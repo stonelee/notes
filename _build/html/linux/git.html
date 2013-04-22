@@ -66,6 +66,7 @@
 <li><a class="reference internal" href="#id4">如何将牛人的远程分支更新到自己的本地分支？</a></li>
 <li><a class="reference internal" href="#id5">如何建立远程库进行管理</a></li>
 <li><a class="reference internal" href="#commit">删除错误提交的commit</a></li>
+<li><a class="reference internal" href="#submodule">使用submodule</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#git-pages">git pages</a></li>
@@ -205,6 +206,29 @@ git reset –hard：彻底回退到某个版本，本地的源码也会变为上
 HEAD 最近一个提交
 HEAD^ 上一次
 &lt;commit_id&gt;  每次commit的SHA1值. 可以用git log 看到,也可以在页面上commit标签页里找到.</pre>
+</div>
+</div>
+<div class="section" id="submodule">
+<h3>使用submodule<a class="headerlink" href="#submodule" title="Permalink to this headline">¶</a></h3>
+<p>clone:</p>
+<div class="highlight-python"><pre>git clone /path/to/repos/foo.git
+git submodule init
+git submodule update</pre>
+</div>
+<p>或者:</p>
+<div class="highlight-python"><pre>git clone --recursive /path/to/repos/foo.git</pre>
+</div>
+<p>添加:</p>
+<div class="highlight-python"><pre>git submodule add ~/submd/repos/lib1.git libs/lib1</pre>
+</div>
+<p>删除:</p>
+<div class="highlight-python"><pre>git rm --cached event-simulate</pre>
+</div>
+<p>修改子项目:</p>
+<div class="highlight-python"><pre>在子项目目录中修改并git push后，还要在工程项目中更新commit id</pre>
+</div>
+<p>更新:</p>
+<div class="highlight-python"><pre>git submodule foreach git pull</pre>
 </div>
 </div>
 </div>
