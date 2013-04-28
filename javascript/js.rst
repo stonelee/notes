@@ -7,6 +7,10 @@ js
 技巧
 =============================
 
+checkbox半选状态::
+
+  indeterminate = true;
+
 element.attributes会返回所有属性的数组，每个属性都是一个key为name，value的object
 
 location.replace设置当前文档，并在history中移除，防止后退::

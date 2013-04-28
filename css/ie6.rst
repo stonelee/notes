@@ -5,6 +5,13 @@
 IE6
 ***************
 
+单线table::
+
+  border-collapse: collapse;//IE6中需要
+  border-spacing: 0;
+
+IE6中使用background-position指定图片，即使设置height也会撑大，这时可以设置overflow:hidden来避免
+
 父容器position:relative;容易在IE6中出现各种问题，如子元素的border-top不显示等。解决方法是加上*zoom:1
 
 border: 1px solid transparent;

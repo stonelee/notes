@@ -4,6 +4,10 @@
 node
 ***************
 
+grunt安装插件并放置到package.json的dependencies中::
+
+  npm install grunt-contrib-uglify --save-dev
+
 package.json中dependencies格式::
 
   "~1.2.3" = ">=1.2.3 <1.3.0"

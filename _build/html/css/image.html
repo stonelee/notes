@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>IE6 &mdash; stonelee&#39;s notes 0 documentation</title>
+    <title>image &mdash; stonelee&#39;s notes 0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -28,7 +28,7 @@
     <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
     <link rel="up" title="css" href="index.html" />
     <link rel="next" title="css规范" href="regulate.html" />
-    <link rel="prev" title="html" href="html.html" /> 
+    <link rel="prev" title="IE6" href="ie6.html" /> 
   </head>
   <body>
 
@@ -46,7 +46,7 @@
           <a href="regulate.html" title="css规范"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="html.html" title="html"
+          <a href="ie6.html" title="IE6"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">home</a>|&nbsp;</li>
         <li><a href="../search.html">search</a>|&nbsp;</li>
@@ -57,15 +57,26 @@
 
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">image</a><ul>
+<li><a class="reference internal" href="#imagemagick">imageMagick</a></li>
+<li><a class="reference internal" href="#id2">格式</a></li>
+<li><a class="reference internal" href="#jpeg">两种jpeg加载方式</a></li>
+<li><a class="reference internal" href="#gif-png">水平扫描（gif，png）</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="html.html"
-                        title="previous chapter">html</a></p>
+  <p class="topless"><a href="ie6.html"
+                        title="previous chapter">IE6</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="regulate.html"
                         title="next chapter">css规范</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/css/ie6.txt"
+    <li><a href="../_sources/css/image.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -89,46 +100,50 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="ie6">
-<span id="id1"></span><h1>IE6<a class="headerlink" href="#ie6" title="Permalink to this headline">¶</a></h1>
-<p>单线table:</p>
-<div class="highlight-python"><pre>border-collapse: collapse;//IE6中需要
-border-spacing: 0;</pre>
+  <div class="section" id="image">
+<span id="id1"></span><h1>image<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="imagemagick">
+<h2>imageMagick<a class="headerlink" href="#imagemagick" title="Permalink to this headline">¶</a></h2>
+<p>gif批量转为png:</p>
+<div class="highlight-python"><pre>mogrify -format png *.gif</pre>
 </div>
-<p>IE6中使用background-position指定图片，即使设置height也会撑大，这时可以设置overflow:hidden来避免</p>
-<p>父容器position:relative;容易在IE6中出现各种问题，如子元素的border-top不显示等。解决方法是加上*zoom:1</p>
-<p>border: 1px solid transparent;</p>
-<p>非a元素的hover .icon-btn:hover</p>
-<p>32-bit alpha-transparent PNG:</p>
-<div class="highlight-python"><pre>使用Fireworks save your alpha-tranparent PNG image in 8-bit format,</pre>
+<p>单个png转为gif:</p>
+<div class="highlight-python"><pre>convert tree-s7defbb4611.png tree-s7defbb4611.gif</pre>
 </div>
-<p>IE6中如果使用 &lt;!DOCTYPE&gt; 就可以使用正确的盒模型</p>
-<p>min-height for IE6:</p>
-<div class="highlight-python"><pre>div.min-height {
-  min-height: 500px;
-  height: auto !important;
-  height: 500px;
-}</pre>
+<p>compass的sprite只支持png格式，但是IE6不支持png透明</p>
+<p>转为PNG-8，IE6支持，而且体积更小:</p>
+<div class="highlight-python"><pre>convert tree-s7defbb4611.png -colors 256 PNG8:tree.png</pre>
 </div>
-<p>max-width,min-width,max-height需要使用expression，问题在于速度慢，借助js实现:</p>
-<div class="highlight-python"><pre>/* max-width for IE6 */
-* html div.max-width {
-  width: expression(document.body.clientWidth &gt; 776 ? "777px" : "auto");
-}
-/* max-width for standards-compliant browsers */
-div.max-width {
-  max-width: 777px;
-}</pre>
 </div>
-<p>double margin bug.
-float an element (such as a &lt;div&gt;) in one direction and then apply a margin in that same direction:</p>
-<div class="highlight-python"><pre>div#selector {
-  float: right;
-  margin-right: 10px;
-}
-* html div#selector {
-  display: inline; /* kill double-margin bug */
-}</pre>
+<div class="section" id="id2">
+<h2>格式<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>gif 支持透明，支持动画，无损耗，水平扫描，间隔渐进显示，只有256种颜色，不适合照片，但它适合对颜色要求不高的图形（比如说图标，图表等）</li>
+<li>jpeg 不支持透明，不支持动画，有损耗，所以在编辑过程一般用png作为过渡格式。隔行渐进显示，适合web上面的摄影图片和数字照相机</li>
+<li>png 支持透明，不支持动画，无损耗，水平扫描，间隔渐进显示</li>
+</ul>
+<p>结论:</p>
+<div class="highlight-python"><pre>动画gif最好
+png8代替静态gif
+PNG24接近JPG，但因为是无损格式，同样尺寸的照片png24比jpg画质要高很多而且体积大很多，所以一般网站使用jpg
+
+PNG8除了不支持动画外和GIF基本一致，属于256的索引色，其中包括透明索引，不支持半透明
+PNG24即24位全彩，RGB三色各占8位(#FFFFFF,0xFFFFFF)，但不包含透明度，不过PS将PNG24和PNG32的概念整合到PNG24了，这点FW有明显的区分
+PNG32即32位全彩，ARGB四色各占8位(0xFFFFFFFF)，含alpha透明度</pre>
+</div>
+</div>
+<div class="section" id="jpeg">
+<h2>两种jpeg加载方式<a class="headerlink" href="#jpeg" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>自上而下线性加载（基本）</li>
+<li>先是全部的模糊图片，然后逐渐清晰（渐进）</li>
+</ul>
+<p>两种图片大小差不多，加载速度方面渐进方式在现代浏览器中快的多，一开始就能定好大小，防止回流，但是占CPU、内存较多</p>
+</div>
+<div class="section" id="gif-png">
+<h2>水平扫描（gif，png）<a class="headerlink" href="#gif-png" title="Permalink to this headline">¶</a></h2>
+<p>使用了一种叫作LZW的算法进行压缩，当压缩gif的过程中，像素是由上到下水平压缩的，
+这也意味着同等条件下，横向的gif图片比竖向的gif图片更加小。例如500*10的图片比10*500的图片更加小</p>
 </div>
 </div>
 
@@ -148,7 +163,7 @@ float an element (such as a &lt;div&gt;) in one direction and then apply a margi
           <a href="regulate.html" title="css规范"
              >next</a> |</li>
         <li class="right" >
-          <a href="html.html" title="html"
+          <a href="ie6.html" title="IE6"
              >previous</a> |</li>
         <li><a href="../index.html">home</a>|&nbsp;</li>
         <li><a href="../search.html">search</a>|&nbsp;</li>
