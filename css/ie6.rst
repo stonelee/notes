@@ -5,6 +5,9 @@
 IE6
 ***************
 
+IE6中同一个大括号中的重复属性，后面的将会覆盖前面的，不管前面的属性是否有!important；
+而在不同的大括号里，则有!important的属性有效
+
 单线table::
 
   border-collapse: collapse;//IE6中需要

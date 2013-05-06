@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
     <link rel="up" title="css" href="index.html" />
-    <link rel="next" title="css规范" href="regulate.html" />
+    <link rel="next" title="IE6" href="ie6.html" />
     <link rel="prev" title="django-cms" href="django-cms.html" /> 
   </head>
   <body>
@@ -43,7 +43,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="regulate.html" title="css规范"
+          <a href="ie6.html" title="IE6"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="django-cms.html" title="django-cms"
@@ -61,6 +61,7 @@
   <ul>
 <li><a class="reference internal" href="#">html</a><ul>
 <li><a class="reference internal" href="#id2">语义化</a></li>
+<li><a class="reference internal" href="#html5">html5</a></li>
 </ul>
 </li>
 </ul>
@@ -69,8 +70,8 @@
   <p class="topless"><a href="django-cms.html"
                         title="previous chapter">django-cms</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="regulate.html"
-                        title="next chapter">css规范</a></p>
+  <p class="topless"><a href="ie6.html"
+                        title="next chapter">IE6</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/css/html.txt"
@@ -118,6 +119,59 @@
 <p>表单项:&lt;label for=&#8221;firstname&#8221;&gt;</p>
 <p>&lt;img src=&#8221;&#8221; alt=&#8221;替代文本&#8221; /&gt;</p>
 </div>
+<div class="section" id="html5">
+<h2>html5<a class="headerlink" href="#html5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>&lt;header id="page-header"&gt;
+  &lt;h1&gt;Site title&lt;/h1&gt;
+  &lt;form&gt;Search&lt;/form&gt;
+  &lt;nav class="site-nav"&gt;
+    &lt;ul&gt;Site navigation&lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+&lt;section id="main-content"&gt;
+  &lt;article&gt;
+    &lt;h1&gt;Article title&lt;/h1&gt;
+    &lt;p&gt;Summary&lt;/p&gt;
+  &lt;/article&gt;
+  &lt;article&gt;
+    &lt;h1&gt;Article title&lt;/h1&gt;
+    &lt;p&gt;Summary&lt;/p&gt;
+  &lt;/article&gt;
+  &lt;article&gt;
+    &lt;h1&gt;Article title&lt;/h1&gt;
+    &lt;p&gt;Summary&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/section&gt;
+&lt;aside class="sidebar"&gt;
+  &lt;section&gt;
+    &lt;h2&gt;Blogroll…&lt;/h2&gt;
+  &lt;/section&gt;
+  &lt;section&gt;
+    &lt;h2&gt;Photos…&lt;/h2&gt;
+  &lt;/section&gt;
+&lt;/aside&gt;
+&lt;footer id="page-footer"&gt;
+  &lt;h2&gt;Footer&lt;/h2&gt;
+&lt;/footer&gt;</pre>
+</div>
+<p>div, section, article:</p>
+<div class="highlight-python"><pre>div block-level element，没有语义
+section 关联部分的集合，例如文章的一部分，页面的一部分
+article 可独立的完整的部分，例如一篇文章，论坛的一篇帖子或者评论
+article是特殊的section，section是特殊的div
+article和section可以互相包含</pre>
+</div>
+<p>header, hgroup &amp; h1-h6:</p>
+<div class="highlight-python"><pre>header 可以包含h1-h6,hgroup等其他元素，可以出现在任何位置，除了footer和header
+hgroup 特殊的header，只能包含h1-h6，用来分组子标题</pre>
+</div>
+<p>&lt;nav&gt;, &lt;aside&gt;, &lt;figure&gt; and &lt;footer&gt;:</p>
+<div class="highlight-python"><pre>nav 主要导航链接，footer中的不算，有利于可访问性
+aside 侧边栏，脚注等起辅助作用的部分
+figure 内容重要，但是位置不重要。多用于images, video, graph, code sample 等使用css position定位的部分</pre>
+</div>
+<p>The sectioning content elements are &lt;section&gt;, &lt;article&gt;, &lt;nav&gt; and &lt;aside&gt;</p>
+</div>
 </div>
 
 
@@ -133,7 +187,7 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="regulate.html" title="css规范"
+          <a href="ie6.html" title="IE6"
              >next</a> |</li>
         <li class="right" >
           <a href="django-cms.html" title="django-cms"

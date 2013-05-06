@@ -5,6 +5,30 @@
 css
 ***************
 
+white-space控制空格以及是否换行::
+
+  normal (默认)多个空格合并为一个，自动换行，但是回车不换行
+  nowrap 多个空格合并为一个，不换行（除非<br/>）
+  pre 保留空格，回车换行
+  pre-line 多个空格合并为一个，自动换行，回车换行
+  pre-wrap 保留空格，自动换行，回车换行
+
+word-wrap::
+
+  normal （默认）
+  break-word 连续字母切断换行
+
+
+stacking context::
+
+  https://developer.mozilla.org/zh-CN/docs/CSS/Understanding_z-index/The_stacking_context
+
+  形成条件：
+  root emement(HTML)
+  position为absolute或relative，z-index不为auto
+  opacity小于1
+  mobile webkit或chrome22+，position:fixed，即使z-index:auto
+
 缩进2字符::
 
   text-indent: 2em;
@@ -355,6 +379,12 @@ CSS3
   -o-transform:rotate(-3deg);
   transform:rotate(-3deg);
 
+
+pointer-events
+
+设置该元素是否响应鼠标事件，设为none则元素不再是鼠标事件的目标，鼠标不再监听当前层而去监听下面层中的元素。
+如果它的子元素设置为auto，鼠标还是会监听这个子元素的。
+用于google地图的导航区域
 
 less
 -----------

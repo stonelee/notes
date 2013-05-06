@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>IE6 &mdash; stonelee&#39;s notes 0 documentation</title>
+    <title>foundation &mdash; stonelee&#39;s notes 0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -27,8 +27,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
     <link rel="up" title="css" href="index.html" />
-    <link rel="next" title="image" href="image.html" />
-    <link rel="prev" title="html" href="html.html" /> 
+    <link rel="next" title="html" href="html.html" />
+    <link rel="prev" title="django-cms" href="django-cms.html" /> 
   </head>
   <body>
 
@@ -43,10 +43,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="image.html" title="image"
+          <a href="html.html" title="html"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="html.html" title="html"
+          <a href="django-cms.html" title="django-cms"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">home</a>|&nbsp;</li>
         <li><a href="../search.html">search</a>|&nbsp;</li>
@@ -57,15 +57,23 @@
 
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">foundation</a><ul>
+<li><a class="reference internal" href="#grid">grid</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="html.html"
-                        title="previous chapter">html</a></p>
+  <p class="topless"><a href="django-cms.html"
+                        title="previous chapter">django-cms</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="image.html"
-                        title="next chapter">image</a></p>
+  <p class="topless"><a href="html.html"
+                        title="next chapter">html</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/css/ie6.txt"
+    <li><a href="../_sources/css/foundation.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -89,48 +97,56 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="ie6">
-<span id="id1"></span><h1>IE6<a class="headerlink" href="#ie6" title="Permalink to this headline">¶</a></h1>
-<p>IE6中同一个大括号中的重复属性，后面的将会覆盖前面的，不管前面的属性是否有!important；
-而在不同的大括号里，则有!important的属性有效</p>
-<p>单线table:</p>
-<div class="highlight-python"><pre>border-collapse: collapse;//IE6中需要
-border-spacing: 0;</pre>
+  <div class="section" id="foundation">
+<span id="id1"></span><h1>foundation<a class="headerlink" href="#foundation" title="Permalink to this headline">¶</a></h1>
+<p>box-sizing: border-box 简化width的计算</p>
+<p>768px为分隔</p>
+<div class="section" id="grid">
+<h2>grid<a class="headerlink" href="#grid" title="Permalink to this headline">¶</a></h2>
+<p>row:</p>
+<div class="highlight-python"><pre>.row 整行
+
+  width: 100%; //窄屏100%宽度
+  max-width: 62.5em; //宽屏固定大小
+  margin: 0 auto; //居中
+
+嵌套row（.row .row ）
+
+  width: auto;
+  max-width: none;
+  左右margin补偿columns的padding</pre>
 </div>
-<p>IE6中使用background-position指定图片，即使设置height也会撑大，这时可以设置overflow:hidden来避免</p>
-<p>父容器position:relative;容易在IE6中出现各种问题，如子元素的border-top不显示等。解决方法是加上*zoom:1</p>
-<p>border: 1px solid transparent;</p>
-<p>非a元素的hover .icon-btn:hover</p>
-<p>32-bit alpha-transparent PNG:</p>
-<div class="highlight-python"><pre>使用Fireworks save your alpha-tranparent PNG image in 8-bit format,</pre>
-</div>
-<p>IE6中如果使用 &lt;!DOCTYPE&gt; 就可以使用正确的盒模型</p>
-<p>min-height for IE6:</p>
-<div class="highlight-python"><pre>div.min-height {
-  min-height: 500px;
-  height: auto !important;
-  height: 500px;
-}</pre>
-</div>
-<p>max-width,min-width,max-height需要使用expression，问题在于速度慢，借助js实现:</p>
-<div class="highlight-python"><pre>/* max-width for IE6 */
-* html div.max-width {
-  width: expression(document.body.clientWidth &gt; 776 ? "777px" : "auto");
-}
-/* max-width for standards-compliant browsers */
-div.max-width {
-  max-width: 777px;
-}</pre>
-</div>
-<p>double margin bug.
-float an element (such as a &lt;div&gt;) in one direction and then apply a margin in that same direction:</p>
-<div class="highlight-python"><pre>div#selector {
+<p>columns:</p>
+<div class="highlight-python"><pre>行中的列需要.columns，一行12列，如果超出12则显示为下一行
+
+position: relative; //为定位准备
+float: left; //左浮动
+有左右padding
+
+如果设置了多个column，最后一个右浮动。即如果不满足12实现两端浮动效果
+[class*="column"] + [class*="column"]:last-child {
   float: right;
-  margin-right: 10px;
 }
-* html div#selector {
-  display: inline; /* kill double-margin bug */
-}</pre>
+
+
+.large-* 设置宽屏中比例，如果只设large-*则窄屏中显示为整行
+.small-* 设置窄屏中比例，如果只设small-*则宽屏中也按该比例显示
+百分比宽度
+
+
+.show-for-small 在窄屏中显示
+.hide-for-small 在宽屏中显示
+如果不设置则宽屏窄屏中都显示
+
+.large-offset-* 和 .small-offset-* 通过margin-left进行偏移
+
+
+small-centered 窄屏中整行居中，宽屏中无居中效果，也没有偏移
+large-centered 宽屏中整行居中，窄屏中无效
+
+.push-* 宽屏中通过设置百分比left将元素推向右边
+.pull-* 宽屏中通过设置百分比right将元素拉向左边</pre>
+</div>
 </div>
 </div>
 
@@ -147,10 +163,10 @@ float an element (such as a &lt;div&gt;) in one direction and then apply a margi
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="image.html" title="image"
+          <a href="html.html" title="html"
              >next</a> |</li>
         <li class="right" >
-          <a href="html.html" title="html"
+          <a href="django-cms.html" title="django-cms"
              >previous</a> |</li>
         <li><a href="../index.html">home</a>|&nbsp;</li>
         <li><a href="../search.html">search</a>|&nbsp;</li>
