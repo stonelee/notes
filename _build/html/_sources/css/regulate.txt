@@ -68,17 +68,17 @@ Hacks
 
   区别属性：
 
-  IE6	_property:value
-  IE6/7	*property:value
-  IE6/7/8/9	property:value\9
-  非IE6	property//:value
+  IE6  _property:value
+  IE6/7  *property:value
+  IE6/7/8/9  property:value\9
+  非IE6  property//:value
 
   区别规则：
 
-  IE6	* html selector { … }
-  IE7	*:first-child+html selector { … }
-  非IE6	html>body selector { … }
-  firefox only	@-moz-document url-prefix() { … }
-  saf3+/chrome1+	@media all and (-webkit-min-device-pixel-ratio:0) { … }
-  opera only	@media all and (-webkit-min-device-pixel-ratio:10000),not all and (-webkit-min-device-pixel-ratio:0) { … }
-  iPhone/mobile webkit	@media screen and (max-device-width: 480px) { … }
+  IE6 * html selector { … }
+  IE7 *:first-child+html selector { … }
+  非IE6 html>body selector { … }
+  firefox only @-moz-document url-prefix() { … }
+  saf3+/chrome1+ @media all and (-webkit-min-device-pixel-ratio:0) { … }
+  opera only @media all and (-webkit-min-device-pixel-ratio:10000),not all and (-webkit-min-device-pixel-ratio:0) { … }
+  iPhone/mobile webkit @media screen and (max-device-width: 480px) { … }

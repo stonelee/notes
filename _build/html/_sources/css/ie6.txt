@@ -5,6 +5,23 @@
 IE6
 ***************
 
+hack
+-------------
+
+::
+
+  #Holly hack
+  /* \*/
+  * html .gainlayout { height: 1%; }
+  /* */
+
+  #underscore hack:
+  .gainlayout { _height: 0; }
+
+
+问题
+---------
+
 IE6中同一个大括号中的重复属性，后面的将会覆盖前面的，不管前面的属性是否有!important；
 而在不同的大括号里，则有!important的属性有效
 
@@ -46,7 +63,9 @@ max-width,min-width,max-height需要使用expression，问题在于速度慢，�
     max-width: 777px;
   }
 
-double margin bug.
+double margin bug
+=====================
+
 float an element (such as a <div>) in one direction and then apply a margin in that same direction::
 
   div#selector {

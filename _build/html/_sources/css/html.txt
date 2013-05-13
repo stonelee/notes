@@ -5,10 +5,15 @@
 html
 ***************
 
-
 label for对应input id
 
 input name在submit时提交
+
+建立隐藏锚点<h2 class="hidden" id="navigation">Navigation:</h2>通过#navigation来跳转
+
+* a>img
+* li>a
+* h4>a
 
 语义化
 ===========

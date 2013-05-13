@@ -7,10 +7,6 @@ bootstrap
 
 * .label
 
-  white-space: nowrap; 防止换行
-
-  通过background-color区分不同
-
 * .badge比.label边角更圆一些
 
 * .hero-unit显示页面主要内容，里面的h1，p等都调大了

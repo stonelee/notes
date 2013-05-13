@@ -1,0 +1,213 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>design &mdash; stonelee&#39;s notes 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="stonelee&#39;s notes 0 documentation" href="../index.html" />
+    <link rel="up" title="css" href="index.html" />
+    <link rel="next" title="html" href="html.html" />
+    <link rel="prev" title="css3" href="css3.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html">stonelee's notes</a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="html.html" title="html"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="css3.html" title="css3"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" accesskey="U">css</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">design</a><ul>
+<li><a class="reference internal" href="#scheme">Scheme</a></li>
+<li><a class="reference internal" href="#id2">字体</a></li>
+<li><a class="reference internal" href="#imagemagick">imageMagick</a></li>
+<li><a class="reference internal" href="#id3">图片格式</a><ul>
+<li><a class="reference internal" href="#jpeg">两种jpeg加载方式</a></li>
+<li><a class="reference internal" href="#gif-png">水平扫描（gif，png）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="css3.html"
+                        title="previous chapter">css3</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="html.html"
+                        title="next chapter">html</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/css/design.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="design">
+<span id="id1"></span><h1>design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="scheme">
+<h2>Scheme<a class="headerlink" href="#scheme" title="Permalink to this headline">¶</a></h2>
+<p>从图片中选取颜色，然后从色盘中选取邻近色和相反色。</p>
+</div>
+<div class="section" id="id2">
+<h2>字体<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>serif(Times New Roman) 对某些字符笔画末端加了些小短线做装饰。适于印刷，不适于屏幕显示，尤其是小字体时，可以应用于大字体。</li>
+<li>Sans-serif(Arial, Helvetica, verdana)，适用于大量文字屏幕显示</li>
+<li>Monospace(Courier)，适用于代码显示或邮件中的发票（空格等宽便于对齐）</li>
+</ul>
+<p>Microsoft Web Fonts:</p>
+<div class="highlight-python"><pre>Arial, Courier New, Georgia, Times New Roman, Verdana</pre>
+</div>
+<p>不同字体的height, width, x-height,descender height, ascender height都可能不同</p>
+<p>16px=1em</p>
+<p>W3C推荐使用em来代替px，因为px在IE9之前版本中无法随页面缩放，
+但是em在IE老版本中缩放比例不一致，所以body {font-size:100%;}，然后再使用em</p>
+<p>font-size/line-height, font-family将generic family放到最后面，来自动选择此类型的字体:</p>
+<div class="highlight-python"><pre>font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;</pre>
+</div>
+<p>调整margin，padding为18的倍数来保证多列文字的水平对齐</p>
+</div>
+<div class="section" id="imagemagick">
+<h2>imageMagick<a class="headerlink" href="#imagemagick" title="Permalink to this headline">¶</a></h2>
+<p>gif批量转为png:</p>
+<div class="highlight-python"><pre>mogrify -format png *.gif</pre>
+</div>
+<p>单个png转为gif:</p>
+<div class="highlight-python"><pre>convert tree-s7defbb4611.png tree-s7defbb4611.gif</pre>
+</div>
+<p>compass的sprite只支持png格式，但是IE6不支持png透明</p>
+<p>转为PNG-8，IE6支持，而且体积更小:</p>
+<div class="highlight-python"><pre>convert tree-s7defbb4611.png -colors 256 PNG8:tree.png</pre>
+</div>
+<p>将所有img00开头的文件进行合并，将白色设为透明背景，合并为1行，
+每个文件大小为121*98，没有间隔，导出为png格式:</p>
+<div class="highlight-python"><pre>montage img00*.jpg -background transparent -transparent #fff -tile x1 -geometry 121x98+0+0 player.png</pre>
+</div>
+<p>image sprites:</p>
+<div class="highlight-python"><pre>montage grid/* -background transparent -geometry '16x16+0+0&gt;' grid.gif</pre>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>图片格式<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>gif 支持透明，支持动画，无损耗，水平扫描，间隔渐进显示，只有256种颜色，不适合照片，但它适合对颜色要求不高的图形（比如说图标，图表等）</li>
+<li>jpeg 不支持透明，不支持动画，有损耗，所以在编辑过程一般用png作为过渡格式。隔行渐进显示，适合web上面的摄影图片和数字照相机</li>
+<li>png 支持透明，不支持动画，无损耗，水平扫描，间隔渐进显示</li>
+</ul>
+<p>结论:</p>
+<div class="highlight-python"><pre>动画gif最好
+png8代替静态gif
+PNG24接近JPG，但因为是无损格式，同样尺寸的照片png24比jpg画质要高很多而且体积大很多，所以一般网站使用jpg
+
+PNG8除了不支持动画外和GIF基本一致，属于256的索引色，其中包括透明索引，不支持半透明
+PNG24即24位全彩，RGB三色各占8位(#FFFFFF,0xFFFFFF)，但不包含透明度，不过PS将PNG24和PNG32的概念整合到PNG24了，这点FW有明显的区分
+PNG32即32位全彩，ARGB四色各占8位(0xFFFFFFFF)，含alpha透明度</pre>
+</div>
+<div class="section" id="jpeg">
+<h3>两种jpeg加载方式<a class="headerlink" href="#jpeg" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>自上而下线性加载（基本）</li>
+<li>先是全部的模糊图片，然后逐渐清晰（渐进）</li>
+</ul>
+<p>两种图片大小差不多，加载速度方面渐进方式在现代浏览器中快的多，一开始就能定好大小，防止回流，但是占CPU、内存较多</p>
+</div>
+<div class="section" id="gif-png">
+<h3>水平扫描（gif，png）<a class="headerlink" href="#gif-png" title="Permalink to this headline">¶</a></h3>
+<p>使用了一种叫作LZW的算法进行压缩，当压缩gif的过程中，像素是由上到下水平压缩的，
+这也意味着同等条件下，横向的gif图片比竖向的gif图片更加小。例如500*10的图片比10*500的图片更加小</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="html.html" title="html"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="css3.html" title="css3"
+             >previous</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+
+          <li><a href="index.html" >css</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, stonelee.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
