@@ -341,6 +341,19 @@ bin
     url = git@gitcafe.com:dragon/test.git
 这样，使用git push all即可一键Push到多个远程仓库中。</pre>
 </div>
+<p>暂存数据:</p>
+<div class="highlight-python"><pre>在堆栈中存储：git stash
+
+查看存储：git stash list
+
+应用最近的存储：git stash apply
+应用其他存储：git stash apply stash@{2}
+
+移除存储：git stash drop stash@{0}
+应用并移除：git stash pop
+
+创建新的分支，并应用最近的存储，并从堆栈中删除：git stash branch other</pre>
+</div>
 </div>
 </div>
 </div>

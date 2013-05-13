@@ -58,3 +58,20 @@ columns::
   .push-* 宽屏中通过设置百分比left将元素推向右边
   .pull-* 宽屏中通过设置百分比right将元素拉向左边
 
+功能
+===============
+
+* orbit 图片文字走马灯
+* clearing 图片点击灯箱效果
+* dropdown 下拉条
+* joyride 自动游览页面
+
+安装
+===========
+
+* gem install zurb-foundation
+* gem update zurb-foundation
+
+sass实时编译为css
+==================
+sass --watch your/scss/directory:your/css/directory
