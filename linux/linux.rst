@@ -276,6 +276,24 @@ ssh scp sftp访问远程机器免输入密码
 
   $ scp ~/.ssh/id_rsa.pub vboxadmin@10.10.22.86:/home/vboxadmin/.ssh/authorized_keys
 
+免登录ssh,scp
+================
+
+主机::
+
+  ssh keygen -t dsa
+  scp id_dsa.pub 10.10.22.82:.ssh/new
+
+远程::
+
+  cat new >> authorized_keys
+
+::
+
+  chmod o-w ~/
+  chmod 700 ~/.ssh
+  chmod 600 ~/.ssh/authorized_keys
+
 工具
 -----------------
 

@@ -144,3 +144,27 @@ Semantic Versioning: http://semver.org/
 * 有功能增加或非兼容式修改时，升 y
 * 大量重构，革命性的，升 x
 
+rst语法
+==========
+
+http://www.worldhello.net/gotgithub/appendix/markups.html
+
+::
+
+  一级标题
+  ========
+
+  二级标题
+  --------
+
+  三级标题
+  ~~~~~~~~
+
+  四级标题
+  ^^^^^^^^
+
+  五级标题
+  ++++++++
+
+  六级标题
+  ````````

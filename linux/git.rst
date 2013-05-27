@@ -8,6 +8,10 @@
 git
 =============================
 
+撤销上一次commit::
+
+  git reset HEAD^
+
 避免push时填入密码，通过ssh::
 
   git remote set-url origin git@github.com:user/repo.git

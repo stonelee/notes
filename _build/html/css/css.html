@@ -69,6 +69,7 @@
 <li><a class="reference internal" href="#position">position</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#float-vs-inline-block">float vs inline-block</a></li>
 <li><a class="reference internal" href="#bfc-vs-haslayout">BFC vs hasLayout</a><ul>
 <li><a class="reference internal" href="#bfc">BFC</a></li>
 <li><a class="reference internal" href="#haslayout">hasLayout</a></li>
@@ -137,6 +138,10 @@
 <span id="id1"></span><h1>css<a class="headerlink" href="#css" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
 <h2>技巧<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>[type=text] 与 .invalid 优先级一样</p>
+<p>IE9以下不支持linear-gradient</p>
+<p>outline比较border而言不占位置</p>
+<p>disabled在IE6也可以使得input不可输入</p>
 <p>缩进2字符:</p>
 <div class="highlight-python"><pre>text-indent: 2em;</pre>
 </div>
@@ -239,9 +244,9 @@ postion:absolute/fixed</pre>
 所以如果是制作js动画等，用absolute或者fixed定位会更好。</p>
 <p>不推荐用position来布局整个页面的大框架，而推荐用float或者文档流的默认方式。</p>
 <p>取代float方式布局:</p>
-<div class="highlight-python"><pre>display: inline-block;
-*display: inline;
-*zoom: 1;</pre>
+<div class="highlight-python"><pre>display:inline-block; /* 现代浏览器 +IE6、7 inline 元素 */
+*display:inline; /* IE6、7 block 元素 */
+*zoom:1;</pre>
 </div>
 <p>yui grid: <a class="reference external" href="http://yui.yahooapis.com/3.3.0/build/cssgrids/grids.css">http://yui.yahooapis.com/3.3.0/build/cssgrids/grids.css</a></p>
 <p>inline-block 前世今生: <a class="reference external" href="http://ued.taobao.com/blog/2012/08/15/inline-block/">http://ued.taobao.com/blog/2012/08/15/inline-block/</a></p>
@@ -255,6 +260,40 @@ postion:absolute/fixed</pre>
 </ul>
 <p>position:absolute中的width，height是相对父relative来定义的</p>
 </div>
+</div>
+<div class="section" id="float-vs-inline-block">
+<h3>float vs inline-block<a class="headerlink" href="#float-vs-inline-block" title="Permalink to this headline">¶</a></h3>
+<p>inline-block 内部像block，可以设置width, height, padding, border与margin。
+外部的排列方式像行内元素，即水平排列，而不是像块级元素一样从上到下排列</p>
+<p>相同点：
+内部表现为块级元素，水平排列</p>
+<p>区别：</p>
+<ol class="arabic simple">
+<li>文档流（Document flow）:浮动元素会脱离文档流，并使得周围元素环绕这个元素。
+而inline-block元素仍在文档流内。因此设置inline-block不需要清除浮动。</li>
+<li>水平位置（Horizontal position）：很明显你不能通过给父元素设置text-align:center让浮动元素居中。
+事实上定位类属性设置到父元素上，均不会影响父元素内浮动的元素。
+但是父元素内元素如果设置了display：inline-block，则对父元素设置一些定位属性会影响到子元素。</li>
+<li>垂直对齐（Vertical alignment）：inline-block元素沿着默认的基线对齐。浮动元素紧贴顶部。
+你可以通过vertical属性设置这个默认基线，但对浮动元素这种方法就不行了。这也是我倾向于inline-block的主要原因。</li>
+<li>空白（Whitespace）：inline-block包含html空白节点。
+如果你的html中一系列元素每个元素之间都换行了，当你对这些元素设置inline-block时，这些元素之间就会出现空白。
+而浮动元素会忽略空白节点，互相紧贴</li>
+<li>IE6和IE7：Ie67对inline-block的兼容性问题。</li>
+</ol>
+<p>解决空白问题：</p>
+<ul class="simple">
+<li>删除html中的空白：不要让元素之间换行</li>
+<li>使用负边距：你可以用负边距来补齐空白。但你需要调整font-size，因为空白的宽度与这个属性有关系。</li>
+<li>给父元素设置font-size:0：不管空白多大，由于空白跟font-size的关系，设置这个属性即可把空白的宽度设置为0，
+还需要给子元素重新设置font-size。</li>
+</ul>
+<p>使用场景：
+如果你需要文字环绕容器，那浮动是不二选择。如果你需要居中对齐元素，inline-block是个好选择。</p>
+<ul class="simple">
+<li>使用inline-block：当你需要控制元素的垂直对齐跟水平排列时（例如不固定高度图片排列），使用inline-block。</li>
+<li>使用浮动：当你需要让元素环绕某一个元素时，或者不想处理inline-block带来的空白问题时，使用浮动。</li>
+</ul>
 </div>
 <div class="section" id="bfc-vs-haslayout">
 <h3>BFC vs hasLayout<a class="headerlink" href="#bfc-vs-haslayout" title="Permalink to this headline">¶</a></h3>

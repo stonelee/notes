@@ -8,6 +8,15 @@ css
 技巧
 --------
 
+[type=text] 与 .invalid 优先级一样
+
+IE9以下不支持linear-gradient
+
+outline比较border而言不占位置
+
+disabled在IE6也可以使得input不可输入
+
+
 缩进2字符::
 
   text-indent: 2em;
@@ -129,9 +138,9 @@ float vs position
 
 取代float方式布局::
 
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
+  display:inline-block; /* 现代浏览器 +IE6、7 inline 元素 */
+  *display:inline; /* IE6、7 block 元素 */
+  *zoom:1;
 
 yui grid: http://yui.yahooapis.com/3.3.0/build/cssgrids/grids.css
 
@@ -146,6 +155,42 @@ position
 * fixed  相对于浏览器窗口进行定位。
 
 position:absolute中的width，height是相对父relative来定义的
+
+float vs inline-block
+=========================
+
+inline-block 内部像block，可以设置width, height, padding, border与margin。
+外部的排列方式像行内元素，即水平排列，而不是像块级元素一样从上到下排列
+
+相同点：
+内部表现为块级元素，水平排列
+
+区别：
+
+1. 文档流（Document flow）:浮动元素会脱离文档流，并使得周围元素环绕这个元素。
+   而inline-block元素仍在文档流内。因此设置inline-block不需要清除浮动。
+#. 水平位置（Horizontal position）：很明显你不能通过给父元素设置text-align:center让浮动元素居中。
+   事实上定位类属性设置到父元素上，均不会影响父元素内浮动的元素。
+   但是父元素内元素如果设置了display：inline-block，则对父元素设置一些定位属性会影响到子元素。
+#. 垂直对齐（Vertical alignment）：inline-block元素沿着默认的基线对齐。浮动元素紧贴顶部。
+   你可以通过vertical属性设置这个默认基线，但对浮动元素这种方法就不行了。这也是我倾向于inline-block的主要原因。
+#. 空白（Whitespace）：inline-block包含html空白节点。
+   如果你的html中一系列元素每个元素之间都换行了，当你对这些元素设置inline-block时，这些元素之间就会出现空白。
+   而浮动元素会忽略空白节点，互相紧贴
+#. IE6和IE7：Ie67对inline-block的兼容性问题。
+
+解决空白问题：
+
+* 删除html中的空白：不要让元素之间换行
+* 使用负边距：你可以用负边距来补齐空白。但你需要调整font-size，因为空白的宽度与这个属性有关系。
+* 给父元素设置font-size:0：不管空白多大，由于空白跟font-size的关系，设置这个属性即可把空白的宽度设置为0，
+  还需要给子元素重新设置font-size。
+
+使用场景：
+如果你需要文字环绕容器，那浮动是不二选择。如果你需要居中对齐元素，inline-block是个好选择。
+
+* 使用inline-block：当你需要控制元素的垂直对齐跟水平排列时（例如不固定高度图片排列），使用inline-block。
+* 使用浮动：当你需要让元素环绕某一个元素时，或者不想处理inline-block带来的空白问题时，使用浮动。
 
 BFC vs hasLayout
 ==================
