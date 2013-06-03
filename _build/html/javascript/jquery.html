@@ -133,6 +133,25 @@ $.each .each .map与之相反，为index，data</p>
 <p>intro，outro提供包裹函数，其他函数可以作为全局函数测试，生产环境时打包到一起</p>
 <p>jQuery.fn中的this是个[]</p>
 <ul class="simple">
+<li>event.target 当前点击的元素</li>
+<li>event.delegateTarget 委托元素</li>
+<li>event.currentTarget 如果没有使用proxy则与this相同，委托时为当前元素，冒泡时为委托元素</li>
+</ul>
+<p>委托方式点击button:</p>
+<div class="highlight-python"><pre>$(".box").on("click", "button", function(event) {});
+
+event.target==button
+this==event.currentTarget==button
+event.delegateTarget==.box</pre>
+</div>
+<p>冒泡方式点击button:</p>
+<div class="highlight-python"><pre>$('.box').click(function(event) {});
+
+event.target==button;
+this==event.currentTarget==.box
+event.delegateTarget==.box</pre>
+</div>
+<ul class="simple">
 <li>event.stopImmediatePropagation()  阻止冒泡，也阻止其他handlers</li>
 <li>event.stopPropagation()   阻止冒泡</li>
 </ul>

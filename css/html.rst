@@ -5,6 +5,8 @@
 html
 ***************
 
+chrome引用当前选中元素 $0
+
 label for对应input id
 
 input name在submit时提交

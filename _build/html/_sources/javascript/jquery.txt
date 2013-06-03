@@ -32,6 +32,26 @@ intro，outro提供包裹函数，其他函数可以作为全局函数测试，�
 
 jQuery.fn中的this是个[]
 
+* event.target 当前点击的元素
+* event.delegateTarget 委托元素
+* event.currentTarget 如果没有使用proxy则与this相同，委托时为当前元素，冒泡时为委托元素
+
+委托方式点击button::
+
+  $(".box").on("click", "button", function(event) {}); 
+
+  event.target==button
+  this==event.currentTarget==button
+  event.delegateTarget==.box
+
+冒泡方式点击button::
+
+  $('.box').click(function(event) {});
+
+  event.target==button;
+  this==event.currentTarget==.box
+  event.delegateTarget==.box
+
 * event.stopImmediatePropagation()  阻止冒泡，也阻止其他handlers
 * event.stopPropagation()   阻止冒泡
 

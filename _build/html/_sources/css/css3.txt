@@ -72,3 +72,67 @@ text-overflow：ellipsis （文字溢出特定宽度“点点点”省略号表�
 
 图片旋转: -webkit-transform: rotate(360deg);
 
+去掉鼠标: cursor: url(blank.gif), move;
+
+放大镜效果::
+
+  在小图片上叠加大图片，在鼠标移动时更改top、left，同时调整大图片的background-position
+
+鼠标在上时的突出效果::
+
+  .item:hover {
+  -webkit-transform: scale(1.02);
+
+增加动画效果::
+
+  -webkit-transition: .2s ease-in-out;
+
+增加class后显示动画效果（反弹效果）::
+
+  .show {
+  -webkit-animation: show 0.5s ease-in;
+
+  @-webkit-keyframes show{
+    0% {
+      -webkit-transform: scale(1.2);
+              transform: scale(1.2);
+    }
+
+    50% {
+      -webkit-transform: scale(0.9);
+              transform: scale(0.9);
+    }
+
+    75% {
+      -webkit-transform: scale(1.1);
+              transform: scale(1.1);
+    }
+
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+
+立体按钮
+========
+
+按钮background：linear-gradient从下到上，由亮到暗::
+
+  background: -webkit-linear-gradient(top,hsl(210, 10%, 30%),hsl(210, 10%, 20%));
+
+混合型的box-shadow，模拟按钮的左上角光照效果::
+
+  box-shadow: 0 1px 0 hsl(212, 9%, 42%) inset,0 1px 5px hsl(206, 10%, 14%);
+
+hover时亮度要大一些::
+
+  background: -webkit-linear-gradient(top,hsl(210, 10%, 40%),hsl(210, 10%, 22%));
+
+active时从下到上，由暗到亮::
+
+  background: -webkit-linear-gradient(top,hsl(212, 16%, 16%),hsl(212, 10%, 26%));
+
+去掉内侧的投影::
+
+  box-shadow: 0 1px hsl(210, 5%, 30%);
